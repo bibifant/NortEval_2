@@ -22,8 +22,11 @@ def upper_lower_case(text):
 
     gesamt_prozentsatz = (prozentsatz_nomen + prozentsatz_klein + prozentsatz_satzanfang) / 3
 
-    print("Es sind ", gesamt_prozentsatz, "% des Textes in der korrekten Groß-und Kleinschreibung.")
+    print(f"Text:", text, "\nEs sind ", gesamt_prozentsatz, "% des Textes in der korrekten Groß-und Kleinschreibung.\n")
 
 # Beispieltext
 text_beispiel = "Der schnelle braune Fuchs springt über den faulen Hund und der Fuchs freut sich. Der große Baum."
+text_beispiel1 = "Der Schnelle braune fuchs springt über den faulen Hund und der Fuchs freut sich. der große Baum."
+
 upper_lower_case(text_beispiel)
+upper_lower_case(text_beispiel1)
