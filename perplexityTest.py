@@ -6,16 +6,12 @@ import math
 
 nltk.download('punkt')
 
-# Beispiel-Datenset: Hier ersetze dies durch den Pfad zu deinem eigenen Datenset
 dataset_path = "WikiQA-train.txt"
 
 # 1. Datenset laden und vorverarbeiten
 def load_and_preprocess_dataset(dataset_path):
     with open(dataset_path, 'r', encoding='utf-8') as file:
         raw_text = file.read()
-
-    # Hier könntest du weitere Vorverarbeitungsschritte hinzufügen (z.B. Entfernen von Sonderzeichen)
-
     return raw_text
 
 # 2. Tokenisierung mit nltk
