@@ -4,8 +4,6 @@ from nltk.lm import MLE
 from nltk.util import bigrams
 import math
 
-nltk.download('punkt')
-
 dataset_path = "WikiQA-train.txt"
 
 # 1. Datenset laden und vorverarbeiten
@@ -23,7 +21,8 @@ def tokenize_text(text):
 def calculate_perplexity(tokens, ngram_order=2):
     # NLTK MLE-Modell trainieren
     bigram_model = MLE(ngram_order)
-    bigram_model.fit([bigrams(tokens)])
+    vocab = set(tokens)
+    bigram_model.fit([bigrams(tokens)], vocabulary_text=vocab)
 
     # Wahrscheinlichkeiten für jedes Bigramm im Text berechnen
     probabilities = [bigram_model.score(bigram) for bigram in bigrams(tokens)]
