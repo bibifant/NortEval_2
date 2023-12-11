@@ -1,3 +1,4 @@
+#diese bleuTest wird in separaten Task aktualisiert.
 # import json
 # from nltk.translate.bleu_score import sentence_bleu
 # from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
