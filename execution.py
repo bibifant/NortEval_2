@@ -1,5 +1,6 @@
 from bleuTest import run_bleu_test_1
 from bleuTest2 import run_bleu_test_2
+from bleuTest3 import run_bleu_test_on_json_dataset
 from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
@@ -21,6 +22,8 @@ def main():
         ["My age is thirty six years."]
     ]
 
+    json_file_bleu3_path = "dataset/bleu_dataset.json"
+
     example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
 
     text_example_gk = "Der schnelle braune Fuchs springt über den faulen Hund und der Fuchs freut sich. Der große Baum."
@@ -40,6 +43,9 @@ def main():
 
     print("\n\nBLEU Test 2:")
     run_bleu_test_2(predictions_bleu2, references_bleu2)
+
+    print("\n\nBLEU Test 3:")
+    run_bleu_test_on_json_dataset(json_file_bleu3_path)
 
     print("\n\nde_en Test:")
     run_de_en_test(example_text_de_en)
