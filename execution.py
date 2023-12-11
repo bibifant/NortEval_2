@@ -4,7 +4,7 @@ from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
 from perplexityTest import run_perplexity_test
-# from rouge import run_rouge_test
+from rouge import run_rouge_test
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
                                 "lachen, spielen, singen.",
                                 "Fenster singen im Park."]
 
-    dataset_path_perplexity = "WikiQA-train.txt"
+    dataset_path_perplexity = "dataset/WikiQA-train.txt"
 
     jsonl_file_path_rouge = "de_test.jsonl" #dataset muss updated werden
 
@@ -52,9 +52,9 @@ def main():
 
     print("\n\nPerplexity Test:")
     run_perplexity_test(dataset_path_perplexity)
-    #
-    # print("\n\nRouge Test:")
-    # run_rouge_test(jsonl_file_path_rouge)
+
+    print("\n\nRouge Test:")
+    run_rouge_test(jsonl_file_path_rouge)
 
 
 if __name__ == "__main__":
