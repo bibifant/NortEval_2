@@ -1,31 +1,55 @@
 import json
 from rouge_score import rouge_scorer
+import sys
+sys.path.append('script')
+from azure_openai_connection import get_answer
 
-scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+def rouge():
+    # Initialisiere den ROUGE-Scorer
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
-# Pfad JSONL-Datei
-json_file_path = "test.json"
+    # Pfad JSONL-Datei
+    json_file_path = "test.json"
 
-# Daten aus JSONL-Datei lesen
-with open(json_file_path, 'r', encoding='utf-8') as file:
-    lines = file.readlines()
+    # Pfad für die Ausgabedatei
+    output_file_path = "llm_evaluation_rouge.txt"
 
-# Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
-for line in lines[:2]:
-    data_point = json.loads(line)
-    candidate_summary = data_point.get("wiki_sentences", [])  # Platzhalter für LLM output
-    reference_summary = data_point.get("klexikon_sentences", [])
+    # Öffne die Ausgabedatei im Schreibmodus
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        # Lade die Daten aus der JSONL-Datei
+        with open(json_file_path, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
 
-    # Konvertiere die Listen in Strings
-    candidate_summary_str = " ".join(candidate_summary)
-    reference_summary_str = " ".join(reference_summary)
+        # Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
+        for index, line in enumerate(lines[:2]):
+            data_point = json.loads(line)
 
-    scores = scorer.score(reference_summary_str, candidate_summary_str)
+            # Füge das Attribut "wiki_sentences" zum Prompt hinzu
+            prompt = f"Fasse den Text in 10 Sätzen in deutsch zusammen:\n{data_point['wiki_sentences']}"
 
-    print(f"Candidate Summary: {candidate_summary_str}")
-    print(f"Reference Summary: {reference_summary_str}")
+            # Schreibe den Prompt mit Index in die Datei
+            output_file.write(f"Index: {index}\n")
+            output_file.write(f"Prompt: {prompt}\n")
 
-    for key in scores:
-        print(f'{key}: {scores[key]}')
+            # Erhalte die Zusammenfassung vom LLM
+            candidate_summary = get_answer(prompt)
 
-    print("\n")
+            # Schreibe den LLM-Output in die Datei
+            output_file.write(f"LLM Output: {candidate_summary}\n")
+
+            # Erhalte die Referenz-Zusammenfassung
+            reference_summary = data_point.get("klexikon_sentences", [])
+
+            # Konvertiere die Listen in Strings
+            candidate_summary_str = " ".join(candidate_summary)
+            reference_summary_str = " ".join(reference_summary)
+
+            # Berechne ROUGE-Scores
+            scores = scorer.score(reference_summary_str, candidate_summary_str)
+
+            # Schreibe die ROUGE-Scores in die Datei
+            output_file.write("ROUGE Scores:\n")
+            for key in scores:
+                output_file.write(f'{key}: {scores[key]}\n')
+
+            output_file.write("\n")
