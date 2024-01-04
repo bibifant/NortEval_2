@@ -1,6 +1,4 @@
-from bleuTest import run_bleu_test_1
-from bleuTest2 import run_bleu_test_2
-from bleuTest3 import run_bleu_test_on_json_dataset
+from bleu import run_bleu_test_on_json_dataset
 from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
@@ -10,18 +8,6 @@ from rouge import run_rouge_test
 
 def main():
     # Setze die Testdaten entsprechend
-    predictions_bleu1 = ["I have thirty six years old."]
-    references_bleu1 = ["I'm thirty six years old."]
-
-    predictions_bleu2 = ["My is age thirty years six.",
-                         "I am thirty six years old.",
-                         "I have thirty six years."]
-    references_bleu2 = [
-        ["I am thirty six years old."],
-        ["I'm thirty six years old."],
-        ["My age is thirty six years."]
-    ]
-
     json_file_bleu3_path = "dataset/bleu_dataset.json"
 
     example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
@@ -38,28 +24,22 @@ def main():
     jsonl_file_path_rouge = "de_test.jsonl" #dataset muss updated werden
 
     # Führe die Tests aus
-    print("\n\nBLEU Test 1:")
-    run_bleu_test_1(predictions_bleu1, references_bleu1)
-
-    print("\n\nBLEU Test 2:")
-    run_bleu_test_2(predictions_bleu2, references_bleu2)
-
-    print("\n\nBLEU Test 3:")
+    print("\n\nBLEU:")
     run_bleu_test_on_json_dataset(json_file_bleu3_path)
 
-    print("\n\nde_en Test:")
+    print("\n\nde_en:")
     run_de_en_test(example_text_de_en)
 
-    print("\n\nFunction GK Test:")
+    print("\n\nFunction GK:")
     run_function_gk_test(text_example_gk)
 
-    print("\n\nGebeugtes Verb Test:")
+    print("\n\nGebeugtes Verb:")
     run_gebeugtes_verb_test(sentences_gebeugtes_verb)
 
-    print("\n\nPerplexity Test:")
+    print("\n\nPerplexity:")
     run_perplexity_test(dataset_path_perplexity)
 
-    print("\n\nRouge Test:")
+    print("\n\nRouge:")
     run_rouge_test(jsonl_file_path_rouge)
 
 
