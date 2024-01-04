@@ -213,3 +213,4 @@ $RECYCLE.BIN/
 # add .idea files in subfolders
 /*/.idea*
 __pycache__
+__pycache__/
