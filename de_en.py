@@ -1,6 +1,10 @@
 import spacy
 from langdetect import detect
+
+# global variable
 nlp = spacy.load("de_core_news_sm")
+
+
 def language_percentage(text):
     # Sprache des gesamten Textes bestimmen
     main_language = detect(text)
@@ -34,12 +38,16 @@ def language_percentage(text):
     print(f"Englische Wortanteil: {english_percentage:.2f}%")
     print(f"Deutsche Wortanteil: {german_percentage:.2f}% \n")
 
+
+def run_de_en_test(text):
+    language_percentage(text)
+    
 # Beispieltext
-example_text = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
-language_percentage(example_text)
-
-example_text ="this is an example text in English."
-language_percentage(example_text)
-
-example_text = "Dies ist ein deutscher Beispieltext."
-language_percentage(example_text)
+# example_text = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
+# language_percentage(example_text)
+#
+# example_text ="this is an example text in English."
+# language_percentage(example_text)
+#
+# example_text = "Dies ist ein deutscher Beispieltext."
+# language_percentage(example_text)
