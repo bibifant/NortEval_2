@@ -212,3 +212,4 @@ $RECYCLE.BIN/
 ## custom exclusions
 # add .idea files in subfolders
 /*/.idea*
+__pycache__

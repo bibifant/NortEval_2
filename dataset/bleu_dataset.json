@@ -1,0 +1,46 @@
+[
+  {
+    "predictions": [
+      "Mein Alter beträgt dreißig Jahre sechs.",
+      "Ich bin sechsunddreißig Jahre alt.",
+      "Ich habe sechsunddreißig Jahre."
+    ],
+    "references": [
+      ["Ich bin sechsunddreißig Jahre alt.", "Ich bin sechsunddreißig Jahre alt.", "Mein Alter beträgt sechsunddreißig Jahre."]
+    ]
+  },
+  {
+    "predictions": [
+      "Eine weitere Vorhersage 1.",
+      "Eine weitere Vorhersage 2.",
+      "Eine weitere Vorhersage 3."
+    ],
+    "references": [
+      ["Referenz 1-1", "Referenz 1-2", "Referenz 1-3"],
+      ["Referenz 2-1", "Referenz 2-2", "Referenz 2-3"],
+      ["Referenz 3-1", "Referenz 3-2", "Referenz 3-3"]
+    ]
+  },
+  {
+    "predictions": [
+      "Eins",
+      "Zwei",
+      "Drei"
+    ],
+    "references": [
+      ["Eins", "Zwei", "Drei"],
+      ["One", "Two", "Three"],
+      ["Un", "Deux", "Trois"]
+    ]
+  },
+  {
+    "predictions": [
+      "Das ist ein weiterer Satz auf Deutsch.",
+      "Hier ist eine weitere Vorhersage.",
+      "Eine dritte Vorhersage für das Dataset."
+    ],
+    "references": [
+      ["Hier ist eine weitere Vorhersage.", "Eine weitere Referenz.", "Noch eine Referenz."]
+    ]
+  }
+]

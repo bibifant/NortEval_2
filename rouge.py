@@ -1,26 +1,37 @@
 import json
 from rouge_score import rouge_scorer
 
-scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
-# Pfad JSONL-Datei
-jsonl_file_path = "de_test.jsonl"
+def rouge(json_file_path):
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
-# Daten aus JSONL-Datei lesen
-with open(jsonl_file_path, 'r', encoding='utf-8') as file:
-    dataset = [json.loads(line) for line in file]
+    # Pfad JSONL-Datei
+    json_file_path = "dataset/test.json"
 
-# Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
-for data_point in dataset:
-    candidate_summary = data_point["candidate"] #Platzhalter für LLM output
-    reference_summary = data_point["summary"]
+    # Daten aus JSONL-Datei lesen
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
 
-    scores = scorer.score(reference_summary, candidate_summary)
+    # Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
+    for line in lines[:2]:
+        data_point = json.loads(line)
+        candidate_summary = data_point.get("wiki_sentences", [])  # Platzhalter für LLM output
+        reference_summary = data_point.get("klexikon_sentences", [])
 
-    print(f"Candidate Summary: {candidate_summary}")
-    print(f"Reference Summary: {reference_summary}")
+        # Konvertiere die Listen in Strings
+        candidate_summary_str = " ".join(candidate_summary)
+        reference_summary_str = " ".join(reference_summary)
 
-    for key in scores:
-        print(f'{key}: {scores[key]}')
+        scores = scorer.score(reference_summary_str, candidate_summary_str)
 
-    print("\n")
+        print(f"Candidate Summary: {candidate_summary_str}")
+        print(f"Reference Summary: {reference_summary_str}")
+
+        for key in scores:
+            print(f'{key}: {scores[key]}')
+
+        print("\n")
+
+
+def run_rouge_test(json_file_path):
+    rouge(json_file_path)
