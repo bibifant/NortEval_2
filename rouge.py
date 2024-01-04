@@ -13,7 +13,7 @@ def rouge():
     json_file_path = "test.json"
 
     # Pfad für die Ausgabedatei
-    output_file_path = "llm_evaluation_rougee.txt"
+    output_file_path = "llm_evaluation_rouge.txt"
 
     # Öffne die Ausgabedatei im Schreibmodus
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
@@ -22,7 +22,7 @@ def rouge():
             lines = file.readlines()
 
         # Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
-        for index, line in enumerate(lines[:3]):
+        for index, line in enumerate(lines[:2]):
             data_point = json.loads(line)
 
             # Füge das Attribut "wiki_sentences" zum Prompt hinzu
