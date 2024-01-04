@@ -13,7 +13,7 @@ def run_bleu_test_on_json_dataset(json_file_path):
     total_bleu_score = 0
 
     # SmoothingFunction wird verwendet, um Warnmeldungen zu vermeiden
-    smoothing = SmoothingFunction()
+    # smoothing = SmoothingFunction()
 
     for i, data_point in enumerate(dataset):
         # Jeder Datenpunkt enthält "predictions" und "references"
@@ -35,7 +35,8 @@ def run_bleu_test_on_json_dataset(json_file_path):
             print(f"Vorhersage: {prediction}")
 
             # Berechnung des BLEU-Scores für die Vorhersage
-            bleu_score = sentence_bleu(reference_set, prediction, smoothing_function=smoothing.method1)
+            # wenn smoothingFunction benutzen: , smoothing_function=smoothing.method1
+            bleu_score = sentence_bleu(reference_set, prediction)
             total_bleu_score += bleu_score
 
             print(f"BLEU Score für Vorhersage {i + 1}-{j + 1}: {bleu_score}")
