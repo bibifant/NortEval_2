@@ -4,7 +4,6 @@ from nltk.lm import MLE
 from nltk.util import bigrams
 import math
 
-dataset_path = "WikiQA-train.txt"
 
 # 1. Datenset laden und vorverarbeiten
 def load_and_preprocess_dataset(dataset_path):
@@ -12,10 +11,12 @@ def load_and_preprocess_dataset(dataset_path):
         raw_text = file.read()
     return raw_text
 
+
 # 2. Tokenisierung mit nltk
 def tokenize_text(text):
     tokens = nltk.word_tokenize(text)
     return tokens
+
 
 # 3. Perplexity berechnen
 def calculate_perplexity(tokens, ngram_order=2):
@@ -35,13 +36,19 @@ def calculate_perplexity(tokens, ngram_order=2):
 
     return perplexity
 
-# Beispiel-Datenset laden und vorverarbeiten
-raw_text = load_and_preprocess_dataset(dataset_path)
 
-# Beispiel-Tokenisierung
-tokens = tokenize_text(raw_text)
+def run_perplexity_test(dataset_path):
+    print(f"perplexity: {calculate_perplexity(tokenize_text(load_and_preprocess_dataset(dataset_path)))}")
 
-# Beispiel-Perplexity berechnen (mit einem NLTK MLE-Modell)
-perplexity = calculate_perplexity(tokens)
-
-print(f"Perplexity: {perplexity}")
+# dataset_path = "WikiQA-train.txt"
+# run_perplexity_test(dataset_path)
+# # Beispiel-Datenset laden und vorverarbeiten
+# raw_text = load_and_preprocess_dataset(dataset_path)
+#
+# # Beispiel-Tokenisierung
+# tokens = tokenize_text(raw_text)
+#
+# # Beispiel-Perplexity berechnen (mit einem NLTK MLE-Modell)
+# perplexity = calculate_perplexity(tokens)
+#
+# print(f"Perplexity: {perplexity}")
