@@ -5,15 +5,18 @@ sys.path.append('script')
 from script.azure_openai_connection import get_answer
 
 
-def rouge():
+def run_rouge():
     # rouge score initialisieren
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
     # Pfad JSON-Datei
-    json_file_path = "test.json"
+    json_file_path = "dataset/test.json"
 
     # Pfad für die Ausgabedatei
     output_file_path = "llm_evaluation_rouge.txt"
+
+    # Pfad für die Ausgabedatei Durchschnitt
+    output_average_file_path = "llm_evaluation_all.txt"
 
     # Listen für rouge scores
     rouge1_scores = []
@@ -80,6 +83,11 @@ def rouge():
         output_file.write(f'rouge2: {avg_rouge2}\n')
         output_file.write(f'rougeL: {avg_rougeL}\n')
 
+    # Durchschnitt in Durchschnitt-Datei schreiben
+    with open(output_average_file_path, 'a', encoding='utf-8') as output_file:
+        output_file.write("\nDurchschnittliche Rouge Scores:\n")
+        output_file.write(f'rouge1: {avg_rouge1}\n')
+        output_file.write(f'rouge2: {avg_rouge2}\n')
+        output_file.write(f'rougeL: {avg_rougeL}\n')
 
-# Aufruf der Funktion
-rouge()
+
