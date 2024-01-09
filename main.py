@@ -3,7 +3,6 @@ from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
 from perplexityTest import run_perplexity_test
-from script.azure_openai_connection import get_answer
 from rouge import run_rouge
 
 
@@ -21,9 +20,8 @@ def main():
                                 "Die Vögel singen fröhlich.",
                                 "lachen, spielen, singen.",
                                 "Fenster singen im Park."]
-    # perflexity
+    #perflexity
     dataset_path_perplexity = "dataset/WikiQA-train.txt"
-    sentence = "El grupo HTW-Nortal está generando un gran proyecto!"
 
     jsonl_file_path_rouge = "de_test.jsonl"  # dataset muss updated werden
 
@@ -39,11 +37,9 @@ def main():
 
     print("\n\nGebeugtes Verb:")
     run_gebeugtes_verb_test(sentences_gebeugtes_verb)
+
     print("\n\n Perflexity: ")
-    prompt = """
-    Translate {0} to german
-    """.format(sentence)
-    print(get_answer(prompt))
+    run_perplexity_test(dataset_path_perplexity)
 
     print("\n\nRouge:")
     run_rouge()
