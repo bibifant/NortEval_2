@@ -1,0 +1,5 @@
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.023696410867684058
+rouge2: 0.0024011885019347705
+rougeL: 0.022541676456598603
