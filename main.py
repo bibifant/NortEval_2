@@ -36,8 +36,8 @@ def main():
     print("\n\nGebeugtes Verb:")
     run_gebeugtes_verb_test(sentences_gebeugtes_verb)
 
-    print("\n\nPerplexity:")
-    run_perplexity_test(dataset_path_perplexity)
+    # print("\n\nPerplexity:")
+    # run_perplexity_test(dataset_path_perplexity)
 
     print("\n\nRouge:")
     run_rouge()

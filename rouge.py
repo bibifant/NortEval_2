@@ -30,7 +30,7 @@ def run_rouge():
         with open(json_file_path, 'r', encoding='utf-8') as file:
             lines = file.readlines()
 
-        output_file.write(f"Der Rouge-Score reicht von 0 bis 1, wobei höhere Werte eine bessere Qualität der Zusammenfassung anzeigen.\n\n")
+        output_file.write(f"Die Rouge-Metrik bewertet die Fähigkeit eines LLMs, Zusammenfassungen aus einem Input Text zu generieren. Der Rouge-Score reicht von 0 bis 1, wobei höhere Werte eine bessere Qualität der Zusammenfassung anzeigen.\n\n")
 
         # rouge scores für jeden Datensatzpunkt im Datensatz berechnen
         for index, line in enumerate(lines[:2]):
