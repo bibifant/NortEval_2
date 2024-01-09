@@ -1,0 +1,8 @@
+{
+    "Metrik Erklärungen": {
+        "Rouge": "Platzhalter für Erklärung der Rouge Metrik",
+        "BLEU": "Platzhalter für Erklärung der BLEU Metrik",
+        "Perplexity": "Perplexity ist ein Maß für die Vorhersageunsicherheit eines Sprachmodells. Ein niedrigerer Wert deutet auf eine höhere Vorhersagegenauigkeit des Modells hin."
+    },
+    "Ergebnisse": []
+}
