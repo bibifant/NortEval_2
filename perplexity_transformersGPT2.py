@@ -1,8 +1,7 @@
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from math import exp
-import csv
-import os
+import json
 from script.azure_openai_connection import get_answer
 
 # Funktion zur Berechnung der Perplexität
@@ -30,33 +29,47 @@ prompts = [
     "Wie könnte die Welt im Jahr 2050 aussehen, wenn erneuerbare Energien die Hauptenergiequelle sind?"  # Hypothetische Szenarien
     ]
 
+# Ergebnisliste für aktuelle Session
+current_results = []
+total_perplexity = 0
+
+for prompt in prompts:
+    try:
+        # Antwort erhalten
+        response_text = get_answer(prompt)
+
+        # Perplexität berechnen
+        perplexity = calculate_perplexity(model, tokenizer, response_text)
+        total_perplexity += perplexity
+
+        # Ergebnisse in der aktuellen Liste speichern
+        current_results.append({
+            "Prompt": prompt,
+            "Response": response_text,
+            "Perplexity Score": perplexity
+        })
+    except Exception as e:
+        print(f"Fehler bei der Verarbeitung des Prompts '{prompt}': {e}")
+
+# Durchschnittsperplexität berechnen
+average_perplexity = total_perplexity / len(prompts) if prompts else 0
+
 # Dateiname für die Ergebnisse
-output_file = "perplexity_results.csv"
+output_file = "results.json"
 
-# Überprüfen, ob die Datei bereits existiert und ob eine Kopfzeile erforderlich ist
-write_header = not os.path.exists(output_file)
+# Vorhandene JSON-Datei laden
+with open(output_file, 'r', encoding='utf-8') as file:
+    data_structure = json.load(file)
 
-# CSV-Datei öffnen und Ergebnisse schreiben
-with open(output_file, mode='a', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
+# Aktuelle Ergebnisse zu den bestehenden hinzufügen
+data_structure["Ergebnisse"].extend(current_results)
 
-    # Schreibt Kopfzeile nur, wenn die Datei neu ist
-    if write_header:
-        writer.writerow(['Prompt', 'Response', 'Perplexity'])
-
-    for prompt in prompts:
-        try:
-            # Antwort erhalten
-            response_text = get_answer(prompt)
-
-            # Perplexität berechnen
-            perplexity = calculate_perplexity(model, tokenizer, response_text)
-
-            # Ergebnisse in CSV schreiben
-            writer.writerow([prompt, response_text, perplexity])
-        except Exception as e:
-            print(f"Fehler bei der Verarbeitung des Prompts '{prompt}': {e}")
-
-print(f"Ergebnisse wurden in {output_file} gespeichert.")
+# Durchschnittliche Perplexität am Ende der Ergebnisse hinzufügen
+data_structure["Ergebnisse"].append({"Durchschnittliche Perplexität": average_perplexity})
 
 
+# JSON-Datei mit aktualisierten Daten schreiben
+with open(output_file, mode='w', encoding='utf-8') as file:
+    json.dump(data_structure, file, ensure_ascii=False, indent=4)
+
+print(f"Ergebnisse und Durchschnittliche Perplexität wurden in {output_file} aktualisiert.")
