@@ -11,6 +11,15 @@ def run_bleu_test_on_json_dataset(json_file_path, output_file_path):
 
     # Öffnen der Ausgabedatei im Schreibmodus
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        # Kurze Erklärung zu BLEU und BLEU-Score am Anfang der Datei
+        explanation = (
+            "BLEU (Bilingual Evaluation Understudy) ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. "
+            "Der BLEU-Score misst die Ähnlichkeit zwischen einer automatisch generierten Übersetzung und einer oder mehreren Referenzübersetzungen. "
+            "Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt."
+        )
+
+        # Schreibe Erklärung in die Datei
+        output_file.write(explanation + '\n\n')
         for i, data_point in enumerate(dataset):
             # Jeder Datenpunkt enthält "predictions" und "references"
             predictions = data_point.get("predictions", [])
