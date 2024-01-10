@@ -215,5 +215,5 @@ $RECYCLE.BIN/
 /*/.idea*
 __pycache__
 __pycache__/
-#ignore all the txt files
+#ignore all the txt files inside results
 results/*.txt
