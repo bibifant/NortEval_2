@@ -1,12 +1,43 @@
 BLEU (Bilingual Evaluation Understudy) ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Der BLEU-Score misst die Ähnlichkeit zwischen einer automatisch generierten Übersetzung und einer oder mehreren Referenzübersetzungen. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt.
 
-BLEU Score für Vorhersage 1-1: 0.8646108953733144
-BLEU Score für Vorhersage 2-1: 2.3394285299910343e-78
-BLEU Score für Vorhersage 2-2: 2.3394285299910343e-78
-BLEU Score für Vorhersage 2-3: 2.3394285299910343e-78
+BLEU Score für Vorhersage 1-1: 1.0
+BLEU Score für Vorhersage 1-2: 1.0
+BLEU Score für Vorhersage 1-3: 1.0
+BLEU Score für Vorhersage 2-1: 1.0
+BLEU Score für Vorhersage 2-2: 1.0
+BLEU Score für Vorhersage 2-3: 1.0
 BLEU Score für Vorhersage 3-1: 1.0
-BLEU Score für Vorhersage 3-2: 1.5319719891192393e-231
-BLEU Score für Vorhersage 3-3: 1.821831989445342e-231
-BLEU Score für Vorhersage 4-1: 0.4243775868805291
+BLEU Score für Vorhersage 3-2: 1.0
+BLEU Score für Vorhersage 3-3: 1.0
+BLEU Score für Vorhersage 4-1: 1.0
+BLEU Score für Vorhersage 4-2: 1.0
+BLEU Score für Vorhersage 4-3: 1.0
+BLEU Score für Vorhersage 5-1: 1.0
+BLEU Score für Vorhersage 5-2: 1.0
+BLEU Score für Vorhersage 5-3: 1.0
+BLEU Score für Vorhersage 6-1: 1.0
+BLEU Score für Vorhersage 6-2: 1.0
+BLEU Score für Vorhersage 6-3: 1.0
+BLEU Score für Vorhersage 7-1: 1.0
+BLEU Score für Vorhersage 7-2: 1.0
+BLEU Score für Vorhersage 7-3: 1.0
+BLEU Score für Vorhersage 8-1: 1.0
+BLEU Score für Vorhersage 8-2: 1.0
+BLEU Score für Vorhersage 8-3: 1.0
+BLEU Score für Vorhersage 9-1: 1.0
+BLEU Score für Vorhersage 9-2: 1.0
+BLEU Score für Vorhersage 9-3: 1.0
+BLEU Score für Vorhersage 10-1: 1.0
+BLEU Score für Vorhersage 10-2: 1.0
+BLEU Score für Vorhersage 10-3: 1.0
+BLEU Score für Vorhersage 11-1: 1.0
+BLEU Score für Vorhersage 11-2: 1.0
+BLEU Score für Vorhersage 11-3: 1.0
+BLEU Score für Vorhersage 12-1: 1.0
+BLEU Score für Vorhersage 12-2: 1.0
+BLEU Score für Vorhersage 12-3: 1.0
+BLEU Score für Vorhersage 13-1: 1.0
+BLEU Score für Vorhersage 13-2: 1.0
+BLEU Score für Vorhersage 13-3: 1.0
 
-Durchschnittlicher BLEU-Score für das gesamte Dataset: 0.5722471205634609
+Durchschnittlicher BLEU-Score für das gesamte Dataset(13): 3.0
