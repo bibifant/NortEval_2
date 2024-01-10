@@ -12,7 +12,9 @@ def main():
     output_file = create_results_file()
 
     # Setze die Testdaten entsprechend
-    json_file_bleu3_path = "dataset/bleu_dataset.json"
+    # bleu
+    json_file_bleu_path = "dataset/bleu_dataset.json"
+    output_file_path = "results/bleu_results.txt"
 
     example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
 
@@ -25,7 +27,7 @@ def main():
 
     # Führe die Tests aus
     print("\n\nBLEU:")
-    run_bleu_test_on_json_dataset(json_file_bleu3_path)
+    run_bleu_test_on_json_dataset(json_file_bleu_path, output_file_path)
 
     print("\n\nde_en:")
     run_de_en_test(example_text_de_en)
@@ -45,4 +47,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

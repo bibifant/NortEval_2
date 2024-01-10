@@ -10,14 +10,14 @@ client = AzureOpenAI(
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
 )
 
-def get_answer(prompt: str, max_response_tokens:int = 200, user_text: str = None):
 
+def get_answer(prompt: str, max_response_tokens: int = 200, user_text: str = None):
     if user_text is not None:
         prompt.format(user_text)
 
     system_message = [{"role": "system", "content": prompt}]
     response = client.chat.completions.create(
-        model="gpt35", # model = "deployment_name".
+        model="gpt35",  # model = "deployment_name".
         messages=system_message,
         temperature=0.7,
         max_tokens=max_response_tokens
