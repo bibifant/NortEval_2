@@ -1,6 +1,7 @@
 import json
 from nltk.translate.bleu_score import sentence_bleu
 
+
 def run_bleu_test_on_json_dataset(json_file_path, output_file_path):
     # Öffnen der JSON-Datei
     with open(json_file_path, 'r', encoding='utf-8') as file:
@@ -45,5 +46,5 @@ def run_bleu_test_on_json_dataset(json_file_path, output_file_path):
     # Durchschnittlicher BLEU-Score für das gesamte Dataset
     average_bleu_score = total_bleu_score / len(dataset)
     with open(output_file_path, 'a', encoding='utf-8') as output_file:
-        output_file.write(f"\nDurchschnittlicher BLEU-Score für das gesamte Dataset: {average_bleu_score}\n")
-
+        output_file.write(
+            f"\nDurchschnittlicher BLEU-Score für das gesamte Dataset({len(dataset)}): {average_bleu_score}\n")
