@@ -13,10 +13,10 @@ def run_rouge():
     json_file_path = "dataset/test.json"
 
     # Pfad für die Ausgabedatei
-    output_file_path = "llm_evaluation_rouge.txt"
+    output_file_path = "results/llm_evaluation_rouge.txt"
 
     # Pfad für die Ausgabedatei Durchschnitt
-    output_average_file_path = "llm_evaluation_all.txt"
+    output_average_file_path = "results/llm_evaluation_all.txt"
 
     # Listen für rouge scores
     rouge1_scores = []
