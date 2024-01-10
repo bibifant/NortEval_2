@@ -1,12 +1,16 @@
+from create_results_file import create_results_file
 from bleu import run_bleu_test_on_json_dataset
 from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
-from perplexityTest import run_perplexity_test
+from perplexity_transformersGPT2 import run_perplexity_test
 from rouge import run_rouge
 
 
 def main():
+    # Erstelle zuerst die results.json Datei
+    output_file = create_results_file()
+
     # Setze die Testdaten entsprechend
     json_file_bleu3_path = "dataset/bleu_dataset.json"
 
@@ -18,10 +22,6 @@ def main():
                                 "Die Vögel singen fröhlich.",
                                 "lachen, spielen, singen.",
                                 "Fenster singen im Park."]
-
-    dataset_path_perplexity = "dataset/WikiQA-train.txt"
-
-    jsonl_file_path_rouge = "de_test.jsonl" #dataset muss updated werden
 
     # Führe die Tests aus
     print("\n\nBLEU:")
@@ -36,8 +36,8 @@ def main():
     print("\n\nGebeugtes Verb:")
     run_gebeugtes_verb_test(sentences_gebeugtes_verb)
 
-    # print("\n\nPerplexity:")
-    # run_perplexity_test(dataset_path_perplexity)
+    print("\n\nPerplexity:")
+    run_perplexity_test(output_file)
 
     print("\n\nRouge:")
     run_rouge()
