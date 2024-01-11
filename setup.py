@@ -17,6 +17,11 @@ setup(
         "nltk",
         "spacy",
         "langdetect",
+        "math",
+        "torch",
+        "transformers",
+        "rouge_score",
+        "sys"
     ],
     python_requires=">=3.11",
 )
