@@ -1,4 +1,4 @@
-BLEU (Bilingual Evaluation Understudy) ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Der BLEU-Score misst die Ähnlichkeit zwischen einer automatisch generierten Übersetzung und einer oder mehreren Referenzübersetzungen. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt.
+BLEU (Bilingual Evaluation Understudy) ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Der BLEU-Score misst die Ähnlichkeit zwischen einer automatisch generierten Übersetzung und einer oder mehreren Referenzübersetzungen. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt.Bleu score bleibt ziwschen 0-1
 
 BLEU Score für Vorhersage 1-1: 1.0
 BLEU Score für Vorhersage 1-2: 1.0
@@ -40,4 +40,4 @@ BLEU Score für Vorhersage 13-1: 1.0
 BLEU Score für Vorhersage 13-2: 1.0
 BLEU Score für Vorhersage 13-3: 1.0
 
-Durchschnittlicher BLEU-Score für das gesamte Dataset(13): 3.0
+Durchschnittlicher BLEU-Score für das gesamte Dataset(13, 3): 1.0
