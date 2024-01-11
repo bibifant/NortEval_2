@@ -63,3 +63,68 @@ Durchschnittliche Rouge Scores:
 rouge1: 0.024189551930621514
 rouge2: 0.0
 rougeL: 0.022991947140202355
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.02453246863859248
+rouge2: 0.0012135922330097088
+rougeL: 0.02453246863859248
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024374584702692027
+rouge2: 0.0
+rougeL: 0.024374584702692027
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.02466977944338638
+rouge2: 0.0012224938875305626
+rougeL: 0.023450267248264423
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024353325985496437
+rouge2: 0.0012180267965895251
+rougeL: 0.024353325985496437
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024291106020572002
+rouge2: 0.0
+rougeL: 0.024291106020572002
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024131889958110293
+rouge2: 0.0012422360248447203
+rougeL: 0.024131889958110293
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.0232683409994437
+rouge2: 0.0
+rougeL: 0.022108248192019106
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024542303522621427
+rouge2: 0.0
+rougeL: 0.02333603090500985
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024619938317609776
+rouge2: 0.0012345679012345679
+rougeL: 0.024619938317609776
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.022901075532654483
+rouge2: 0.0011990407673860913
+rougeL: 0.022901075532654483
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024303428811625536
+rouge2: 0.0012642225031605564
+rougeL: 0.023112952621149346
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.024495633845227342
+rouge2: 0.0
+rougeL: 0.024495633845227342
+
+Durchschnittliche Rouge Scores:
+rouge1: 0.023893505027060016
+rouge2: 0.0
+rougeL: 0.022697332778256186
