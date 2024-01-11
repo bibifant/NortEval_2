@@ -1,93 +1,86 @@
 import json
+import os.path
 from rouge_score import rouge_scorer
-import sys
-sys.path.append('script')
 from script.azure_openai_connection import get_answer
 
-
-def run_rouge():
-    # rouge score initialisieren
+def run_rouge(output_folder):
+    # Rouge-Scorer initialisieren
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
-    # Pfad JSON-Datei
+    # Pfad zur JSON-Datei
     json_file_path = "dataset/test.json"
 
-    # Pfad für die Ausgabedatei
-    output_file_path = "results/llm_evaluation_rouge.txt"
+    # Dateipfad für die Ausgabedatei
+    output_file_path = os.path.join(output_folder, "rouge_results.json")
 
-    # Pfad für die Ausgabedatei Durchschnitt
-    output_average_file_path = "results/llm_evaluation_all.txt"
+    # Liste für Datensatzpunkte
+    dataset_points = []
 
-    # Listen für rouge scores
-    rouge1_scores = []
-    rouge2_scores = []
-    rougeL_scores = []
+    # Laden der Daten aus JSON-Datei
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
 
-    # Öffnen der Ausgabedatei im Schreibmodus
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    # Rouge-Scores für jeden Datensatzpunkt im Datensatz berechnen
+    for index, line in enumerate(lines[:2]):
+        data_point = json.loads(line)
 
-        # Laden der Daten aus JSON-Datei
-        with open(json_file_path, 'r', encoding='utf-8') as file:
-            lines = file.readlines()
+        # Attribut "wiki_sentences" zum Prompt hinzufügen
+        prompt = f"Fasse den Text in deutsch zusammen:\n{data_point.get('wiki_sentences')}"
 
-        output_file.write(f"Die Rouge-Metrik bewertet die Fähigkeit eines LLMs, Zusammenfassungen aus einem Input Text zu generieren. Der Rouge-Score reicht von 0 bis 1, wobei höhere Werte eine bessere Qualität der Zusammenfassung anzeigen.\n\n")
+        # Zusammenfassung vom LLM
+        candidate_summary = get_answer(prompt)
 
-        # rouge scores für jeden Datensatzpunkt im Datensatz berechnen
-        for index, line in enumerate(lines[:2]):
-            data_point = json.loads(line)
+        # Referenz-Zusammenfassung
+        reference_summary = data_point.get("klexikon_sentences", [])
 
-            # Attribut "wiki_sentences" zum Prompt hinzufügen
-            prompt = f"Fasse den Text in 10 Sätzen in deutsch zusammen:\n{data_point.get('wiki_sentences')}"
+        # Konvertiere die Listen in Strings
+        candidate_summary_str = " ".join(candidate_summary)
+        reference_summary_str = " ".join(reference_summary)
 
-            # Prompt und Index in Datei schreiben
-            output_file.write(f"Index: {index}\n")
-            output_file.write(f"Prompt: {prompt}\n")
+        # Rouge-Scores berechnen
+        scores = scorer.score(reference_summary_str, candidate_summary_str)
 
-            # Zusammenfassung vom LLM
-            candidate_summary = get_answer(prompt)
+        # Datensatzpunkt speichern
+        dataset_point = {
+            "index": index,
+            "prompt": prompt,
+            "candidate_summary": candidate_summary,
+            "rouge1_scores": scores['rouge1'],
+            "rouge2_scores": scores['rouge2'],
+            "rougeL_scores": scores['rougeL']
+        }
 
-            # LLM-Output in Datei schreiben
-            output_file.write(f"LLM Output: {candidate_summary}\n")
+        dataset_points.append(dataset_point)
 
-            # Referenz-Zusammenfassung
-            reference_summary = data_point.get("klexikon_sentences", [])
+    # Rouge-Scores für Durchschnitt berechnen und speichern
+    rouge1_scores = [point["rouge1_scores"].fmeasure for point in dataset_points]
+    rouge2_scores = [point["rouge2_scores"].fmeasure for point in dataset_points]
+    rougeL_scores = [point["rougeL_scores"].fmeasure for point in dataset_points]
 
-            # Konvertiere die Listen in Strings
-            candidate_summary_str = " ".join(candidate_summary)
-            reference_summary_str = " ".join(reference_summary)
-
-            # rouge scores berechnen
-            scores = scorer.score(reference_summary_str, candidate_summary_str)
-
-            # rouge scores speichern
-            rouge1_scores.append(scores['rouge1'].fmeasure)
-            rouge2_scores.append(scores['rouge2'].fmeasure)
-            rougeL_scores.append(scores['rougeL'].fmeasure)
-
-            # rouge scores in Datei schreiben
-            output_file.write("Rouge Scores:\n")
-            for key in scores:
-                output_file.write(f'{key}: {scores[key]}\n')
-
-            output_file.write("\n")
-
-    # Durchschnitt berechnen
     avg_rouge1 = sum(rouge1_scores) / len(rouge1_scores)
     avg_rouge2 = sum(rouge2_scores) / len(rouge2_scores)
     avg_rougeL = sum(rougeL_scores) / len(rougeL_scores)
 
-    # Durchschnitt in Datei schreiben
-    with open(output_file_path, 'a', encoding='utf-8') as output_file:
-        output_file.write("\nDurchschnittliche Rouge Scores:\n")
-        output_file.write(f'rouge1: {avg_rouge1}\n')
-        output_file.write(f'rouge2: {avg_rouge2}\n')
-        output_file.write(f'rougeL: {avg_rougeL}\n')
+    # Durchschnitts-Rouge-Scores speichern
+    avg_json_data = {
+        "avg_rouge1": avg_rouge1,
+        "avg_rouge2": avg_rouge2,
+        "avg_rougeL": avg_rougeL
+    }
 
-    # Durchschnitt in Durchschnitt-Datei schreiben
-    with open(output_average_file_path, 'a', encoding='utf-8') as output_file:
-        output_file.write("\nDurchschnittliche Rouge Scores:\n")
-        output_file.write(f'rouge1: {avg_rouge1}\n')
-        output_file.write(f'rouge2: {avg_rouge2}\n')
-        output_file.write(f'rougeL: {avg_rougeL}\n')
+    # Daten in JSON-Dateien schreiben
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        json.dump(dataset_points, output_file, ensure_ascii=False, indent=2)
 
+    # Laden der bestehenden Ergebnisdatei
+    with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
+        existing_data = json.load(result_file)
 
+    # Hinzufügen der Durchschnitts-Rouge-Scores
+    existing_data["Ergebnisse"].append(avg_json_data)
+
+    # Aktualisieren der Ergebnisdatei
+    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+
+    return dataset_points, avg_json_data
