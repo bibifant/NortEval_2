@@ -17,6 +17,7 @@ def run_bleu_test_on_json_dataset(json_file_path, output_file_path):
             "BLEU (Bilingual Evaluation Understudy) ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. "
             "Der BLEU-Score misst die Ähnlichkeit zwischen einer automatisch generierten Übersetzung und einer oder mehreren Referenzübersetzungen. "
             "Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt."
+            "Bleu score bleibt ziwschen 0-1"
         )
 
         # Schreibe Erklärung in die Datei
@@ -44,7 +45,7 @@ def run_bleu_test_on_json_dataset(json_file_path, output_file_path):
                 output_file.write(f"BLEU Score für Vorhersage {i + 1}-{j + 1}: {bleu_score}\n")
 
     # Durchschnittlicher BLEU-Score für das gesamte Dataset
-    average_bleu_score = total_bleu_score / len(dataset)
+    average_bleu_score = total_bleu_score / (len(dataset)*len(reference_set))
     with open(output_file_path, 'a', encoding='utf-8') as output_file:
         output_file.write(
-            f"\nDurchschnittlicher BLEU-Score für das gesamte Dataset({len(dataset)}): {average_bleu_score}\n")
+            f"\nDurchschnittlicher BLEU-Score für das gesamte Dataset({len(dataset)}, {len(references)}): {average_bleu_score}\n")
