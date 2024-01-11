@@ -4,3 +4,7 @@ spacy~=3.7.2
 langdetect~=1.0.9
 setuptools~=65.5.0
 python-dotenv~=1.0.0
+requests~=2.31.0
+translate~=3.6.1
+torch~=2.1.2
+transformers~=4.36.2

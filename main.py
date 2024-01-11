@@ -1,16 +1,15 @@
-from bleu import run_bleu_test_on_json_dataset
 from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
 from perplexityTest import run_perplexity_test
 from rouge import run_rouge
+from bleu.bleu import calculate_bleu
 
 
 def main():
     # Setze die Testdaten entsprechend
     # bleu
-    json_file_bleu_path = "dataset/bleu_dataset.json"
-    output_file_path = "results/bleu_results.txt"
+    output_file_path = "results/bleu_results.json"
 
     example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
 
@@ -27,7 +26,7 @@ def main():
 
     # Führe die Tests aus
     print("\n\nBLEU:")
-    run_bleu_test_on_json_dataset(json_file_bleu_path, output_file_path)
+    calculate_bleu(output_file_path)
 
     print("\n\nde_en:")
     run_de_en_test(example_text_de_en)
