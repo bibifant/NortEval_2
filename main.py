@@ -8,8 +8,8 @@ from metrics.rouge import run_rouge
 
 
 def main():
-    #Erstelle zuerst die results.json Datei
-    output_file = create_results()
+    #Erstelle zuerst den results.json Ordner mit Zeitstempel
+    output_folder = create_results()
 
     #Tests ausführen
     #Bleu
@@ -25,10 +25,10 @@ def main():
     #run_gebeugtes_verb_test()
 
     #Perplexity
-    run_perplexity_test(output_file)
+    run_perplexity_test(output_folder)
 
     #Rouge
-    run_rouge(output_file)
+    run_rouge(output_folder)
 
 
 if __name__ == "__main__":

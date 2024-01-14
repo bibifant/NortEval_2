@@ -17,15 +17,14 @@ def create_results():
     data_structure = {
         "Metrik Erklärungen": {
             "Rouge": "Die Rouge-Metrik bewertet die Fähigkeit eines LLMs, Zusammenfassungen aus einem Input Text zu generieren. Der Rouge-Score reicht von 0 bis 1, wobei höhere Werte eine bessere Qualität der Zusammenfassung anzeigen.",
-            "BLEU": "BLEU ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt",
-            "Perplexity": "Perplexity ist ein Maß für die Vorhersageunsicherheit eines Sprachmodells. Ein niedrigerer Wert deutet auf eine höhere Vorhersagegenauigkeit des Modells hin."
+            "BLEU": "BLEU ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Bleu Score reicht von 0 bis 1. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt.",
+            "Perplexity": "Perplexity ist ein Maß für die Vorhersageunsicherheit eines Sprachmodells. Ein niedrigerer Wert deutet auf eine höhere Vorhersagegenauigkeit des Modells hin. Ein Wert nahe 50 ist hervorragend."
         },
         "Ergebnisse": []
     }
 
     with open(file_name, mode='w', encoding='utf-8') as file:
         json.dump(data_structure, file, ensure_ascii=False, indent=4)
-    print(f"{file_name} wurde erstellt.")
-
+    print(f"Der Ordner {folder_name} wurde erstellt.")
 
     return folder_name
