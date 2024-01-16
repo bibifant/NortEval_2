@@ -4,6 +4,7 @@ from rouge_score import rouge_scorer
 from script.azure_openai_connection import get_answer
 
 def run_rouge(output_folder):
+
     # Rouge-Scorer initialisieren
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
