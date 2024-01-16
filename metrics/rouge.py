@@ -77,7 +77,7 @@ def run_rouge(output_folder):
         existing_data = json.load(result_file)
 
     # Hinzufügen der Durchschnitts-Rouge-Scores
-    existing_data["Ergebnisse"].append(avg_json_data)
+    existing_data["Results"].append(avg_json_data)
 
     # Aktualisieren der Ergebnisdatei
     with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
