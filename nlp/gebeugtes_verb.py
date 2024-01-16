@@ -69,3 +69,5 @@ response = get_answer(prompt)
 
 # Überprüfung ob der Satz ein gebeugtes Verb enthält
 run_gebeugtes_verb_test(response)
+
+
