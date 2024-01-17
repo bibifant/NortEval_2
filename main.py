@@ -1,3 +1,4 @@
+from bleu import bleu_with_local_dataset
 from de_en import run_de_en_test
 from functionGK import run_function_gk_test
 from gebeugtes_verb import run_gebeugtes_verb_test
@@ -7,9 +8,6 @@ from bleu.bleu import calculate_bleu
 
 
 def main():
-    # Setze die Testdaten entsprechend
-    # bleu
-    output_file_path = "results/bleu_results.json"
 
     example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
 
@@ -19,14 +17,14 @@ def main():
                                 "Die Vögel singen fröhlich.",
                                 "lachen, spielen, singen.",
                                 "Fenster singen im Park."]
-    #perflexity
+
     dataset_path_perplexity = "dataset/WikiQA-train.txt"
 
-    jsonl_file_path_rouge = "de_test.jsonl"  # dataset muss updated werden
-
-    # Führe die Tests aus
     print("\n\nBLEU:")
-    calculate_bleu(output_file_path)
+    calculate_bleu()
+
+    print("\n\nBLEU With local dataset:")
+    bleu_with_local_dataset.calculate_bleu()
 
     print("\n\nde_en:")
     run_de_en_test(example_text_de_en)
