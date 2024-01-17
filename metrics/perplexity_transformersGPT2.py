@@ -2,6 +2,7 @@ import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from math import exp
 import json
+import os
 from script.azure_openai_connection import get_answer
 
 # Funktion zur Berechnung der Perplexität
@@ -12,11 +13,14 @@ def calculate_perplexity(model, tokenizer, text):
         loss = model(tensor_input, labels=tensor_input).loss
     return exp(loss.item())
 
-def run_perplexity_test(output_file):
+def run_perplexity_test(output_folder):
     # Laden des Modells und des Tokenizers
     model_name = "gpt2"
     model = GPT2LMHeadModel.from_pretrained(model_name)
     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+
+    # Dateipfad für die Ausgabedatei
+    output_file_path = os.path.join(output_folder, "perplexity_results.json")
 
     # Liste von Prompts
     prompts = [
@@ -56,19 +60,24 @@ def run_perplexity_test(output_file):
     # Durchschnittsperplexität berechnen
     average_perplexity = total_perplexity / len(prompts) if prompts else 0
 
+    # Ergebnisse in JSON-Datei schreiben
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        json.dump(current_results, output_file, ensure_ascii=False, indent=2)
 
-    # Vorhandene JSON-Datei laden
-    with open(output_file, 'r', encoding='utf-8') as file:
-        data_structure = json.load(file)
+    # Durchschnittliche Perplexität speichern
+    avg_json_data = {"average_perplexity": average_perplexity}
 
-    # Aktuelle Ergebnisse zu den bestehenden hinzufügen
-    data_structure["Ergebnisse"].extend(current_results)
+    # Laden der bestehenden Ergebnisdatei
+    with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
+            existing_data = json.load(result_file)
 
-    # Durchschnittliche Perplexität am Ende der Ergebnisse hinzufügen
-    data_structure["Ergebnisse"].append({"Durchschnittliche Perplexität": average_perplexity})
+    # Hinzufügen der Durchschnitts-Perplexity
+    existing_data["Results"].append(avg_json_data)
 
-    # JSON-Datei mit aktualisierten Daten schreiben
-    with open(output_file, mode='w', encoding='utf-8') as file:
-        json.dump(data_structure, file, ensure_ascii=False, indent=4)
+    # Aktualisieren der Ergebnisdatei
+    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
 
-    print(f"Ergebnisse und Durchschnittliche Perplexität wurden in {output_file} aktualisiert.")
+    # print(f"Ergebnisse und Durchschnittliche Perplexität wurden in {output_file} aktualisiert.")
+    return current_results, avg_json_data
+
