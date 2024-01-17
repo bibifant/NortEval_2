@@ -1,7 +1,8 @@
-# Überprüfung ob ein gebeugtes Verb im Satz enthalten ist. Da das Verb der Anker eines deutschen Satzes ist,
-# muss eins enthalten sein.
+# Check whether a conjugated verb is contained in the sentence. As the verb is the anchor of a German sentence,
+# one must be included.
 
 import spacy
+from script.azure_openai_connection import get_answer
 
 # global variable
 nlp = spacy.load("de_core_news_sm")
@@ -37,35 +38,36 @@ def get_nomen_numerus(sentence):
             return numerus
 
 
-def enthält_gebeugtes_verb(satz):
-    doc = nlp(satz)
+def run_gebeugtes_verb_test(sentence):
+    doc = nlp(sentence)
+    gefundene_verben = []
 
     # Überprüfen, ob ein gebeugtes Verb im Satz vorhanden ist
     for token in doc:
         if token.pos_ == "VERB":
-            if get_number(satz) == get_nomen_numerus(satz) and get_number(satz):
-                print(f"{satz}: Dieser Satz enthält das gebeugte Verb {token}")
-                return True
-            if get_number(satz) == "Sing":
-                print(f"{satz}: Dieser Satz enthält das gebeugte Verb {token}")
-                return True
-            else:
-                print(f"{satz}: Dieser Satz enthält kein gebeugtes Verb.")
-            return False
+            number = get_number(sentence)
+            numerus = get_nomen_numerus(sentence)
+
+            if number == numerus and number:
+                print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
+                gefundene_verben.append(token.text)
+            elif number == "Sing":
+                print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
+                gefundene_verben.append(token.text)
+
+    if not gefundene_verben:
+        print(f"{sentence}: Dieser Satz enthält kein gebeugtes Verb.")
+    else:
+        print(f"Gefundene Verben: {', '.join(gefundene_verben)}")
+        return True
+
+    return False
 
 
-def run_gebeugtes_verb_test(saetze):
-    for satz in saetze:
-        enthält_gebeugtes_verb(satz)
+prompt = "Schreibe einen deutschen Satz mit mehreren gebeugten Verben:"
+response = get_answer(prompt)
 
-# test gebeugtes_verb here
-# bespiel Daten
-# satz1 = "Der Hund spielt im Park."
-# satz2 = "Die Vögel singen fröhlich."
-# satz3 = "lachen, spielen, singen."
-# satz4 = "Fenster singen im Park."
-#
-# print(enthält_gebeugtes_verb(satz1))
-# print(enthält_gebeugtes_verb(satz2))
-# print(enthält_gebeugtes_verb(satz3))
-# print(enthält_gebeugtes_verb(satz4))
+# Überprüfung ob der Satz ein gebeugtes Verb enthält
+run_gebeugtes_verb_test(response)
+
+
