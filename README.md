@@ -84,6 +84,9 @@ import spacy
 global variable
 nlp = spacy.load("de_core_news_sm")
 
+def load_data(json_file_path):
+    This reads the json data from "npl_dataset.json" file and returns the loaded data
+
 def get_number(sentence):
     This determines the number of the verbs in the sentence and returns the number.
 
