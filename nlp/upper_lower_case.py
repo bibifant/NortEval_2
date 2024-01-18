@@ -40,7 +40,7 @@ def update_results_file(output_folder, avg_upper_lower_case):
         existing_data = json.load(result_file)
 
     existing_data["Results"].append({
-        "average percentage upper and lower case": avg_upper_lower_case
+        "average of correct letter case": avg_upper_lower_case
     })
 
     with open(avg_results_file_path, 'w', encoding='utf-8') as result_file:

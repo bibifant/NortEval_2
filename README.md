@@ -1,4 +1,4 @@
-# notal-llm: German LLM Evaluation Module
+# nortal-llm: German LLM Evaluation Module
 
 ## Overview
 
@@ -77,29 +77,39 @@ def upper_lower_case(text):
 def run_function_gk_test(text_example_gk):
     This prints out the results.
 
-## gebeugtes_verb : Verb Conjugation Test
-
-run_gebeugtes_verb_test(saetze)
+## conjugated_verb : Verb Conjugation Test
 
 import spacy
 
 global variable
 nlp = spacy.load("de_core_news_sm")
 
+def load_data(json_file_path):
+    This reads the json data from "npl_dataset.json" file and returns the loaded data
+
 def get_number(sentence):
     This determines the number of the verbs in the sentence and returns the number.
-
-def get_person(sentence):
-    This determines the person of the verbs in the sentence and returns the person.
 
 def get_nomen_numerus(sentence):
     This determines the number of the nouns in the sentence and returns the number. 
 
-def enthält_gebeugtes_verb(satz):
-    Returns TRUE, if sentence contains a conjugated verb, else FALSE
+def get_verbs(sentence):
+    This determines all the conjugated verbs in the responses.
 
-def run_gebeugtes_verb_test(saetze):
-    This iterates through a list of sentences.
+def avg_percentage(dataset_points):
+    This calculates the average value whether a conjugated verb is included.
+
+def save_conjugated_verb_results(output_file_path, data):
+    This writes the data to the "conjugated_verb_results.json" file
+
+def update_results_file(output_folder, avg_true_percentage):
+    This updates the "avg_results" file in the "results" folder with new results by reading existing data, adding new data and writing the updated data back to the file.
+
+def contains_conjugated_verb(output_folder):
+    Returns TRUE, if sentence contains a conjugated verb, else FALSE
+    and returns all conjugated verbs found and saves the results in the "conjugated_verb_results.json" file.
+
+
 
 ## de_en Language Percentage Check
 

@@ -25,6 +25,6 @@ def create_results():
 
     with open(file_name, mode='w', encoding='utf-8') as file:
         json.dump(data_structure, file, ensure_ascii=False, indent=4)
-    print(f"The folder {folder_name} has been created.")
+    print(f"The folder {folder_name} is being created.")
 
     return folder_name
