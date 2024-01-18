@@ -95,4 +95,4 @@ def calculate_bleu(output_folder, max_index=100):
 
     # update avg_results.json file
     with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
-        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+        json.dump(existing_data, result_file, indent=4, ensure_ascii=False)
