@@ -1,45 +1,34 @@
-from bleu import bleu_with_local_dataset
-from de_en import run_de_en_test
-from functionGK import run_function_gk_test
-from gebeugtes_verb import run_gebeugtes_verb_test
-from perplexityTest import run_perplexity_test
-from rouge import run_rouge
-from bleu.bleu import calculate_bleu
+from create_results import create_results
+from nlp.de_en import run_language_percentage
+from nlp.upper_lower_case import upper_lower_case
+from nlp.gebeugtes_verb import run_gebeugtes_verb_test
+from metrics.perplexity_transformersGPT2 import run_perplexity_test
+from metrics.rouge import run_rouge
+from metrics.bleu import calculate_bleu
 
 
 def main():
+    # create the results folder with timestamp
+    output_folder = create_results()
 
-    example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
-
-    text_example_gk = "Der schnelle braune Fuchs springt über den faulen Hund und der Fuchs freut sich. Der große Baum."
-
-    sentences_gebeugtes_verb = ["Der Hund spielt im Park.",
-                                "Die Vögel singen fröhlich.",
-                                "lachen, spielen, singen.",
-                                "Fenster singen im Park."]
-
-    dataset_path_perplexity = "dataset/WikiQA-train.txt"
-
-    print("\n\nBLEU:")
+    #Tests ausführen
+    #Bleu
     calculate_bleu()
 
-    print("\n\nBLEU With local dataset:")
-    bleu_with_local_dataset.calculate_bleu()
+    #Funktion deutsch-englisch
+    run_language_percentage(output_folder)
 
-    print("\n\nde_en:")
-    run_de_en_test(example_text_de_en)
+    #Funktion Groß- und Kleinschreibung
+    upper_lower_case(output_folder)
 
-    print("\n\nFunction GK:")
-    run_function_gk_test(text_example_gk)
+    # Gebeugtes Verb
+    # run_gebeugtes_verb_test()
 
-    print("\n\nGebeugtes Verb:")
-    run_gebeugtes_verb_test(sentences_gebeugtes_verb)
+    # Perplexity
+    run_perplexity_test(output_folder)
 
-    print("\n\n Perplexity: ")
-    run_perplexity_test(dataset_path_perplexity)
-
-    print("\n\nRouge:")
-    run_rouge()
+    # Rouge
+    run_rouge(output_folder)
 
 
 if __name__ == "__main__":

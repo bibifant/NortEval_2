@@ -41,7 +41,6 @@ def get_simple_translation(text, target_language='de', max_response_tokens=200):
         translated_text = response.choices[0].message.content
         return translated_text
     except Exception as e:
-        print(f"Error: {e}")
         return None
 
 
