@@ -1,36 +1,46 @@
-from create_results import create_results
-from metrics.bleu import run_bleu_test_on_json_dataset
-from nlp.de_en import run_language_percentage
-from nlp.upper_lower_case import upper_lower_case
-from nlp.gebeugtes_verb import run_gebeugtes_verb_test
-from metrics.perplexity_transformersGPT2 import run_perplexity_test
-from metrics.rouge import run_rouge
+from bleu import bleu_with_local_dataset
+from de_en import run_de_en_test
+from functionGK import run_function_gk_test
+from gebeugtes_verb import run_gebeugtes_verb_test
+from perplexityTest import run_perplexity_test
+from rouge import run_rouge
+from bleu.bleu import calculate_bleu
 
 
 def main():
-    # create the results folder with timestamp
-    output_folder = create_results()
 
-    #Tests ausführen
-    #Bleu
-    #run_bleu_test_on_json_dataset()
+    example_text_de_en = "Dies ist an english example text und ein deutscher Text zum Überprüfen."
 
-    #Funktion deutsch-englisch
-    run_language_percentage(output_folder)
+    text_example_gk = "Der schnelle braune Fuchs springt über den faulen Hund und der Fuchs freut sich. Der große Baum."
 
-    #Funktion Groß- und Kleinschreibung
-    upper_lower_case(output_folder)
+    sentences_gebeugtes_verb = ["Der Hund spielt im Park.",
+                                "Die Vögel singen fröhlich.",
+                                "lachen, spielen, singen.",
+                                "Fenster singen im Park."]
 
-    # Gebeugtes Verb
-    # run_gebeugtes_verb_test()
+    dataset_path_perplexity = "dataset/WikiQA-train.txt"
 
-    # Perplexity
-    run_perplexity_test(output_folder)
+    print("\n\nBLEU:")
+    calculate_bleu()
 
-    # Rouge
-    run_rouge(output_folder)
+    print("\n\nBLEU With local dataset:")
+    bleu_with_local_dataset.calculate_bleu()
+
+    print("\n\nde_en:")
+    run_de_en_test(example_text_de_en)
+
+    print("\n\nFunction GK:")
+    run_function_gk_test(text_example_gk)
+
+    print("\n\nGebeugtes Verb:")
+    run_gebeugtes_verb_test(sentences_gebeugtes_verb)
+
+    print("\n\n Perplexity: ")
+    run_perplexity_test(dataset_path_perplexity)
+
+    print("\n\nRouge:")
+    run_rouge()
 
 
 if __name__ == "__main__":
     main()
-

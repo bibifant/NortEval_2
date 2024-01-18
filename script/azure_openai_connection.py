@@ -13,7 +13,7 @@ client = AzureOpenAI(
 )
 
 
-def get_answer(prompt: str, max_response_tokens: int = 600, user_text: str = None):
+def get_answer(prompt: str, max_response_tokens: int = 200, user_text: str = None):
     if user_text is not None:
         prompt.format(user_text)
 
