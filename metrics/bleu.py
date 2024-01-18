@@ -1,13 +1,14 @@
 import json
-from script.azure_openai_connection import get_simple_translation
+import os.path
+
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+from script.azure_openai_connection import get_simple_translation
 
 # link to dataset: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
 # input file paths
 de_file_path = "dataset/zitate-dewiki-20141024.de"
 en_file_path = "dataset/zitate-dewiki-20141024.en"
 # create output file path
-output_file_path = "results/bleu_results.json"
 """
 This file performs a BLEU test on long text.
 The BLEU score is calculated in the following steps:
@@ -22,7 +23,10 @@ The BLEU score is calculated in the following steps:
 """
 
 
-def calculate_bleu(max_index=100):
+def calculate_bleu(output_folder, max_index=100):
+    # Dateipfad für die Ausgabedatei
+    output_file_path = os.path.join(output_folder, "bleu_results.json")
+
     # Read content from the ".de" file
     with open(de_file_path, 'r', encoding='utf-8') as de_file:
         de_content = de_file.read()
@@ -37,7 +41,7 @@ def calculate_bleu(max_index=100):
 
     # Initialise total score
     total_bleu_score = 0
-    results = {"scores": []}
+    bleu_score_data = {"scores": []}
     count = 0  # Number of successful BLEU score calculations
 
     for i, (en_sentence, de_sentence) in enumerate(zip(en_sentences, de_sentences)):
@@ -56,7 +60,7 @@ def calculate_bleu(max_index=100):
             formatted_bleu_score = "{:.2f}".format(bleu_score)
 
             # Save the results as a dictionary
-            results["scores"].append({
+            bleu_score_data["scores"].append({
                 "prediction_index": i + 1,
                 "prediction": prediction,
                 "reference": reference,
@@ -72,9 +76,23 @@ def calculate_bleu(max_index=100):
     average_bleu_score = total_bleu_score / count
     # Formatting the average BLEU score to two decimal places after the decimal point
     formatted_bleu_average_score = "{:.2f}".format(average_bleu_score)
-    results["count"] = count
-    results["average_bleu_score"] = formatted_bleu_average_score
 
     # Saving the results as JSON
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        json.dump(results, output_file, indent=2, ensure_ascii=False)
+        json.dump(bleu_score_data, output_file, indent=2, ensure_ascii=False)
+    # add bleu average score to avg_results
+
+    # load avg_result.json file
+    with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
+        existing_data = json.load(result_file)
+
+    # add average bleu score to data
+    bleu_avg_data = {
+        "count": count,
+        "average_bleu_score": formatted_bleu_average_score
+    }
+    existing_data['Results'].append(bleu_avg_data)
+
+    # update avg_results.json file
+    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
