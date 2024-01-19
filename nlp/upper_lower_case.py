@@ -50,7 +50,7 @@ def update_results_file(output_folder, avg_upper_lower_case):
         json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
 
 
-def upper_lower_case(output_folder):
+def run_upper_lower_case(output_folder):
     json_file_path = "./dataset/nlp_dataset.json"
     output_file_path = os.path.join(output_folder, "upper_lower_case_results.json")
 
