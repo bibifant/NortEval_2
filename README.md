@@ -14,6 +14,8 @@ pip install -r requirements.txt
 
 ## Usage:
 
+# Metrics
+
 ## BLEU
 This script implements the BLEU metric. It measures the similarity between a machine-generated translation and one or more reference translations provided by humans.
 In this implementation we provide an English source text to be translated into German and compare the LLMs output to a reference translation from a dataset (//add dataset).
@@ -63,26 +65,55 @@ from script.azure_openai_connection import get_answer
 def run_rouge():
     This takes datapoints from the dataset and calculated three rouge scores for each entry. It creates a txt file with the scores and the average scores.
 
-## functionGK : Capitalization Test
-run_function_gk_test(text_example_gk)
+
+# NLP (Natural Language Processing) Methods
+
+## upper lower case : Capitalization Test
+
+#### This module calculates the percentage of correct capitalization of the generated text from the connected API.
 
 import spacy
+import os
+import json
+from script.azure_openai_connection import get_answer
 
-global variable
 nlp = spacy.load("de_core_news_sm")
+    This loads the german language model from spacy
 
-def upper_lower_case(text):
-    This analyzes if an input sentence contains upper and lower case. 
+def load_data(json_file_path):
+    This reads the json data from "npl_dataset.json" file and returns the loaded data
 
-def run_function_gk_test(text_example_gk):
-    This prints out the results.
+def calculate_percentage(doc, nouns, words_lower_case):
+    This calculates the percentage of capitalized nouns, lowercase words not in the specified list, and title-cased words at the start of sentences. 
+    It averages these three percentages and rounds the result to two decimal places.
+
+def save_results(output_file_path, dataset_points):
+    This writes the data to the "upper_lower_case_results.json" file and saves it there.
+
+def calculate_average_percentage(dataset_points):
+    This function calculates the average percentage of correct usage of upper and lower case letters across the dataset and rounds the result to two decimal places.
+
+def update_results_file(output_folder, avg_upper_lower_case):
+    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    adding new data and writing the updated data back to the file.
+
+def upper_lower_case(output_folder):
+    This processes the dataset and responses of the api, calculates the percentage of correct usage of upper and lower case letters in the answers, saves individual results to the "upper_lower_case_results.json" file, 
+    and updates the "avg_results.json" file with the calculated average percentage.
+
+
 
 ## conjugated_verb : Verb Conjugation Test
 
-import spacy
+#### This module checks whether a conjugated verb is contained in a sentence.
 
-global variable
+import spacy
+import json
+import os
+from script.azure_openai_connection import get_answer
+
 nlp = spacy.load("de_core_news_sm")
+    This loads the german language model from spacy
 
 def load_data(json_file_path):
     This reads the json data from "npl_dataset.json" file and returns the loaded data
@@ -100,32 +131,53 @@ def avg_percentage(dataset_points):
     This calculates the average value whether a conjugated verb is included.
 
 def save_conjugated_verb_results(output_file_path, data):
-    This writes the data to the "conjugated_verb_results.json" file
+    This writes the data to the "conjugated_verb_results.json" file and saves it there.
 
 def update_results_file(output_folder, avg_true_percentage):
-    This updates the "avg_results" file in the "results" folder with new results by reading existing data, adding new data and writing the updated data back to the file.
+    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    adding new data and writing the updated data back to the file.
 
 def contains_conjugated_verb(output_folder):
-    Returns TRUE, if sentence contains a conjugated verb, else FALSE
+    This processes the dataset and responses of the api and Returns TRUE, if sentence contains a conjugated verb, else FALSE
     and returns all conjugated verbs found and saves the results in the "conjugated_verb_results.json" file.
 
 
 
-## de_en Language Percentage Check
+## de_en: Language Percentage Check
 
-run_de_en_test(text)
+#### This module identifies the main language of the generated answers,using Spacy for linguistic analysis and the langdetect library.
 
 import spacy
+import json
+import os
 from langdetect import detect
+from script.azure_openai_connection import get_answer
 
-global variable
 nlp = spacy.load("de_core_news_sm")
+    This loads the german language model from spacy
 
-def language_percentage(text):
-    This calculates the percentage of a certain language in a sentence (German, English).
+def load_data(json_file_path):
+    This reads the json data from "npl_dataset.json" file and returns the loaded data
 
-def run_de_en_test(text):
-    This executes language_percentage(text).
+def calculate_language_percentages(doc): 
+    This calculates the percentage of words in english and german and rounds the result to two decimal places.
+
+def calculate_average_percentage(dataset_points, key):
+    This function calculates the average percentage of english and german words for all datapoints across the dataset.
+
+def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
+    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    adding new data and writing the updated data back to the file.
+
+def save_results(output_file_path, data):
+    This writes the data to the "language_percentage_results.json" file and saves it there.
+
+def run_language_percentage(output_folder):
+    This processes the dataset and responses of the api and calculates the percentage of english and german words in the generated answers.
+    It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
+
+
+
 
 
 
