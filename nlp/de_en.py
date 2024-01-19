@@ -7,14 +7,12 @@ from script.azure_openai_connection import get_answer
 nlp = spacy.load("de_core_news_sm")
 
 
-# Function for loading data from JSON file
 def load_data(json_file_path):
     with open(json_file_path, 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
 
-# Function for calculating the percentage of words in English and German
 def calculate_language_percentages(doc):
     english_words = sum(1 for token in doc if token.is_alpha and detect(token.text) == 'en')
     german_words = sum(1 for token in doc if token.is_alpha and detect(token.text) == 'de')
@@ -24,7 +22,7 @@ def calculate_language_percentages(doc):
     if total_words == 0:
         english_percentage, german_percentage = 0, 0
     else:
-        # Calculation of the percentage values
+        # Calculate percentage values
         english_percentage = (english_words / total_words) * 100
         german_percentage = (german_words / total_words) * 100
 
@@ -38,26 +36,25 @@ def calculate_language_percentages(doc):
 
 
 def calculate_average_percentage(dataset_points, key):
-    return (sum(point[key] for point in dataset_points) / len(dataset_points))
+    return sum(point[key] for point in dataset_points) / len(dataset_points)
 
 
-# save average results in existing avg_results.json
 def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
     result_file_path = os.path.join(output_folder, "avg_results.json")
 
-    # Load the existing result file
+    # Load existing result file
     with open(result_file_path, 'r', encoding='utf-8') as result_file:
         existing_data = json.load(result_file)
 
-        # Add the average values
-        existing_data["Results"].append({
+    # Add average values
+    existing_data["Results"].append({
         "average percentage of english words": round(avg_english_percentage, 2),
         "average percentage of german words": round(avg_german_percentage, 2)
     })
 
-        # Update results file
-        with open(result_file_path, 'w', encoding='utf-8') as result_file:
-            json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+    # Update results file
+    with open(result_file_path, 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
 
 
 def save_results(output_file_path, data):
@@ -71,26 +68,26 @@ def run_language_percentage(output_folder):
 
     dataset_points = []
 
-    # Load data from JSON file
     data = load_data(json_file_path)
 
     for index, data_point in enumerate(data):
         prompt = f"Beantworte folgende Frage auf deutsch: {data_point.get('Frage')}"
 
-        # response LLM
+        # Response LLM
         candidate = get_answer(prompt)
+        candidate_str = ' '.join(sentence + "." for sentence in candidate)
 
-        doc = nlp(candidate)
+        doc = nlp(candidate_str)
 
         # Determine the main language of the text
-        main_language = detect(candidate)
+        main_language = detect(candidate_str)
 
         english_percentage, german_percentage = calculate_language_percentages(doc)
 
         dataset_point = {
             "index": index,
             "prompt": prompt,
-            "candidate": candidate,
+            "candidate": candidate_str,
             "main language part of the text": main_language,
             "english part of speech": english_percentage,
             "german part of speech": german_percentage

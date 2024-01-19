@@ -15,6 +15,7 @@ def load_data(json_file_path):
 def calculate_percentage(doc, nouns, words_lower_case):
     nouns_capitalized = [word.capitalize() for word in nouns]
 
+    # Calculate percentage values
     percentage_nouns = min((sum(1 for token in doc if token.text in nouns_capitalized) / len(nouns_capitalized)) * 100, 100)
     percentage_low = (sum(1 for token in doc if token.text.isalpha() and token.text.lower() not in nouns and not token.is_sent_start and token.text.islower()) / len(words_lower_case)) * 100
     percentage_start_of_sentence = (sum(1 for token in doc if token.is_sent_start and token.text.istitle()) / len(list(doc.sents))) * 100
@@ -28,21 +29,23 @@ def save_results(output_file_path, dataset_points):
         json.dump({"results": dataset_points}, output_file, ensure_ascii=False, indent=2)
 
 
-def calculate_average_percentage(dataset_points):
-    return round(sum(point["correct upper and lower case"] for point in dataset_points) / len(dataset_points), 2)
+def calculate_average_percentage(dataset_points, key):
+    return sum(point[key] for point in dataset_points) / len(dataset_points)
 
 
-# save average results in existing avg_results.json
 def update_results_file(output_folder, avg_upper_lower_case):
     avg_results_file_path = os.path.join(output_folder, "avg_results.json")
 
+    # Load existing result file
     with open(avg_results_file_path, 'r', encoding='utf-8') as result_file:
         existing_data = json.load(result_file)
 
+    # Add average value
     existing_data["Results"].append({
-        "average of correct letter case": avg_upper_lower_case
+        "average of correct letter case": round(avg_upper_lower_case, 2)
     })
 
+    # Update results file
     with open(avg_results_file_path, 'w', encoding='utf-8') as result_file:
         json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
 
@@ -57,10 +60,14 @@ def upper_lower_case(output_folder):
 
     for index, data_point in enumerate(data):
         prompt = f"Beantworte folgende Frage auf deutsch: {data_point.get('Frage')}"
-        candidate = get_answer(prompt)
-        doc = nlp(candidate)
 
-        text_low = candidate.lower()
+        # Response LLM
+        candidate = get_answer(prompt)
+        candidate_str = ' '.join(sentence + "." for sentence in candidate)
+
+        doc = nlp(candidate_str)
+
+        text_low = candidate_str.lower()
         nouns = [token.text for token in nlp(text_low) if token.pos_ in ('NOUN', 'PROPN')]
         words_lower_case = [token.text for token in doc if token.text.isalpha() and token.text.lower() not in nouns and not token.is_sent_start]
 
@@ -69,7 +76,7 @@ def upper_lower_case(output_folder):
         dataset_point = {
             "index": index,
             "prompt": prompt,
-            "candidate": candidate,
+            "candidate": candidate_str,
             "correct upper and lower case": total_percentage
         }
 
@@ -77,7 +84,7 @@ def upper_lower_case(output_folder):
 
     save_results(output_file_path, dataset_points)
 
-    avg_upper_lower_case = calculate_average_percentage(dataset_points)
+    avg_upper_lower_case = calculate_average_percentage(dataset_points, "correct upper and lower case")
 
     update_results_file(output_folder, avg_upper_lower_case)
 
