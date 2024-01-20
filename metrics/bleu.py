@@ -2,6 +2,7 @@ import json
 import os.path
 
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+
 from script.azure_openai_connection import get_simple_translation
 
 # link to dataset: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
@@ -28,6 +29,15 @@ def categorize_bleu_score(bleu_score):
         return "average"
     else:
         return "low"
+
+def categorize_bleu_score(bleu_score):
+    if bleu_score > 0.4:
+        return "high"
+    elif 0.2 <= bleu_score <= 0.4:
+        return "average"
+    else:
+        return "low"
+
 
 def calculate_bleu(output_folder, max_index=100):
     # Dateipfad für die Ausgabedatei
