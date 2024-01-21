@@ -113,7 +113,7 @@ import os
 from script.azure_openai_connection import get_answer
 
 nlp = spacy.load("de_core_news_sm")
-    This loads the german language model from spacy
+    This loads the German language model from spacy
 
 def load_data(json_file_path):
     This reads the json data from "npl_dataset.json" file and returns the loaded data
@@ -154,16 +154,16 @@ from langdetect import detect
 from script.azure_openai_connection import get_answer
 
 nlp = spacy.load("de_core_news_sm")
-    This loads the german language model from spacy
+    This loads the German language model from spacy
 
 def load_data(json_file_path):
     This reads the json data from "npl_dataset.json" file and returns the loaded data
 
 def calculate_language_percentages(doc): 
-    This calculates the percentage of words in english and german and rounds the result to two decimal places.
+    This calculates the percentage of words in English and German and rounds the result to two decimal places.
 
 def calculate_average_percentage(dataset_points, key):
-    This function calculates the average percentage of english and german words for all datapoints across the dataset.
+    This function calculates the average percentage of English and German words for all datapoints across the dataset.
 
 def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
     This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
@@ -173,7 +173,7 @@ def save_results(output_file_path, data):
     This writes the data to the "language_percentage_results.json" file and saves it there.
 
 def run_language_percentage(output_folder):
-    This processes the dataset and responses of the api and calculates the percentage of english and german words in the generated answers.
+    This processes the dataset and responses of the api and calculates the percentage of English and German words in the generated answers.
     It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
 
 

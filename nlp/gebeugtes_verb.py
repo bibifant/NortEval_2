@@ -49,16 +49,16 @@ def run_gebeugtes_verb_test(sentence):
             numerus = get_nomen_numerus(sentence)
 
             if number == numerus and number:
-                print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
+                # print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
                 gefundene_verben.append(token.text)
             elif number == "Sing":
-                print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
+                # print(f"{sentence}: Dieser Satz enthält das gebeugte Verb {token.text}")
                 gefundene_verben.append(token.text)
 
     if not gefundene_verben:
         print(f"{sentence}: Dieser Satz enthält kein gebeugtes Verb.")
     else:
-        print(f"Gefundene Verben: {', '.join(gefundene_verben)}")
+        # print(f"Gefundene Verben: {', '.join(gefundene_verben)}")
         return True
 
     return False
@@ -67,7 +67,7 @@ def run_gebeugtes_verb_test(sentence):
 prompt = "Schreibe einen deutschen Satz mit mehreren gebeugten Verben:"
 response = get_answer(prompt)
 
-# Überprüfung ob der Satz ein gebeugtes Verb enthält
+# Überprüfung, ob der Satz ein gebeugtes Verb enthält
 run_gebeugtes_verb_test(response)
 
 
