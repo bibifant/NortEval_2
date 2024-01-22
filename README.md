@@ -54,16 +54,32 @@ def run_perplexity_test(dataset_path):
 
 ## Rouge
 
-run_rouge()
+### The Rouge metric is used to evaluate generated text summaries of the LLM by measuring the alignment between the generated and reference texts based on n-gram matches (Rouge-1, Rouge-2) and the longest common subsequence (Rouge-L).
 
 import json
+import os.path
 from rouge_score import rouge_scorer
-import sys
-sys.path.append('script')
 from script.azure_openai_connection import get_answer
 
+
+def load_data(json_file_path):
+    This reads the json data from "test.json" file and returns the loaded data
+
+def calculate_average_rouge_scores(dataset_points):
+    This function calculates the average Rouge scores for Rouge-1, Rouge-2, and Rouge-L based on the list of data points, 
+    each containing these scores for different text summaries.
+
+def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
+    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
+    adding new data and writing the updated data back to the file.
+
+def save_results(output_file_path, data):
+    This writes the data to the "rouge_results.json" file and saves it there.
+
 def run_rouge():
-    This takes datapoints from the dataset and calculated three rouge scores for each entry. It creates a txt file with the scores and the average scores.
+    This initializes the Rouge scorer, processes a dataset of German text and  generates summaries of "candidate_summary" using the LLM. 
+    It then calculates Rouge scores for the first 2 entries in the dataset by comparing the candidate summaries to the reference summaries.
+    The results, prompts and summaries are then saved into the json file.
 
 
 # NLP (Natural Language Processing) Methods
@@ -94,18 +110,18 @@ def calculate_average_percentage(dataset_points):
     This function calculates the average percentage of correct usage of upper and lower case letters across the dataset and rounds the result to two decimal places.
 
 def update_results_file(output_folder, avg_upper_lower_case):
-    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
     adding new data and writing the updated data back to the file.
 
-def upper_lower_case(output_folder):
+def run_upper_lower_case(output_folder):
     This processes the dataset and responses of the api, calculates the percentage of correct usage of upper and lower case letters in the answers, saves individual results to the "upper_lower_case_results.json" file, 
     and updates the "avg_results.json" file with the calculated average percentage.
 
 
 
-## conjugated_verb : Verb Conjugation Test
+## contains_verb : Verb  Test
 
-#### This module checks whether a conjugated verb is contained in a sentence.
+#### This module checks whether a verb is contained in a sentence.
 
 import spacy
 import json
@@ -118,29 +134,25 @@ nlp = spacy.load("de_core_news_sm")
 def load_data(json_file_path):
     This reads the json data from "npl_dataset.json" file and returns the loaded data
 
-def get_number(sentence):
-    This determines the number of the verbs in the sentence and returns the number.
-
-def get_nomen_numerus(sentence):
-    This determines the number of the nouns in the sentence and returns the number. 
+def sentence_contains_verb(sentence):
+    This checks whether the sentence contains a verb or an auxiliary verb 
 
 def get_verbs(sentence):
-    This determines all the conjugated verbs in the responses.
+    This analyzes a sentence using spacy and returns a list of verbs and auxiliary verbs in the sentence
 
-def avg_percentage(dataset_points):
+def avg_percentage(dataset_points, key):
     This calculates the average value whether a conjugated verb is included.
 
-def save_conjugated_verb_results(output_file_path, data):
-    This writes the data to the "conjugated_verb_results.json" file and saves it there.
+def save_contains_verb_results(output_file_path, data):
+    This writes the data to the "contains_verb_results.json" file and saves it there.
 
 def update_results_file(output_folder, avg_true_percentage):
-    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
     adding new data and writing the updated data back to the file.
 
-def contains_conjugated_verb(output_folder):
-    This processes the dataset and responses of the api and Returns TRUE, if sentence contains a conjugated verb, else FALSE
-    and returns all conjugated verbs found and saves the results in the "conjugated_verb_results.json" file.
-
+def run_contains_verb(output_folder):
+    This analyzes each response to calculate the percentage of sentences containing at least one verb. It also extracts the verbs from the responses.It then saves the results including the response sentences, percentage with verbs, 
+    and the verbs themselves into the json file.
 
 
 ## de_en: Language Percentage Check
@@ -166,7 +178,7 @@ def calculate_average_percentage(dataset_points, key):
     This function calculates the average percentage of English and German words for all datapoints across the dataset.
 
 def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
-    This updates the "avg_results" file in the "results" folder with new results by reading existing data, 
+    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
     adding new data and writing the updated data back to the file.
 
 def save_results(output_file_path, data):
