@@ -2,7 +2,7 @@ from create_results import create_results
 from metrics.bleu import run_bleu_test_on_json_dataset
 from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
-from nlp.contains_verb import run_conjugated_verb
+from nlp.contains_verb import run_contains_verb
 from metrics.perplexity_transformersGPT2 import run_perplexity_test
 from metrics.rouge import run_rouge
 
@@ -28,7 +28,7 @@ def main():
     run_upper_lower_case(output_folder)
 
     # Conjugated Verb
-    run_conjugated_verb(output_folder)
+    run_contains_verb(output_folder)
 
 
 if __name__ == "__main__":

@@ -29,7 +29,7 @@ def avg_percentage(dataset_points, key):
 
 def save_contains_verb_results(output_file_path, data):
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        json.dump({"conjugated_verb_results": data}, output_file, ensure_ascii=False, indent=2)
+        json.dump({"contains_verb_results": data}, output_file, ensure_ascii=False, indent=2)
 
 
 def update_results_file(output_folder, avg_true_percentage):
@@ -49,10 +49,10 @@ def update_results_file(output_folder, avg_true_percentage):
         json.dump(existing_data, result_file, ensure_ascii=False, indent=2)
 
 
-def run_conjugated_verb(output_folder):
+def run_contains_verb(output_folder):
 
     json_file_path = "./dataset/nlp_dataset.json"
-    output_file_path = os.path.join(output_folder, "conjugated_verb_results.json")
+    output_file_path = os.path.join(output_folder, "contains_verb_results.json")
 
     dataset_points = []
     data = load_data(json_file_path)
@@ -68,13 +68,13 @@ def run_conjugated_verb(output_folder):
         sentences_with_verb_count = sum(1 for sent in doc.sents if sentence_contains_verb(sent.text))
         total_sentences = len(list(doc.sents))
         percentage_with_verb = (sentences_with_verb_count / total_sentences) * 100
-        conjugated_verbs = get_verbs(response_str)
+        containing_verbs = get_verbs(response_str)
 
         dataset_points.append({
             "index": index,
             "sentence": response_str,
             "sentences with at least one verb": percentage_with_verb,
-            "conjugated verbs": conjugated_verbs
+            "containing verbs": containing_verbs
         })
 
     save_contains_verb_results(output_file_path, dataset_points)
