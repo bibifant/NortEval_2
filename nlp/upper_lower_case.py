@@ -62,25 +62,23 @@ def run_upper_lower_case(output_folder):
         prompt = f"Beantworte folgende Frage auf deutsch: {data_point.get('Frage')}"
 
         # Response LLM
-        candidate = get_answer(prompt)
-        candidate_str = ' '.join(sentence + "." for sentence in candidate)
+        response = get_answer(prompt)
+        response_str = ' '.join(sentence + "." for sentence in response)
 
-        doc = nlp(candidate_str)
+        doc = nlp(response_str)
 
-        text_low = candidate_str.lower()
+        text_low = response_str.lower()
         nouns = [token.text for token in nlp(text_low) if token.pos_ in ('NOUN', 'PROPN')]
         words_lower_case = [token.text for token in doc if token.text.isalpha() and token.text.lower() not in nouns and not token.is_sent_start]
 
         total_percentage = calculate_percentage(doc, nouns, words_lower_case)
 
-        dataset_point = {
+        dataset_points.append({
             "index": index,
             "prompt": prompt,
-            "candidate": candidate_str,
+            "response": response_str,
             "correct upper and lower case": total_percentage
-        }
-
-        dataset_points.append(dataset_point)
+        })
 
     save_results(output_file_path, dataset_points)
 

@@ -74,26 +74,24 @@ def run_language_percentage(output_folder):
         prompt = f"Beantworte folgende Frage auf deutsch: {data_point.get('Frage')}"
 
         # Response LLM
-        candidate = get_answer(prompt)
-        candidate_str = ' '.join(sentence + "." for sentence in candidate)
+        response = get_answer(prompt)
+        response_str = ' '.join(sentence + "." for sentence in response)
 
-        doc = nlp(candidate_str)
+        doc = nlp(response_str)
 
         # Determine the main language of the text
-        main_language = detect(candidate_str)
+        main_language = detect(response_str)
 
         english_percentage, german_percentage = calculate_language_percentages(doc)
 
-        dataset_point = {
+        dataset_points.append({
             "index": index,
             "prompt": prompt,
-            "candidate": candidate_str,
+            "response": response_str,
             "main language part of the text": main_language,
             "english part of speech": english_percentage,
             "german part of speech": german_percentage
-        }
-
-        dataset_points.append(dataset_point)
+        })
 
     save_results(output_file_path, dataset_points)
 
