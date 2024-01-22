@@ -2,9 +2,10 @@ import json
 import os.path
 from datetime import datetime
 
+
 def create_results():
-    # Receive the current timestamp in the format "YYYYMMDD-HHMMSS"
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    # Receive the current timestamp
+    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     folder_name = f"results_{timestamp}"
 
     # Check whether the folder exists. If not, create it.
