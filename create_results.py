@@ -15,10 +15,10 @@ def create_results():
     file_name = os.path.join(folder_name, "avg_results.json")
 
     data_structure = {
-        "Metrik Erklärungen": {
-            "Rouge": "Die Rouge-Metrik bewertet die Fähigkeit eines LLMs, Zusammenfassungen aus einem Input Text zu generieren. Der Rouge-Score reicht von 0 bis 1, wobei höhere Werte eine bessere Qualität der Zusammenfassung anzeigen.",
-            "BLEU": "BLEU ist eine Metrik zur Bewertung der Qualität von maschinellen Übersetzungen. Bleu Score reicht von 0 bis 1. Ein höherer BLEU-Score deutet darauf hin, dass die automatische Übersetzung besser mit den Referenzübersetzungen übereinstimmt.",
-            "Perplexity": "Perplexity ist ein Maß für die Vorhersageunsicherheit eines Sprachmodells. Ein niedrigerer Wert deutet auf eine höhere Vorhersagegenauigkeit des Modells hin. Ein Wert nahe 50 ist hervorragend."
+        "Metrics explanations": {
+            "Rouge": "Rouge evaluates the ability of an LLM to generate summaries from an input text. The rouge score ranges from 0 to 1. A higher value indicates a better summary quality.",
+            "BLEU": "BLEU is a metric for evaluating the quality of machine translations. Bleu score ranges from 0 to 1. A higher BLEU score indicates that the automatic translations matches the reference translations better.",
+            "Perplexity": "Perplexity is a measure of the predictive uncertainty of a language model. A lower value indicates a higher prediction accuracy of the model. A value close to 50 is excellent."
         },
         "Results": []
     }
