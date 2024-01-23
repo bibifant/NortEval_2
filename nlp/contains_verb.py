@@ -79,6 +79,6 @@ def run_contains_verb(output_folder):
 
     save_contains_verb_results(output_file_path, dataset_points)
 
-    avg_contains_verb = avg_percentage(dataset_points, "sentences with at least one verb")
+    avg_contains_verb = avg_percentage(dataset_points, "percentage_of_sentences_containing_at_least_one_verb")
 
     update_results_file(output_folder, avg_contains_verb)
