@@ -30,6 +30,15 @@ def main():
     # Rouge
     run_rouge(output_folder)
 
+    # Percentage of german & english words
+    run_language_percentage(output_folder)
+
+    # Upper lower case
+    run_upper_lower_case(output_folder)
+
+    # Conjugated Verb
+    run_contains_verb(output_folder)
+
 
 if __name__ == "__main__":
     main()
