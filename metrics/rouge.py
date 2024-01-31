@@ -17,6 +17,7 @@ def round_rouge_scores(scores):
         'rougeL': round(scores['rougeL'].fmeasure, 2),
     }
 
+
 def calculate_average_rouge_scores(dataset_points):
     rouge1_scores = [point["rouge1_scores"] for point in dataset_points]
     rouge2_scores = [point["rouge2_scores"] for point in dataset_points]
@@ -29,7 +30,38 @@ def calculate_average_rouge_scores(dataset_points):
     return avg_rouge1, avg_rouge2, avg_rougeL
 
 
+def rating_rouge1(score):
+    if 0.39 <= score <= 0.5:
+        return "moderate"
+    if score > 0.5:
+        return "good"
+    if score < 0.39:
+        return "low"
+
+
+def rating_rouge2(score):
+    if 0.19 <= score <= 0.4:
+        return "moderate"
+    if score > 0.4:
+        return "good"
+    if score < 0.19:
+        return "low"
+
+
+def rating_rougeL(score):
+    if 0.39 <= score <= 0.5:
+        return "moderate"
+    if score > 0.5:
+        return "good"
+    if score < 0.39:
+        return "low"
+
+
 def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
+    rating_rouge1_value = rating_rouge1(avg_rouge1)
+    rating_rouge2_value = rating_rouge2(avg_rouge2)
+    rating_rougeL_value = rating_rougeL(avg_rougeL)
+
     result_file_path = os.path.join(output_folder, "avg_results.json")
 
     # Load existing result file
@@ -38,9 +70,12 @@ def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
 
     # Add average values
     existing_data["Results"].append({
-        "avg_rouge1": avg_rouge1,
-        "avg_rouge2": avg_rouge2,
-        "avg_rougeL": avg_rougeL
+        "average_rouge1": avg_rouge1,
+        "average_rouge1_rating": rating_rouge1_value,
+        "average_rouge2": avg_rouge2,
+        "average_rouge2_rating": rating_rouge2_value,
+        "average_rougeL": avg_rougeL,
+        "average_rougeL_rating": rating_rougeL_value
     })
 
     # Update results file
@@ -68,27 +103,26 @@ def run_rouge(output_folder):
     for index, line in enumerate(lines[:2]):
         data_point = json.loads(line)
 
-        prompt = f"Gebe den Text auf deutsch wieder:\n{data_point.get('wiki_sentences')}"
+        prompt = f"Fasse den Text auf deutsch zusammen:\n{data_point.get('wiki_sentences')}"
 
-        # Response LLM
-        candidate_summary = get_answer(prompt)
+        response = get_answer(prompt)
 
-        reference_summary = data_point.get("klexikon_sentences")
+        reference = data_point.get("klexikon_sentences")
 
         # Convert into Strings
-        candidate_summary_str = ' '.join(sentence + "." for sentence in candidate_summary)
-        reference_summary_str = ' '.join(reference_summary)
+        response_str = ' '.join(sentence + "." for sentence in response)
+        reference_str = ' '.join(reference)
 
         # Calculate Rouge scores
-        scores = scorer.score(reference_summary_str, candidate_summary_str)
+        scores = scorer.score(reference_str, response_str)
 
         rounded_scores = round_rouge_scores(scores)
 
         dataset_point = {
             "index": index,
             "prompt": prompt,
-            "reference_summary": reference_summary_str,
-            "candidate_summary": candidate_summary_str,
+            "response": response_str,
+            "reference": reference_str,
             "rouge1_scores": rounded_scores['rouge1'],
             "rouge2_scores": rounded_scores['rouge2'],
             "rougeL_scores": rounded_scores['rougeL']
