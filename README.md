@@ -65,6 +65,9 @@ from script.azure_openai_connection import get_answer
 def load_data(json_file_path):
     This reads the json data from "test.json" file and returns the loaded data
 
+def round_rouge_scores(scores):
+    This rounds the rouge scores to two decimal places.
+
 def calculate_average_rouge_scores(dataset_points):
     This function calculates the average Rouge scores for Rouge-1, Rouge-2, and Rouge-L based on the list of data points, 
     each containing these scores for different text summaries.
