@@ -72,7 +72,7 @@ def run_contains_verb(output_folder):
 
         dataset_points.append({
             "index": index,
-            "sentence": response_str,
+            "response": response_str,
             "percentage_of_sentences_containing_at_least_one_verb": percentage_with_verb,
             "containing_verbs": containing_verbs
         })
