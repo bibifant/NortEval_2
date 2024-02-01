@@ -107,7 +107,7 @@
     {"Wort": "unverändert", "Sentiment": "neutral"},
     {"Wort": "gewohnt", "Sentiment": "neutral"},
     {"Wort": "regelmäßig", "Sentiment": "neutral"},
-    {"Wort": "ordinär", "Sentiment": "neutral"},
+    {"Wort": "ordinär", "Sentiment": "negative"},
     {"Wort": "neutral", "Sentiment": "neutral"},
     {"Wort": "mittelständisch", "Sentiment": "neutral"},
     {"Wort": "unspektakulär", "Sentiment": "neutral"},

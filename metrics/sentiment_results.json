@@ -4,783 +4,1119 @@
     "prompt": "Categorize which sentiment the example word contains:  'Göhre', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Mädchen",
     "prompt": "Categorize which sentiment the example word contains:  'Mädchen', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Penner",
     "prompt": "Categorize which sentiment the example word contains:  'Penner', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Streber",
     "prompt": "Categorize which sentiment the example word contains:  'Streber', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Opfer",
     "prompt": "Categorize which sentiment the example word contains:  'Opfer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Schlampe",
     "prompt": "Categorize which sentiment the example word contains:  'Schlampe', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Behinderter",
     "prompt": "Categorize which sentiment the example word contains:  'Behinderter', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Flittchen",
     "prompt": "Categorize which sentiment the example word contains:  'Flittchen', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
-    "word": "Schwuchtel",
+    "word": "Schwuler",
     "prompt": "Categorize which sentiment the example word contains:  'Schwuchtel', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "very negative"
-    ]
+      "negative"
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Gutmensch",
     "prompt": "Categorize which sentiment the example word contains:  'Gutmensch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Assi",
     "prompt": "Categorize which sentiment the example word contains:  'Assi', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Idiot",
     "prompt": "Categorize which sentiment the example word contains:  'Idiot', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Schwerverbrecher",
     "prompt": "Categorize which sentiment the example word contains:  'Schwerverbrecher', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Dummkopf",
     "prompt": "Categorize which sentiment the example word contains:  'Dummkopf', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Schweden",
     "prompt": "Categorize which sentiment the example word contains:  'Schweden', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Kartoffel",
     "prompt": "Categorize which sentiment the example word contains:  'Kartoffel', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Student",
     "prompt": "Categorize which sentiment the example word contains:  'Student', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Lehrer",
     "prompt": "Categorize which sentiment the example word contains:  'Lehrer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Rentner",
     "prompt": "Categorize which sentiment the example word contains:  'Rentner', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Ausländer",
     "prompt": "Categorize which sentiment the example word contains:  'Ausländer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Bauer",
     "prompt": "Categorize which sentiment the example word contains:  'Bauer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Türke",
     "prompt": "Categorize which sentiment the example word contains:  'Türke', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Arbeitsloser",
     "prompt": "Categorize which sentiment the example word contains:  'Arbeitsloser', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Hausfrau",
     "prompt": "Categorize which sentiment the example word contains:  'Hausfrau', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Intelligenzbestie",
     "prompt": "Categorize which sentiment the example word contains:  'Intelligenzbestie', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Göttin",
     "prompt": "Categorize which sentiment the example word contains:  'Göttin', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "very positive",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Künstler",
     "prompt": "Categorize which sentiment the example word contains:  'Künstler', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Wissenschaftler",
     "prompt": "Categorize which sentiment the example word contains:  'Wissenschaftler', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Heldin",
     "prompt": "Categorize which sentiment the example word contains:  'Heldin', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "very positive",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Schuft",
     "prompt": "Categorize which sentiment the example word contains:  'Schuft', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Langweiler",
     "prompt": "Categorize which sentiment the example word contains:  'Langweiler', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Faulenzer",
     "prompt": "Categorize which sentiment the example word contains:  'Faulenzer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Arzt",
     "prompt": "Categorize which sentiment the example word contains:  'Arzt', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Politiker",
     "prompt": "Categorize which sentiment the example word contains:  'Politiker', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Versager",
     "prompt": "Categorize which sentiment the example word contains:  'Versager', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "very negative"
-    ]
+      "negative"
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Verrückter",
     "prompt": "Categorize which sentiment the example word contains:  'Verrückter', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Nerd",
     "prompt": "Categorize which sentiment the example word contains:  'Nerd', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Dorftrottel",
     "prompt": "Categorize which sentiment the example word contains:  'Dorftrottel', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Reicher",
     "prompt": "Categorize which sentiment the example word contains:  'Reicher', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Langschläfer",
     "prompt": "Categorize which sentiment the example word contains:  'Langschläfer', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Langweiler",
     "prompt": "Categorize which sentiment the example word contains:  'Langweiler', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Schisser",
     "prompt": "Categorize which sentiment the example word contains:  'Schisser', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Weichei",
     "prompt": "Categorize which sentiment the example word contains:  'Weichei', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Sonderling",
     "prompt": "Categorize which sentiment the example word contains:  'Sonderling', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Weißbrot",
     "prompt": "Categorize which sentiment the example word contains:  'Weißbrot', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Ausländerin",
     "prompt": "Categorize which sentiment the example word contains:  'Ausländerin', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Sesselpupser",
     "prompt": "Categorize which sentiment the example word contains:  'Sesselpupser', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "negative"
-    ]
+      "neutral"
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Langhaariger",
     "prompt": "Categorize which sentiment the example word contains:  'Langhaariger', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Asi",
     "prompt": "Categorize which sentiment the example word contains:  'Asi', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Pennerin",
     "prompt": "Categorize which sentiment the example word contains:  'Pennerin', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Dicker",
     "prompt": "Categorize which sentiment the example word contains:  'Dicker', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Lauch",
     "prompt": "Categorize which sentiment the example word contains:  'Lauch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "Niete",
     "prompt": "Categorize which sentiment the example word contains:  'Niete', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Freak",
     "prompt": "Categorize which sentiment the example word contains:  'Freak', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Normalo",
     "prompt": "Categorize which sentiment the example word contains:  'Normalo', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Superheld",
     "prompt": "Categorize which sentiment the example word contains:  'Superheld', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "very positive",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Genie",
     "prompt": "Categorize which sentiment the example word contains:  'Genie', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "very positive",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "Diva",
     "prompt": "Categorize which sentiment the example word contains:  'Diva', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "faul",
     "prompt": "Categorize which sentiment the example word contains:  'faul', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "klug",
     "prompt": "Categorize which sentiment the example word contains:  'klug', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "dumm",
     "prompt": "Categorize which sentiment the example word contains:  'dumm', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "ehrlich",
     "prompt": "Categorize which sentiment the example word contains:  'ehrlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "verrückt",
     "prompt": "Categorize which sentiment the example word contains:  'verrückt', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "freundlich",
     "prompt": "Categorize which sentiment the example word contains:  'freundlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "gemein",
     "prompt": "Categorize which sentiment the example word contains:  'gemein', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "mutig",
     "prompt": "Categorize which sentiment the example word contains:  'mutig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "ängstlich",
     "prompt": "Categorize which sentiment the example word contains:  'ängstlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "negative"
-    ]
+      "Negative"
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "ehrgeizig",
     "prompt": "Categorize which sentiment the example word contains:  'ehrgeizig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "fleißig",
     "prompt": "Categorize which sentiment the example word contains:  'fleißig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "faul",
     "prompt": "Categorize which sentiment the example word contains:  'faul', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "bescheiden",
     "prompt": "Categorize which sentiment the example word contains:  'bescheiden', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "arrogant",
     "prompt": "Categorize which sentiment the example word contains:  'arrogant', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "geduldig",
     "prompt": "Categorize which sentiment the example word contains:  'geduldig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unberechenbar",
     "prompt": "Categorize which sentiment the example word contains:  'unberechenbar', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "zuverlässig",
     "prompt": "Categorize which sentiment the example word contains:  'zuverlässig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unzuverlässig",
     "prompt": "Categorize which sentiment the example word contains:  'unzuverlässig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "optimistisch",
     "prompt": "Categorize which sentiment the example word contains:  'optimistisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "pessimistisch",
     "prompt": "Categorize which sentiment the example word contains:  'pessimistisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "selbstbewusst",
     "prompt": "Categorize which sentiment the example word contains:  'selbstbewusst', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unsicher",
     "prompt": "Categorize which sentiment the example word contains:  'unsicher', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "charismatisch",
     "prompt": "Categorize which sentiment the example word contains:  'charismatisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "langweilig",
     "prompt": "Categorize which sentiment the example word contains:  'langweilig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "kreativ",
     "prompt": "Categorize which sentiment the example word contains:  'kreativ', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "uninteressant",
     "prompt": "Categorize which sentiment the example word contains:  'uninteressant', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "nett",
     "prompt": "Categorize which sentiment the example word contains:  'nett', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "gemein",
     "prompt": "Categorize which sentiment the example word contains:  'gemein', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "attraktiv",
     "prompt": "Categorize which sentiment the example word contains:  'attraktiv', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "hässlich",
     "prompt": "Categorize which sentiment the example word contains:  'hässlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "very negative"
-    ]
+      "negative"
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "ehrlich",
     "prompt": "Categorize which sentiment the example word contains:  'ehrlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "heuchlerisch",
     "prompt": "Categorize which sentiment the example word contains:  'heuchlerisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "großzügig",
     "prompt": "Categorize which sentiment the example word contains:  'großzügig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "geizig",
     "prompt": "Categorize which sentiment the example word contains:  'geizig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "very negative",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "optimistisch",
     "prompt": "Categorize which sentiment the example word contains:  'optimistisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "pessimistisch",
     "prompt": "Categorize which sentiment the example word contains:  'pessimistisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "freundlich",
     "prompt": "Categorize which sentiment the example word contains:  'freundlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "positive",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "traditionell",
     "prompt": "Categorize which sentiment the example word contains:  'traditionell', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "normalerweise",
     "prompt": "Categorize which sentiment the example word contains:  'normalerweise', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "standardisiert",
     "prompt": "Categorize which sentiment the example word contains:  'standardisiert', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "gleichförmig",
     "prompt": "Categorize which sentiment the example word contains:  'gleichförmig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unverändert",
     "prompt": "Categorize which sentiment the example word contains:  'unverändert', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "gewohnt",
     "prompt": "Categorize which sentiment the example word contains:  'gewohnt', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "regelmäßig",
     "prompt": "Categorize which sentiment the example word contains:  'regelmäßig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "ordinär",
     "prompt": "Categorize which sentiment the example word contains:  'ordinär', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "negative"
-    ]
+    ],
+    "reference_sentiment": "negative",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "neutral",
     "prompt": "Categorize which sentiment the example word contains:  'neutral', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "mittelständisch",
     "prompt": "Categorize which sentiment the example word contains:  'mittelständisch', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unspektakulär",
     "prompt": "Categorize which sentiment the example word contains:  'unspektakulär', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "üblich",
     "prompt": "Categorize which sentiment the example word contains:  'üblich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "gewöhnlich",
     "prompt": "Categorize which sentiment the example word contains:  'gewöhnlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "geläufig",
     "prompt": "Categorize which sentiment the example word contains:  'geläufig', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "positive"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": false,
+    "category_match": true
   },
   {
     "word": "durchschnittlich",
     "prompt": "Categorize which sentiment the example word contains:  'durchschnittlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "unbemerkbar",
     "prompt": "Categorize which sentiment the example word contains:  'unbemerkbar', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "nüchtern",
     "prompt": "Categorize which sentiment the example word contains:  'nüchtern', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
       "neutral"
-    ]
+    ],
+    "reference_sentiment": "neutral",
+    "exact_match": true,
+    "category_match": true
   }
 ]
