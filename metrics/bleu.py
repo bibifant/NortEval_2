@@ -21,7 +21,13 @@ The BLEU score is calculated in the following steps:
 7. Calculate the average score.
 8. Save all the results as a JSON file.
 """
-
+def categorize_bleu_score(bleu_score):
+    if bleu_score > 0.4:
+        return "high"
+    elif 0.2 <= bleu_score <= 0.4:
+        return "average"
+    else:
+        return "low"
 
 def calculate_bleu(output_folder, max_index=100):
     # Dateipfad für die Ausgabedatei
@@ -59,12 +65,16 @@ def calculate_bleu(output_folder, max_index=100):
             # Formatting the BLEU score to two decimal places after the decimal point
             formatted_bleu_score = "{:.2f}".format(bleu_score)
 
+            # Categorize BLEU score
+            score_category = categorize_bleu_score(bleu_score)
+
             # Save the results as a dictionary
             bleu_score_data["scores"].append({
                 "prediction_index": i + 1,
                 "prediction": prediction,
                 "reference": reference,
-                "bleu_score": formatted_bleu_score
+                "bleu_score": formatted_bleu_score,
+                "score_category": score_category
             })
             count += 1
 
@@ -76,6 +86,7 @@ def calculate_bleu(output_folder, max_index=100):
     average_bleu_score = total_bleu_score / count
     # Formatting the average BLEU score to two decimal places after the decimal point
     formatted_bleu_average_score = "{:.2f}".format(average_bleu_score)
+    score_category = categorize_bleu_score(average_bleu_score)
 
     # Saving the results as JSON
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
@@ -89,9 +100,14 @@ def calculate_bleu(output_folder, max_index=100):
     # add average bleu score to data
     bleu_avg_data = {
         "count": count,
-        "average_bleu_score": formatted_bleu_average_score
+        "average_bleu_score": formatted_bleu_average_score,
+        "score_category": score_category
     }
     existing_data['Results'].append(bleu_avg_data)
+
+    # update avg_results.json file
+    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, indent=4, ensure_ascii=False)
 
     # update avg_results.json file
     with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
