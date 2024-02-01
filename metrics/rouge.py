@@ -106,22 +106,19 @@ def run_rouge(output_folder):
         prompt = f"Fasse den Text auf deutsch zusammen:\n{data_point.get('wiki_sentences')}"
 
         response = get_answer(prompt)
-
         reference = data_point.get("klexikon_sentences")
-
         # Convert into Strings
-        response_str = ' '.join(sentence + "." for sentence in response)
         reference_str = ' '.join(reference)
 
         # Calculate Rouge scores
-        scores = scorer.score(reference_str, response_str)
+        scores = scorer.score(reference_str, response)
 
         rounded_scores = round_rouge_scores(scores)
 
         dataset_point = {
             "index": index,
             "prompt": prompt,
-            "response": response_str,
+            "response": response,
             "reference": reference_str,
             "rouge1_scores": rounded_scores['rouge1'],
             "rouge2_scores": rounded_scores['rouge2'],
