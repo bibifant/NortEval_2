@@ -31,29 +31,29 @@ def calculate_average_rouge_scores(dataset_points):
 
 
 def rating_rouge1(score):
-    if 0.39 <= score <= 0.5:
+    if 0.2 <= score <= 0.3:
         return "moderate"
-    if score > 0.5:
+    if score > 0.3:
         return "good"
-    if score < 0.39:
+    if score < 0.2:
         return "low"
 
 
 def rating_rouge2(score):
-    if 0.19 <= score <= 0.4:
+    if 0.05 <= score <= 0.15:
         return "moderate"
-    if score > 0.4:
+    if score > 0.15:
         return "good"
-    if score < 0.19:
+    if score < 0.05:
         return "low"
 
 
 def rating_rougeL(score):
-    if 0.39 <= score <= 0.5:
+    if 0.1 <= score <= 0.2:
         return "moderate"
-    if score > 0.5:
+    if score > 0.2:
         return "good"
-    if score < 0.39:
+    if score < 0.1:
         return "low"
 
 
