@@ -76,6 +76,9 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
 
     results = []
 
+    correct_exact_matches = 0
+    correct_category_matches = 0
+
     for word_info in words_data:
         word = word_info.get("Wort", "")
         reference_sentiment = word_info.get("Sentiment",
@@ -105,8 +108,21 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
             'category_match': category_match
         }
         results.append(result_entry)
+        # Count correct matches
+        if exact_match:
+            correct_exact_matches += 1
+        if category_match:
+            correct_category_matches += 1
 
-    # Create JSON file from the results
+
+    total_entries = len(words_data)
+    percentage_exact_matches = round((correct_exact_matches / total_entries) * 100,2)
+    percentage_category_matches = round((correct_category_matches / total_entries) * 100,2)
+
+    print(f"\nPercentage of correct exact matches: {percentage_exact_matches}%")
+    print(f"Percentage of correct category matches: {percentage_category_matches}%")
+
+# Create JSON file from the results
     create_json_file(results, output_file_path)
 
 

@@ -80,12 +80,12 @@
     "category_match": true
   },
   {
-    "word": "Schwuler",
+    "word": "Schwuchtel",
     "prompt": "Categorize which sentiment the example word contains:  'Schwuchtel', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "negative"
+      "very negative"
     ],
-    "reference_sentiment": "negative",
+    "reference_sentiment": "very negative",
     "exact_match": true,
     "category_match": true
   },
@@ -123,10 +123,10 @@
     "word": "Schwerverbrecher",
     "prompt": "Categorize which sentiment the example word contains:  'Schwerverbrecher', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "negative"
+      "very negative"
     ],
     "reference_sentiment": "negative",
-    "exact_match": true,
+    "exact_match": false,
     "category_match": true
   },
   {
@@ -343,10 +343,10 @@
     "word": "Versager",
     "prompt": "Categorize which sentiment the example word contains:  'Versager', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "negative"
+      "very negative"
     ],
     "reference_sentiment": "negative",
-    "exact_match": true,
+    "exact_match": false,
     "category_match": true
   },
   {
@@ -473,7 +473,7 @@
     "word": "Langhaariger",
     "prompt": "Categorize which sentiment the example word contains:  'Langhaariger', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "neutral"
+      "positive"
     ],
     "reference_sentiment": "negative",
     "exact_match": false,
@@ -503,11 +503,11 @@
     "word": "Dicker",
     "prompt": "Categorize which sentiment the example word contains:  'Dicker', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "neutral"
+      "negative"
     ],
     "reference_sentiment": "negative",
-    "exact_match": false,
-    "category_match": false
+    "exact_match": true,
+    "category_match": true
   },
   {
     "word": "Lauch",
@@ -663,7 +663,7 @@
     "word": "ängstlich",
     "prompt": "Categorize which sentiment the example word contains:  'ängstlich', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "Negative"
+      "negative"
     ],
     "reference_sentiment": "very negative",
     "exact_match": false,
@@ -1033,11 +1033,11 @@
     "word": "neutral",
     "prompt": "Categorize which sentiment the example word contains:  'neutral', 'very positive', 'positive', 'neutral', 'negative' or 'very negative'.Respond in all lower caps and in a single word.",
     "response": [
-      "neutral"
+      "negative"
     ],
     "reference_sentiment": "neutral",
-    "exact_match": true,
-    "category_match": true
+    "exact_match": false,
+    "category_match": false
   },
   {
     "word": "mittelständisch",
