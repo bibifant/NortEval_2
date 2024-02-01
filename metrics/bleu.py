@@ -22,13 +22,7 @@ The BLEU score is calculated in the following steps:
 7. Calculate the average score.
 8. Save all the results as a JSON file.
 """
-def categorize_bleu_score(bleu_score):
-    if bleu_score > 0.4:
-        return "high"
-    elif 0.2 <= bleu_score <= 0.4:
-        return "average"
-    else:
-        return "low"
+
 
 def categorize_bleu_score(bleu_score):
     if bleu_score > 0.4:
@@ -114,10 +108,6 @@ def calculate_bleu(output_folder, max_index=100):
         "score_category": score_category
     }
     existing_data['Results'].append(bleu_avg_data)
-
-    # update avg_results.json file
-    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
-        json.dump(existing_data, result_file, indent=4, ensure_ascii=False)
 
     # update avg_results.json file
     with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
