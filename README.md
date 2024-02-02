@@ -72,9 +72,18 @@ def calculate_average_rouge_scores(dataset_points):
     This function calculates the average Rouge scores for Rouge-1, Rouge-2, and Rouge-L based on the list of data points, 
     each containing these scores for different text summaries.
 
+def rating_rouge1(score):
+    This function evaluates the Rouge1 score in three categories: "low", "moderate" and "good".
+
+def rating_rouge2(score):
+    This function evaluates the Rouge2 score in three categories: "low", "moderate" and "good".
+
+def rating_rougeL(score):
+    This function evaluates the RougeL score in three categories: "low", "moderate" and "good".
+
 def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
     This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding new data and writing the updated data back to the file.
+    adding the new data and writing the updated data back to the file.
 
 def save_results(output_file_path, data):
     This writes the data to the "rouge_results.json" file and saves it there.
@@ -82,7 +91,7 @@ def save_results(output_file_path, data):
 def run_rouge():
     This initializes the Rouge scorer, processes a dataset of German text and  generates summaries of "candidate_summary" using the LLM. 
     It then calculates Rouge scores for the first 2 entries in the dataset by comparing the candidate summaries to the reference summaries.
-    The results, prompts and summaries are then saved into the json file.
+    The scores, prompts and responses are then saved into the json file.
 
 
 # NLP (Natural Language Processing) Methods
