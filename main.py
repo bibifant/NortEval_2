@@ -4,6 +4,7 @@ from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
 from nlp.contains_verb import run_contains_verb
 from metrics.perplexity_transformersGPT2 import run_perplexity_test
+from metrics.natural_language_quality_assessor import evaluate_generated_text_quality
 from metrics.rouge import run_rouge
 
 
@@ -16,7 +17,10 @@ def main():
     #run_bleu_test_on_json_dataset()
 
     # Perplexity
-    run_perplexity_test(output_folder)
+    # run_perplexity_test(output_folder)
+
+    # Natural Language/ Plausibility
+    evaluate_generated_text_quality(output_folder)
 
     # Rouge
     run_rouge(output_folder)

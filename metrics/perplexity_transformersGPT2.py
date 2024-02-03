@@ -3,7 +3,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from math import exp
 import json
 import os
-from script.azure_openai_connection import get_answer
+from script.azure_openai_connection  import get_answer
 
 # Funktion zur Berechnung der Perplexität
 def calculate_perplexity(model, tokenizer, text):

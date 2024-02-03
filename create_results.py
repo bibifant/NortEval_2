@@ -18,8 +18,11 @@ def create_results():
     data_structure = {
         "Metrics explanations": {
             "Rouge": "Rouge evaluates the ability of an LLM to generate summaries from an input text. The rouge score ranges from 0 to 1. A higher value indicates a better summary quality.",
-            "BLEU": "BLEU is a metric for evaluating the quality of machine translations. Bleu score ranges from 0 to 1. A higher BLEU score indicates that the automatic translations matches the reference translations better.",
-            "Perplexity": "Perplexity is a measure of the predictive uncertainty of a language model. A lower value indicates a higher prediction accuracy of the model. A value close to 50 is excellent."
+            "BLEU": "BLEU evaluates the quality of machine translations. Bleu scores range from 0 to 1. The higher the BLEU score the better the quality of the machine translation.",
+            "Perplexity": "Perplexity is a measure of the predictive uncertainty of a language model. A lower value indicates a higher prediction accuracy of the model. A value close to 50 is excellent.",
+            "Naturalness": "This score is calculated using perplexity. It assesses the fluency and coherence of the generated text. A lower score usually indicates text that is more natural and easy to read. A score below 50 is excellent.",
+            "Semantic Similarity": "This score evaluates how relevant and contextually aligned the model's response is to the given prompt. The score ranges from 0 to 1. A higher score implies that in meaning the generated text is closely related to the prompt.",
+            "Keywords in Response": "This score measure the presence of key concepts in the response. The score ranges from 0 to 1. A higher score signifies that the response encompasses key elements from the prompt."
         },
         "Results": []
     }

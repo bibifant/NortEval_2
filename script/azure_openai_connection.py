@@ -23,6 +23,5 @@ def get_answer(prompt: str, max_response_tokens: int = 600, user_text: str = Non
         max_tokens=max_response_tokens
     )
 
-    return response.choices[0].message.content.split(". ")
-
+    return response.choices[0].message.content
 
