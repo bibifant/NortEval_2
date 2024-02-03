@@ -44,15 +44,3 @@ def check_prompt_keywords_in_response(prompt_keywords, response_text):
     # Calculate the proportion of prompt keywords present in the response
     prompt_keywords_present = sum(stem in response_stemmed for stem in prompt_keywords)
     return prompt_keywords_present / len(prompt_keywords)
-
-
-# prompt = "Wie könnte die Welt im Jahr 2050 aussehen, wenn erneuerbare Energien die Hauptenergiequelle sind?"
-# response = "Im Jahr 2050 könnte die Welt eine sehr unterschiedliche Energieversorgung aufweisen, wenn erneuerbare Energien die Hauptenergiequelle sind. Hier sind einige mögliche Szenarien:\n\n1. Elektrifizierung des Transportwesens: Da erneuerbare Energien wie Solarenergie und Windenergie von Natur aus intermittierend sind und nicht immer verfügbar sind, könnte die Elektrifizierung des Transportwesens eine Möglichkeit sein, um überschüssige Energie zu nutzen. Elektrofahrzeuge könnten mit erneuerbarer Energie geladen werden und so fossile Brennstoffe ersetzen.\n\n2. Dezentrale Energieversorgung: Eine weit verbreitete Nutzung von erneuerbaren Energien könnte dazu führen, dass die Energieversorgung dezentralisiert wird. Haushalte, Unternehmen und Gemeinden könnten ihre eigene Energie erzeugen und speichern, um unabhängiger von großen Energieversorgern zu sein.\n\n3. Wasserstoff als Energiespeicher: Wasserstoff könnte als Energiespeicher verwendet werden, um überschüssige Energie aus erneuerbaren Quellen zu speichern und bei Bedarf zu nutzen. Wasserstoff könnte auch als Brennstoff für Fahrzeuge und zur Wärmeerzeugung verwendet werden.\n\n4. Neue Arbeitsplätze und Wirtschaftssektoren: Eine Umstellung auf erneuerbare Energien könnte neue Arbeitsplätze und Wirtschaftssektoren schaffen. Es könnten neue Technologien und Infrastrukturen entstehen, um erneuerbare Energien zu nutzen, zu speichern und zu verteilen.\n\n5. Weniger Umweltverschmutzung: Eine Welt, die hauptsächlich auf erneuerbare Energien setzt, würde wahrscheinlich weniger Umweltverschmutzung und Treibhausgasemissionen aufweisen als eine, die sich auf fossile Brennstoffe verlässt. Dies könnte dazu beitragen, den Klimawandel zu bekämpfen und die Luft- und Wasserqualität zu verbessern.\n\nInsgesamt könnte eine Zukunft, die auf erneuerbaren Energien basiert, eine sauberere, dezentralisierte und nachhaltigere Welt schaffen."
-
-# Schlüsselwortanalyse und Score-Berechnung
-# prompt_keywords = extract_relevant_keywords(prompt)
-# prompt_keywords_in_response_score = check_prompt_keywords_in_response(prompt_keywords, response)
-
-# print("Prompt Schlüsselwörter:", prompt_keywords)
-# print("Präsenz der Prompt-Schlüsselwörter in der Antwort:", prompt_keywords_in_response_score)
-
