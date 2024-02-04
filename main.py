@@ -5,11 +5,15 @@ from metrics.rouge import run_rouge
 from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
+from nlp.bias_detection import calculate_bias
 
 
 def main():
     # create the results folder with timestamp
     output_folder = create_results()
+
+    # Bias
+    calculate_bias(output_folder)
 
     # Bleu
     calculate_bleu(output_folder)
