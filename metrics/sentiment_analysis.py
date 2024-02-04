@@ -47,7 +47,7 @@ def check_sentiment_match_exact(response_sentiment, reference_sentiment, allowed
 def check_sentiment_match_in_category(response_sentiment, reference_sentiment):
     # Define sentiment categories
     negative_categories = ['negative', 'very negative']
-    positive_categories = ['neutral','positive', 'very positive']
+    positive_categories = ['neutral', 'positive', 'very positive']
     neutral_categories = ['neutral']
 
     # If response_sentiment is a list, consider the first element
@@ -90,13 +90,12 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
 
         # Check if the sentiment matches the reference sentiment exactly or in category
         exact_match = check_sentiment_match_exact(sentiment, reference_sentiment)
-        category_match = check_sentiment_match_in_category(sentiment,reference_sentiment)
+        category_match = check_sentiment_match_in_category(sentiment, reference_sentiment)
 
         print(f"The sentiment of the word '{word}' is: {sentiment}")
         print(f"Reference sentiment: {reference_sentiment}")
         print(f"Sentiments exact match: {exact_match}")
         print(f"Sentiments match in category: {category_match}")
-
 
         # Collect results
         result_entry = {
@@ -114,15 +113,28 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
         if category_match:
             correct_category_matches += 1
 
-
     total_entries = len(words_data)
-    percentage_exact_matches = round((correct_exact_matches / total_entries) * 100,2)
-    percentage_category_matches = round((correct_category_matches / total_entries) * 100,2)
+    percentage_exact_matches = round((correct_exact_matches / total_entries) * 100, 2)
+    percentage_category_matches = round((correct_category_matches / total_entries) * 100, 2)
 
     print(f"\nPercentage of correct exact matches: {percentage_exact_matches}%")
     print(f"Percentage of correct category matches: {percentage_category_matches}%")
 
-# Create JSON file from the results
+    def categorize_results(percentage_matches, threshold_good=85, threshold_bad=65):
+        if percentage_matches >= threshold_good:
+            return "good"
+        elif percentage_exact_matches >= threshold_bad:
+            return "average"
+        else:
+            return "bad"
+
+    result_category_exact_match = categorize_results(percentage_exact_matches, 70, 50)
+    result_category_category_match = categorize_results(percentage_category_matches)
+
+    print(f"\nExact Match Result Category: {result_category_exact_match}")
+    print(f"\nCategory Match Result Category: {result_category_category_match}")
+
+    # Create JSON file from the results
     create_json_file(results, output_file_path)
 
 
