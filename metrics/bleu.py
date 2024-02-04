@@ -5,16 +5,16 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
 from script.azure_openai_connection import get_simple_translation
 
-# link to dataset: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
+# link to datasets: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
 # input file paths
-de_file_path = "dataset/zitate-dewiki-20141024.de"
-en_file_path = "dataset/zitate-dewiki-20141024.en"
+de_file_path = "datasets/zitate-dewiki-20141024.de"
+en_file_path = "datasets/zitate-dewiki-20141024.en"
 # create output file path
 """
 This file performs a BLEU test on long text.
 The BLEU score is calculated in the following steps:
-1. Retrieve the German dataset from 'dataset/'.
-2. Retrieve the English dataset from 'dataset/'.
+1. Retrieve the German datasets from 'datasets/'.
+2. Retrieve the English datasets from 'datasets/'.
 3. The 'de_content' text is used as the human reference, and the 'en_content' text is used as predictions, which need to be translated into German.
 4. OpenAI is used to translate the text of 'en_content' into German, and 'sentence_bleu()' is used to calculate the BLEU score.
 5. Check for errors; only non-None predictions and references will be calculated.
@@ -86,7 +86,7 @@ def calculate_bleu(output_folder, max_index=100):
         if i >= max_index:
             break
 
-    # Average BLEU score for the entire dataset
+    # Average BLEU score for the entire datasets
     average_bleu_score = total_bleu_score / count
     # Formatting the average BLEU score to two decimal places after the decimal point
     formatted_bleu_average_score = "{:.2f}".format(average_bleu_score)

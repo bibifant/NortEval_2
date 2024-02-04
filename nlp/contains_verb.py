@@ -51,7 +51,7 @@ def update_results_file(output_folder, avg_true_percentage):
 
 def run_contains_verb(output_folder):
 
-    json_file_path = "./dataset/nlp_dataset.json"
+    json_file_path = "./datasets/nlp_dataset.json"
     output_file_path = os.path.join(output_folder, "contains_verb_results.json")
 
     dataset_points = []

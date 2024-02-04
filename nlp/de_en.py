@@ -63,7 +63,7 @@ def save_results(output_file_path, data):
 
 
 def run_language_percentage(output_folder):
-    json_file_path = "./dataset/nlp_dataset.json"
+    json_file_path = "./datasets/nlp_dataset.json"
     output_file_path = os.path.join(output_folder, "language_percentage_results.json")
 
     dataset_points = []

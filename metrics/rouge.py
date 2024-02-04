@@ -92,7 +92,7 @@ def run_rouge(output_folder):
     # Initialize rouge scorer
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 
-    json_file_path = "./dataset/test.json"
+    json_file_path = "./datasets/test.json"
     output_file_path = os.path.join(output_folder, "rouge_results.json")
 
     dataset_points = []
