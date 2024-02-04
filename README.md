@@ -200,6 +200,8 @@ def run_language_percentage(output_folder):
     This processes the dataset and responses of the api and calculates the percentage of English and German words in the generated answers.
     It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
 
+# Sentiment Analysis
+
 
 
 
