@@ -1,15 +1,16 @@
 import json
+import os
+
 import Levenshtein
 from script.azure_openai_connection import get_answer
 
 prompt_template = "Categorize which sentiment the example word contains: "
 prompt_additional_instructions = "Respond in all lower caps and in a single word."
-json_file_path = "../dataset/sentiment_analysis_ds.json"
-output_file_path = "sentiment_results.json"
+ds_json_file_path = "dataset/sentiment_analysis_ds.json"
 
 
-def load_data(json_file_path):
-    with open(json_file_path, 'r', encoding='utf-8') as file:
+def load_data(ds_json_file_path):
+    with open(ds_json_file_path, 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data.get("Wörter", [])
 
@@ -70,9 +71,37 @@ def check_sentiment_match_in_category(response_sentiment, reference_sentiment):
         return False
 
 
-def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_file_path):
+def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
+                        result_category_exact_match, result_category_category_match):
+    result_file_path = os.path.join(output_folder, "avg_results.json")
+
+    # Load existing result file
+    with open(result_file_path, 'r', encoding='utf-8') as result_file:
+        existing_data = json.load(result_file)
+
+    # Add average values
+    existing_data["Results"].append({
+        'percentage_exact_matches': percentage_exact_matches,
+        'percentage_category_matches': percentage_category_matches,
+        'result_category_exact_match': result_category_exact_match,
+        'result_category_category_match': result_category_category_match
+    })
+
+    # Update results file
+    with open(result_file_path, 'w', encoding='utf-8') as result_file:
+        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+
+
+def save_results(output_file_path, data):
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        json.dump({"results": data}, output_file, ensure_ascii=False, indent=2)
+
+
+def run_sentiment_analysis(output_folder):
     # Load data from JSON file
-    words_data = load_data(json_file_path)
+    words_data = load_data(ds_json_file_path)
+    #create detailed results file for sentiment analysis
+    output_file_path = os.path.join(output_folder, "sentiment_analysis_results.json")
 
     results = []
 
@@ -86,16 +115,16 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
 
         # Generate prompt and get sentiment analysis
         prompt = generate_prompt(prompt_template, word)
-        sentiment = get_answer(prompt, num_tokens)
+        sentiment = get_answer(prompt)
 
         # Check if the sentiment matches the reference sentiment exactly or in category
         exact_match = check_sentiment_match_exact(sentiment, reference_sentiment)
         category_match = check_sentiment_match_in_category(sentiment, reference_sentiment)
 
-        print(f"The sentiment of the word '{word}' is: {sentiment}")
-        print(f"Reference sentiment: {reference_sentiment}")
-        print(f"Sentiments exact match: {exact_match}")
-        print(f"Sentiments match in category: {category_match}")
+        # print(f"The sentiment of the word '{word}' is: {sentiment}")
+        # print(f"Reference sentiment: {reference_sentiment}")
+        # print(f"Sentiments exact match: {exact_match}")
+        # print(f"Sentiments match in category: {category_match}")
 
         # Collect results
         result_entry = {
@@ -117,8 +146,9 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
     percentage_exact_matches = round((correct_exact_matches / total_entries) * 100, 2)
     percentage_category_matches = round((correct_category_matches / total_entries) * 100, 2)
 
-    print(f"\nPercentage of correct exact matches: {percentage_exact_matches}%")
-    print(f"Percentage of correct category matches: {percentage_category_matches}%")
+    #
+    # print(f"\nPercentage of correct exact matches: {percentage_exact_matches}%")
+    # print(f"Percentage of correct category matches: {percentage_category_matches}%")
 
     def categorize_results(percentage_matches, threshold_good=85, threshold_bad=65):
         if percentage_matches >= threshold_good:
@@ -130,12 +160,13 @@ def run_sentiment_analysis(prompt_template, num_tokens, json_file_path, output_f
 
     result_category_exact_match = categorize_results(percentage_exact_matches, 70, 50)
     result_category_category_match = categorize_results(percentage_category_matches)
+    #
+    # print(f"\nExact Match Result Category: {result_category_exact_match}")
+    # print(f"\nCategory Match Result Category: {result_category_category_match}")
 
-    print(f"\nExact Match Result Category: {result_category_exact_match}")
-    print(f"\nCategory Match Result Category: {result_category_category_match}")
+    # Save average results
+    update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
+                        result_category_exact_match, result_category_category_match)
 
     # Create JSON file from the results
     create_json_file(results, output_file_path)
-
-
-run_sentiment_analysis(prompt_template, 200, json_file_path, output_file_path)
