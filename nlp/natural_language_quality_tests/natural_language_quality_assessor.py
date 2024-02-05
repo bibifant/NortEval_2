@@ -1,15 +1,33 @@
 import torch
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from math import exp
 import json
 import os
 from script.azure_openai_connection  import get_answer
-from metrics.bert_semantic_similarity import calculate_semantic_similarity
-from metrics.contextual_keyword_checker import extract_relevant_keywords, check_prompt_keywords_in_response
+from nlp.natural_language_quality_tests.bert_semantic_similarity import calculate_semantic_similarity
+from nlp.natural_language_quality_tests.contextual_keyword_checker import extract_relevant_keywords, check_prompt_keywords_in_response
 
 # Path to JSON-file in 'dataset' folder
 # You can change the prompts in the dataset according to your needs.
-path_to_dataset = '../dataset/natural_language_dataset.json'
+path_to_dataset = '../../dataset/natural_language_dataset.json'
+
+
+def categorize_score(score):
+    if score > 0.65:
+        return "good"
+    elif score > 0.5:
+        return "average"
+    else:
+        return "bad"
+
+
+def categorize_naturalness(score):
+    if score < 50:
+        return "good"
+    elif score <= 70:
+        return "average"
+    else:
+        return "bad"
 
 
 # Function to calculate the naturalness score of generated text
@@ -25,8 +43,8 @@ def calculate_naturalness_score(model, tokenizer, text):
 def evaluate_generated_text_quality(output_folder):
     # Load the model and tokenizer
     model_name = "gpt2"
-    model = GPT2LMHeadModel.from_pretrained(model_name)
-    tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     print(f"Natural language quality is being assessed.")
 
@@ -63,29 +81,45 @@ def evaluate_generated_text_quality(output_folder):
             total_semantic_similarity += semantic_similarity
             total_keywords_in_response += keywords_in_response_score
 
+            # Round scores
+            naturalness_score_rounded = round(naturalness_score, 2)
+            semantic_similarity_rounded = round(semantic_similarity, 2)
+            keywords_in_response_score_rounded = round(keywords_in_response_score, 2)
+
             # Store the results for each prompt
             current_results.append({
                 "Prompt": prompt,
                 "Response": response_text,
-                "Naturalness score": naturalness_score,
-                "Semantic Similarity Score": semantic_similarity,
-                "Prompt Keywords": prompt_keywords,
-                "Keywords in Response Score": keywords_in_response_score
+                "Naturalness score": round(naturalness_score, 2),
+                "Semantic Similarity Score": round(semantic_similarity, 2),
+                # "Prompt Keywords": prompt_keywords,
+                "Keywords in Response Score": round(keywords_in_response_score, 2)
             })
         except Exception as e:
             print(f"Error processing prompt '{prompt}': {e}")
 
     # Calculate the average scores
-    average_naturalness = total_naturalness / len(prompts) if prompts else 0
-    average_similarity = total_semantic_similarity / len(prompts) if prompts else 0
-    average_keywords_in_response = total_keywords_in_response / len(prompts) if prompts else 0
+    avg_naturalness = round(total_naturalness / len(prompts), 2) if prompts else 0
+    avg_similarity = round(total_semantic_similarity / len(prompts), 2) if prompts else 0
+    avg_keywords_in_response = round(total_keywords_in_response / len(prompts), 2) if prompts else 0
+
+    # Categorize average scores
+    avg_naturalness_rating = categorize_naturalness(avg_naturalness)
+    avg_semantic_similarity_rating = categorize_score(avg_similarity)
+    avg_keywords_in_response_rating = categorize_score(avg_keywords_in_response)
 
     # Write the results to a JSON file
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
         json.dump(current_results, output_file, ensure_ascii=False, indent=2)
 
     # Prepare data for storing the average scores
-    avg_json_data = {"average_naturalness_score": average_naturalness, "average_semantic_similarity": average_similarity, "average_keywords_in_response_score": average_keywords_in_response}
+    avg_json_data = {"average_naturalness_score": avg_naturalness,
+                     "average_naturalness_rating": avg_naturalness_rating,
+                     "average_semantic_similarity": avg_similarity,
+                     "average_similarity_rating": avg_semantic_similarity_rating,
+                     "average_keywords_in_response_score": avg_keywords_in_response,
+                     "average_keywords_in_response_rating": avg_keywords_in_response_rating
+    }
 
     # Load existing results file
     with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:

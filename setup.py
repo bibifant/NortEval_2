@@ -7,21 +7,18 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name='nortal-llm',
     version='0.1',
-    authors="Yao Yao Zhu, Julia Schultze, Doung Nguyen, Laura Hartstein, Christina Gottschalk, Julia Dusan",
-    description="Evaluationstool zur Berwertung von LLMs hinsichtlich der Qualität ihres Outputs in deutscher Sprache",
+    authors="Yao Yao Zhu, Julia Schultze, Doung Nguyen, Laura Hartstein, Christina Gottschalk",
+    description="Evaluationstool zur Bewertung von LLMs hinsichtlich der Qualität ihres Outputs in deutscher Sprache",
     url="https://gitlab.rz.htw-berlin.de/Christina.Gottschalk/nortal-llm",
     packages=find_packages(),
     install_requires=[
-        "json",
         "rouge-score",
         "nltk",
         "spacy",
         "langdetect",
-        "math",
         "torch",
         "transformers",
-        "rouge_score",
-        "sys"
+        "rouge_score"
     ],
     python_requires=">=3.11",
 )
