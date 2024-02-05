@@ -7,6 +7,8 @@ from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
 from nlp.sentiment_analysis import run_sentiment_analysis
 from nlp.upper_lower_case import run_upper_lower_case
+from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
+
 
 
 def main():
@@ -23,7 +25,10 @@ def main():
     calculate_bleu(output_folder)
 
     # Perplexity
-    run_perplexity_test(output_folder)
+    # run_perplexity_test(output_folder)
+
+    # Natural Language/ Plausibility
+    evaluate_generated_text_quality(output_folder)
 
     # Rouge
     run_rouge(output_folder)
