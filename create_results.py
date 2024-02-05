@@ -17,13 +17,16 @@ def create_results():
 
     data_structure = {
         "Metrics explanations": {
-            "Rouge": "Rouge evaluates the ability of an LLM to generate summaries from an input text. The rouge score ranges from 0 to 1. A higher value indicates a better summary quality.",
+            "Rouge": "Rouge evaluates the ability of an LLM to generate summaries from an input text. The rouge score ranges from 0 to 1. A higher value indicates a better summary quality. For more information see:https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-ROUGE ",
             "BLEU": "BLEU is a metric for evaluating the quality of machine translations. Bleu score ranges from 0 to 1. A higher BLEU score indicates that the automatic translations matches the reference translations better. for more information: https://confluence.de.nortal.com/display/HTWSTUD/Metrics#Metrics-BLEUundsacreBLEU and https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-BLEUassessesamodel",
-            "Perplexity": "Perplexity is a measure of the predictive uncertainty of a language model. A lower value indicates a higher prediction accuracy of the model. A value close to 50 is excellent.",
-            "Naturalness": "This score is calculated using perplexity. It assesses the fluency and coherence of the generated text. A lower score usually indicates text that is more natural and easy to read. A score below 50 is excellent.",
-            "Semantic Similarity": "This score evaluates how relevant and contextually aligned the model's response is to the given prompt. The score ranges from 0 to 1. A higher score implies that in meaning the generated text is closely related to the prompt.",
-            "Keywords in Response": "This score measures the presence of key concepts in the response. The score ranges from 0 to 1. A higher score signifies that the response encompasses key elements from the prompt.",
-            "Sentiment Analysis": "Sentiment analysis is a natural language processing task that involves determining and categorizing the emotional tone in a piece of text. \nCategories used: very positive, positive, neutral, negative, very negative. Scale ranges 0 - 100%. \nThe higher the percentage, the more sentiments have been identified correctly by the model. \nFor more information see https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-SentimentAnalysis",
+            "Perplexity": "Perplexity is a measure of the predictive uncertainty of a language model. A lower value indicates a higher prediction accuracy of the model. A value close to 50 is excellent. For more information see: ",
+
+        },
+        "NLP methods explanations": {
+            "contains_verb": "Checks if a sentence contains a verb. For more information see: https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-ConjugatedVerbCheck",
+            "language_percentage": "Checks the amount of German and English words. For more information see: https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-LanguagePercentage",
+            "upper_lower_case": "Checks the text for correct upper and lower case. For more information see: https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-CorrectCapitalization",
+            "Sentiment Analysis": "Sentiment analysis is a natural language processing task that involves determining and categorizing the emotional tone in a piece of text. Categories used: very positive, positive, neutral, negative, very negative. Scale ranges 0 - 100%. The higher the percentage, the more sentiments have been identified correctly by the model. For more information see https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-SentimentAnalysis",
             "Bias Detection": "Bias detection is a Natural Language Processing (NLP) technique that processes input text in the form of comments from human beings based on the provided input prompt.\n It then compares the output with a binary score of 0/1, indicating 'Not Hate Speech' or 'Hate Speech,' derived from the dataset. The categorizations include Hate Speech and Not Hate Speech, and the scoring range spans from 0% (does not match at all) to 100% (perfect match).",
         },
         "Results": []

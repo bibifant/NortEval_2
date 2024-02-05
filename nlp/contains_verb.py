@@ -31,7 +31,18 @@ def save_contains_verb_results(output_file_path, data):
         json.dump({"contains_verb_results": data}, output_file, ensure_ascii=False, indent=2)
 
 
+def rating(percentage):
+    if 50 <= percentage <= 80:
+        return "moderate"
+    if percentage > 80:
+        return "good"
+    if percentage < 50:
+        return "low"
+
+
 def update_results_file(output_folder, avg_true_percentage):
+    rating_value = rating(avg_true_percentage)
+
     avg_result_file_path = os.path.join(output_folder, "avg_results.json")
 
     # Load existing result file
@@ -41,6 +52,7 @@ def update_results_file(output_folder, avg_true_percentage):
     # Add average value
     existing_data["Results"].append({
         "average_percentage_of_correct_verbs_contained": round(avg_true_percentage, 2),
+        "average_percentage_of_correct_verbs_contained_rating": rating_value
     })
 
     # Update results file

@@ -80,12 +80,12 @@ def update_results_file(output_folder, percentage_exact_matches, percentage_cate
         existing_data = json.load(result_file)
 
     # Add average values
-    existing_data["Results"].append({
-        'percentage_exact_matches': percentage_exact_matches,
-        'percentage_category_matches': percentage_category_matches,
-        'result_category_exact_match': result_category_exact_match,
-        'result_category_category_match': result_category_category_match
-    })
+    existing_data["Results"].append({'sentiment_analysis': {
+        'percentage_exact_sentiment_recognized': percentage_exact_matches,
+        'result_category_exact_recognition': result_category_exact_match,
+        'percentage_sentiment_category_recognized': percentage_category_matches,
+        'result_category_sentiment_category_recognition': result_category_category_match
+    }})
 
     # Update results file
     with open(result_file_path, 'w', encoding='utf-8') as result_file:
