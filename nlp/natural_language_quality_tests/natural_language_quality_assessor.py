@@ -52,7 +52,7 @@ def evaluate_generated_text_quality(output_folder):
     output_file_path = os.path.join(output_folder, "natural_language_results.json")
 
     # List of prompts for different text generation tasks
-    with open('dataset/natural_language_dataset.json', 'r', encoding='utf-8') as file:
+    with open('datasets/natural_language_dataset.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
         prompts = data['prompts']
 
