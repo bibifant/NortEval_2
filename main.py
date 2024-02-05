@@ -16,9 +16,6 @@ def main():
     # Bias
     calculate_bias(output_folder)
 
-    # Bias
-    calculate_bias(output_folder)
-
     # sentiment analysis
     run_sentiment_analysis(output_folder)
 
