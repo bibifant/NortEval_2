@@ -1,6 +1,6 @@
 from create_results import create_results
 from metrics.bleu import calculate_bleu
-from metrics.perplexity_transformersGPT2 import run_perplexity_test
+from nlp.sentiment_analysis import run_sentiment_analysis
 from metrics.rouge import run_rouge
 from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
@@ -11,6 +11,8 @@ def main():
     # create the results folder with timestamp
     output_folder = create_results()
 
+    #sentiment analysis
+    run_sentiment_analysis(output_folder)
     # Bleu
     calculate_bleu(output_folder)
 
