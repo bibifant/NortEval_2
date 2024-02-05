@@ -10,7 +10,6 @@ from nlp.upper_lower_case import run_upper_lower_case
 from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
 
 
-
 def main():
     # create the results folder with timestamp
     output_folder = create_results()
