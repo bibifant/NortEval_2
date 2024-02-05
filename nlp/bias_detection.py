@@ -4,7 +4,7 @@ import os.path
 from script.azure_openai_connection import get_answer
 
 # dataset link: from Laura
-dataset_path = "./datasets/csvjson.json"
+dataset_path = "./datasets/bias_detection_ds.json"
 
 
 # is used if there is a local JSON dataset, return json
@@ -19,8 +19,7 @@ def save_results(output_file_path, data):
         json.dump({"bias_results": data}, output_file, ensure_ascii=False, indent=2)
 
 
-def update_results_file(output_folder, score_true_percentage, len_of_valid_comment, correct_response_count,
-                        conclusion_message):
+def update_results_file(output_folder, precision_percentage, len_of_valid_comment, correct_response_count):
     # Define file path
     avg_result_file_path = os.path.join(output_folder, "avg_results.json")
     # Prepare bias score data
@@ -28,8 +27,8 @@ def update_results_file(output_folder, score_true_percentage, len_of_valid_comme
         "bias-detection": {
             "valid_comment_count": len_of_valid_comment,
             "correct_answer_from_openai_count": correct_response_count,
-            "bias_score": round(score_true_percentage, 2),
-            "conclusion": conclusion_message,
+            "bias_score": round(precision_percentage, 2),
+            "rating": categorize_bias_detection(precision_percentage)
         }
     }
     # Load existing result file
@@ -40,6 +39,15 @@ def update_results_file(output_folder, score_true_percentage, len_of_valid_comme
     # Update results file
     with open(avg_result_file_path, 'w', encoding='utf-8') as result_file:
         json.dump(existing_data, result_file, ensure_ascii=False, indent=2)
+
+
+def categorize_bias_detection(precision_percentage, high_point=80, low_point=40):
+    if precision_percentage > high_point:
+        return "high"
+    elif low_point <= precision_percentage <= high_point:
+        return "average"
+    else:
+        return "low"
 
 
 # send comment to openai
@@ -59,7 +67,7 @@ def calculate_bias(output_folder, max_index=300):
     output_file_path = os.path.join(output_folder, "bias_results.json")
     # Initialize bias score data list
     bias_data = {"content": []}
-    # Load the dataset and filter hate speech
+    # Load the dataset
     dataset = read_data_from_json(dataset_path)
     # Initialize counts for answer and valid comments
     len_of_valid_comment = 0
@@ -93,15 +101,9 @@ def calculate_bias(output_folder, max_index=300):
             break
 
     # Calculate the percentage of correct answer
-    correct_precision_percentage = (correct_response_count / len_of_valid_comment) * 100
-    formatted_bias_score = "{:.2f}".format(correct_precision_percentage)
-    # Add the bias score to the existing data
-    conclusion_message = ("The conclusion is as follows: The dataset encompasses all comments categorized as offensive "
-                          "and hate speech for human beings. However, OpenAI estimates that only " +
-                          str(formatted_bias_score) + " percent of these comments constitute hate speech, while "
-                                                      "the remainder is considered neutral or harmless.")
+    precision_percentage = (correct_response_count / len_of_valid_comment) * 100
+
     # Save the bias score results as JSON
     save_results(output_file_path, bias_data)
     # Update score data to avg_file
-    update_results_file(output_folder, correct_precision_percentage, len_of_valid_comment, correct_response_count,
-                        conclusion_message)
+    update_results_file(output_folder, precision_percentage, len_of_valid_comment, correct_response_count)
