@@ -1,11 +1,12 @@
 from create_results import create_results
 from metrics.bleu import calculate_bleu
-from nlp.sentiment_analysis import run_sentiment_analysis
+from metrics.perplexity_transformersGPT2 import run_perplexity_test
 from metrics.rouge import run_rouge
+from nlp.bias_detection import calculate_bias
 from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
+from nlp.sentiment_analysis import run_sentiment_analysis
 from nlp.upper_lower_case import run_upper_lower_case
-from nlp.bias_detection import calculate_bias
 
 
 def main():
@@ -15,7 +16,10 @@ def main():
     # Bias
     calculate_bias(output_folder)
 
-    #sentiment analysis
+    # Bias
+    calculate_bias(output_folder)
+
+    # sentiment analysis
     run_sentiment_analysis(output_folder)
 
     # Bleu
@@ -25,7 +29,7 @@ def main():
     run_language_percentage(output_folder)
 
     # Perplexity
-   # run_perplexity_test(output_folder)
+    run_perplexity_test(output_folder)
 
     # Rouge
     run_rouge(output_folder)
