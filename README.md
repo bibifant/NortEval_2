@@ -1,14 +1,50 @@
-# nortal-llm: German LLM Evaluation Module
+# Nortal LLM: German LLM Evaluation tool
 
 ## Overview
 
-This Python module is designed to evaluate the output quality of Language Models (LLMs) with a focus on generating high-quality German text. The evaluation utilizes three key metrics: Perplexity, BLEU, and ROUGE. Additionally some NLP-Tests are also performed (de_en, upper_lower_case and contains_verb).
+This Python module is designed for evaluating the output quality of Language Models (LLMs), with a primary focus on generating high-quality German text.
+The evaluation relies on two key metrics: BLEU and ROUGE. Additionally, several NLP tests are conducted to comprehensively evaluate the model's performance. 
+
+These NLP tests include:
+
+1. **Natural language quality assessor:** This test uses semantic similarity, key word extractions and perplexity analysis to assess the quality of the model's response in context. 
+
+2. **Additional tests:** The module also performs several other tests, such as case sensitivity analysis (upper/lower case), and verb presence detection (contains_verb).
 
 ## Installation
 
-```bash
-pip install -r requirements.txt
-```
+To install Nortal LLM, please follow these steps:
+
+1. **Clone the Repository**
+
+   First, clone the repository to your local machine:
+
+   ```bash
+   git clone https://gitlab.rz.htw-berlin.de/Christina.Gottschalk/nortal-llm.git
+   cd nortal-llm
+   ```
+
+2. **Install the Package**
+
+   Install the package and its dependencies with:
+
+   ```bash
+   python setup.py install
+   ```
+
+   This command will install all necessary dependencies listed in the `setup.py` file.
+
+
+
+3. **Download the spaCy Model**
+
+   After installing the package, you need to download the required spaCy model for German:
+
+   ```bash
+   python -m spacy download de_core_news_lg
+   ```
+
+   This step is necessary to ensure functionality of the natural_language_quality_assessor.py script.
 
 ## Usage:
 
@@ -18,8 +54,11 @@ pip install -r requirements.txt
 This script implements the BLEU metric. It measures the similarity between a machine-generated translation and one or more reference translations provided by humans.
 In this implementation we provide an English source text to be translated into German and compare the LLMs output to a reference translation from a dataset (//add dataset).
 
-json_file_path = "dataset/bleu_dataset.json"
+   ```bash
+  json_file_path = "dataset/bleu_dataset.json"
 run_bleu_test_on_json_dataset(json_file_path)
+   ```
+
 
 import json
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
@@ -29,26 +68,7 @@ def run_bleu_test_on_json_dataset(json_file_path):
     The higher the BLUE score, the better.
 
 ## Perplexity
-dataset_path = "WikiQA-train.txt"
-run_perplexity_test(dataset_path)
 
-import nltk
-from nltk import FreqDist
-from nltk.lm import MLE
-from nltk.util import bigrams
-import math
-
-def load_and_preprocess_dataset(dataset_path):
-    This is a necessary to prepare the data for further processing.
-
-def tokenize_text(text):
-    This breaks the text down into tokens.
-
-def calculate_perplexity(tokens, ngram_order=2):
-    This calculates the perplexity score for the text (datapoint) from the dataset in accordance with the previous tokenization and returns a score. 
-
-def run_perplexity_test(dataset_path):
-    This prints the result.
 
 ## Rouge
 
@@ -59,9 +79,10 @@ import os.path
 from rouge_score import rouge_scorer
 from script.azure_openai_connection import get_answer
 
-
-def load_data(json_file_path):
-    This reads the json data from "test.json" file and returns the loaded data
+   ```bash
+def load_data(json_file_path)
+   ```
+This reads the json data from "test.json" file and returns the loaded data
 
 def round_rouge_scores(scores):
     This rounds the rouge scores to two decimal places.
@@ -93,6 +114,15 @@ def run_rouge():
 
 
 # NLP (Natural Language Processing) Methods
+
+## Natural language quality assessor:
+This script employs perplexity as a metric to calculate the fluency and coherence of the generated text. 
+A lower score typically signifies text that is more natural and easier to read. Therefore, we refer to this metric as the "naturalness score". 
+Additionally, the script uses semantic similarity to assess how relevant and contextually aligned the model's response is to the given prompt. 
+A higher semantic similarity score indicates that the generated text closely aligns in meaning with the prompt.
+Furthermore, the script extracts key words from the prompt and compares them to the response text to evaluate whether the essential elements of the prompt are addressed in the model's response.
+
+
 
 ## upper lower case : Capitalization Test
 
