@@ -1,7 +1,6 @@
 import spacy
 import json
 import os
-from script.azure_openai_connection import get_answer
 
 nlp = spacy.load("de_core_news_sm")
 

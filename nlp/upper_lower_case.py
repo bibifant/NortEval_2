@@ -79,4 +79,3 @@ def run_upper_lower_case(output_folder):
     avg_upper_lower_case = calculate_average_percentage(dataset_points, "correct_upper_and_lower_case")
 
     update_results_file(output_folder, avg_upper_lower_case)
-

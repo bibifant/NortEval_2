@@ -93,5 +93,3 @@ def run_language_percentage(output_folder):
     avg_german_percentage = calculate_average_percentage(dataset_points, "german_part_of_speech")
 
     update_results_file(output_folder, avg_english_percentage, avg_german_percentage)
-
-
