@@ -9,7 +9,7 @@ from nlp.natural_language_quality_tests.contextual_keyword_checker import extrac
 
 # Path to JSON-file in 'dataset' folder
 # You can change the prompts in the dataset according to your needs.
-path_to_dataset = '../../dataset/natural_language_dataset.json'
+path_to_dataset = '../../datasets/natural_language_dataset.json'
 
 
 def categorize_score(score):
