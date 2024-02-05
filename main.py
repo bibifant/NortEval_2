@@ -10,7 +10,6 @@ from nlp.upper_lower_case import run_upper_lower_case
 from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
 
 
-
 def main():
     # create the results folder with timestamp
     output_folder = create_results()
@@ -29,6 +28,9 @@ def main():
 
     # Natural Language/ Plausibility
     evaluate_generated_text_quality(output_folder)
+
+    # Deutsch-englisch
+    run_language_percentage(output_folder)
 
     # Rouge
     run_rouge(output_folder)
