@@ -38,7 +38,18 @@ def calculate_average_percentage(dataset_points, key):
     return sum(point[key] for point in dataset_points) / len(dataset_points)
 
 
+def rating(percentage):
+    if 50 <= percentage <= 80:
+        return "moderate"
+    if percentage > 80:
+        return "good"
+    if percentage < 50:
+        return "low"
+
+
 def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
+    rating_value = rating(avg_german_percentage)
+
     result_file_path = os.path.join(output_folder, "avg_results.json")
 
     # Load existing result file
@@ -48,7 +59,9 @@ def update_results_file(output_folder, avg_english_percentage, avg_german_percen
     # Add average values
     existing_data["Results"].append({
         "average_percentage_of_english_words": round(avg_english_percentage, 2),
-        "average_percentage_of_german_words": round(avg_german_percentage, 2)
+        "average_percentage_of_german_words": round(avg_german_percentage, 2),
+        "average_percentage_of_german_words_rating": rating_value
+
     })
 
     # Update results file
