@@ -5,7 +5,7 @@ from metrics.rouge import run_rouge
 from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
-from metrics.natural_language_quality_assessor import evaluate_generated_text_quality
+from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
 
 
 
