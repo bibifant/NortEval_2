@@ -14,9 +14,6 @@ def main():
     # Bleu
     calculate_bleu(output_folder)
 
-    # Deutsch-englisch
-    run_language_percentage(output_folder)
-
     # Perplexity
     run_perplexity_test(output_folder)
 
