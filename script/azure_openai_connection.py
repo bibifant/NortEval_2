@@ -24,7 +24,7 @@ def get_answer(prompt: str, max_response_tokens: int = 200, user_text: str = Non
         temperature=0.7,
         max_tokens=max_response_tokens
     )
-    return response.choices[0].message.content.split(". ")
+    return response.choices[0].message.content
 
 
 def get_simple_translation(text, target_language='de', max_response_tokens=200):

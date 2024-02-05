@@ -6,8 +6,6 @@ This Python module is designed to evaluate the output quality of Language Models
 
 ## Installation
 
-//todo
-
 ```bash
 pip install -r requirements.txt
 ```
@@ -72,9 +70,18 @@ def calculate_average_rouge_scores(dataset_points):
     This function calculates the average Rouge scores for Rouge-1, Rouge-2, and Rouge-L based on the list of data points, 
     each containing these scores for different text summaries.
 
+def rating_rouge1(score):
+    This function evaluates the Rouge1 score in three categories: "low", "moderate" and "good".
+
+def rating_rouge2(score):
+    This function evaluates the Rouge2 score in three categories: "low", "moderate" and "good".
+
+def rating_rougeL(score):
+    This function evaluates the RougeL score in three categories: "low", "moderate" and "good".
+
 def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
     This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding new data and writing the updated data back to the file.
+    adding the new data and writing the updated data back to the file.
 
 def save_results(output_file_path, data):
     This writes the data to the "rouge_results.json" file and saves it there.
@@ -82,7 +89,7 @@ def save_results(output_file_path, data):
 def run_rouge():
     This initializes the Rouge scorer, processes a dataset of German text and  generates summaries of "candidate_summary" using the LLM. 
     It then calculates Rouge scores for the first 2 entries in the dataset by comparing the candidate summaries to the reference summaries.
-    The results, prompts and summaries are then saved into the json file.
+    The scores, prompts and responses are then saved into the json file.
 
 
 # NLP (Natural Language Processing) Methods
@@ -190,6 +197,33 @@ def save_results(output_file_path, data):
 def run_language_percentage(output_folder):
     This processes the dataset and responses of the api and calculates the percentage of English and German words in the generated answers.
     It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
+
+# Sentiment Analysis
+### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
+
+def load_data(ds_json_file_path)
+    This function loads the sentiment analysis dataset from the specified JSON file path (ds_json_file_path). It returns a list containing word data extracted from the dataset.
+
+def generate_prompt(prompt_template, word)
+    Given a base template (prompt_template) and a word, this function generates a prompt for sentiment analysis. The prompt is formatted with the specified word and additional instructions.
+    
+def create_json_file(data, output_file_path)
+    Writes the provided data (data) to a JSON file located at the specified path (output_file_path). This function is responsible for saving data in JSON format.
+    
+def check_sentiment_match_exact(response_sentiment, reference_sentiment, allowed_distance=1)
+    Checks if the predicted sentiment (response_sentiment) matches the reference sentiment (reference_sentiment) either exactly or within the specified Levenshtein distance (allowed_distance).
+
+def check_sentiment_match_in_category(response_sentiment, reference_sentiment)
+    Determines if the predicted sentiment (response_sentiment) falls into the same sentiment category as the reference sentiment (reference_sentiment).
+
+def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches, result_category_exact_match, result_category_category_match)
+    Updates the average results file with new sentiment analysis results. It takes in percentages of exact matches, percentages of matches within the same category, and result categories for both exact matches and matches within the same category.
+
+def save_results(output_file_path, data)
+    Writes the sentiment analysis results (data) to a JSON file located at the specified path (output_file_path). This function is responsible for saving the detailed sentiment analysis results.
+
+def run_sentiment_analysis(output_folder)
+    Processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, and saves both detailed and average results. The results are stored in the specified output folder (output_folder).
 
 
 
