@@ -1,20 +1,22 @@
 from create_results import create_results
-from metrics.bleu import run_bleu_test_on_json_dataset
+from metrics.bleu import calculate_bleu
+from nlp.sentiment_analysis import run_sentiment_analysis
+from metrics.rouge import run_rouge
+from nlp.contains_verb import run_contains_verb
 from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
-from nlp.contains_verb import run_contains_verb
-from metrics.perplexity_transformersGPT2 import run_perplexity_test
 from metrics.natural_language_quality_assessor import evaluate_generated_text_quality
-from metrics.rouge import run_rouge
+
 
 
 def main():
     # create the results folder with timestamp
     output_folder = create_results()
 
-    #Bleu
-    #print("Bleu score is being calculated")
-    #run_bleu_test_on_json_dataset()
+    #sentiment analysis
+    run_sentiment_analysis(output_folder)
+    # Bleu
+    calculate_bleu(output_folder)
 
     # Perplexity
     # run_perplexity_test(output_folder)
@@ -37,4 +39,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

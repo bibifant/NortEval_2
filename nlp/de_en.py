@@ -2,7 +2,6 @@ import spacy
 import json
 import os
 from langdetect import detect
-from script.azure_openai_connection import get_answer
 
 nlp = spacy.load("de_core_news_sm")
 
@@ -48,8 +47,8 @@ def update_results_file(output_folder, avg_english_percentage, avg_german_percen
 
     # Add average values
     existing_data["Results"].append({
-        "average percentage of english words": round(avg_english_percentage, 2),
-        "average percentage of german words": round(avg_german_percentage, 2)
+        "average_percentage_of_english_words": round(avg_english_percentage, 2),
+        "average_percentage_of_german_words": round(avg_german_percentage, 2)
     })
 
     # Update results file
@@ -63,41 +62,34 @@ def save_results(output_file_path, data):
 
 
 def run_language_percentage(output_folder):
-    json_file_path = "./dataset/nlp_dataset.json"
+    json_file_path = os.path.join(output_folder, "bleu_results.json")
     output_file_path = os.path.join(output_folder, "language_percentage_results.json")
 
     dataset_points = []
 
     data = load_data(json_file_path)
 
-    for index, data_point in enumerate(data):
-        prompt = f"Beantworte folgende Frage auf deutsch: {data_point.get('Frage')}"
+    for index, data_point in enumerate(data.get('scores', [])):
 
-        # Response LLM
-        response = get_answer(prompt)
-        response_str = ' '.join(sentence + "." for sentence in response)
-
-        doc = nlp(response_str)
+        response_text = data_point.get('prediction', '')
+        doc = nlp(response_text)
 
         # Determine the main language of the text
-        main_language = detect(response_str)
+        main_language = detect(response_text)
 
         english_percentage, german_percentage = calculate_language_percentages(doc)
 
         dataset_points.append({
             "index": index,
-            "prompt": prompt,
-            "response": response_str,
-            "main language part of the text": main_language,
-            "english part of speech": english_percentage,
-            "german part of speech": german_percentage
+            "response_text_bleu": response_text,
+            "main_language_part_of_the_text": main_language,
+            "english_part_of_speech": english_percentage,
+            "german_part_of_speech": german_percentage
         })
 
     save_results(output_file_path, dataset_points)
 
-    avg_english_percentage = calculate_average_percentage(dataset_points, "english part of speech")
-    avg_german_percentage = calculate_average_percentage(dataset_points, "german part of speech")
+    avg_english_percentage = calculate_average_percentage(dataset_points, "english_part_of_speech")
+    avg_german_percentage = calculate_average_percentage(dataset_points, "german_part_of_speech")
 
     update_results_file(output_folder, avg_english_percentage, avg_german_percentage)
-
-
