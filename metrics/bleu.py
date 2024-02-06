@@ -26,11 +26,11 @@ The BLEU score is calculated in the following steps:
 
 def categorize_bleu_score(bleu_score):
     if bleu_score > 0.4:
-        return "high"
+        return "good"
     elif 0.2 <= bleu_score <= 0.4:
         return "average"
     else:
-        return "low"
+        return "bad"
 
 
 def calculate_bleu(output_folder, max_index=100):
@@ -55,13 +55,13 @@ def calculate_bleu(output_folder, max_index=100):
     count = 0  # Number of successful BLEU score calculations
 
     for i, (en_sentence, de_sentence) in enumerate(zip(en_sentences, de_sentences)):
-        prediction = get_simple_translation(en_sentence)  # Translate 'en' prediction to German using OpenAI
+        response = get_simple_translation(en_sentence)  # Translate 'en' response to German using OpenAI
         reference = de_sentence  # 'de' is used as a reference
 
-        # Check if prediction or reference is not none
-        if prediction and reference:
-            # Calculation of the BLEU score for the prediction compared to the human reference
-            bleu_score = sentence_bleu([prediction.split()], reference.split(),
+        # Check if response or reference is not none
+        if response and reference:
+            # Calculation of the BLEU score for the response compared to the human reference
+            bleu_score = sentence_bleu([response.split()], reference.split(),
                                        smoothing_function=SmoothingFunction().method1,
                                        weights=(1, 0))  # Calculate BLEU with unigram
             total_bleu_score += bleu_score  # Set total BLEU score
@@ -74,8 +74,8 @@ def calculate_bleu(output_folder, max_index=100):
 
             # Save the results as a dictionary
             bleu_score_data["scores"].append({
-                "prediction_index": i + 1,
-                "prediction": prediction,
+                "index": i + 1,
+                "response": response,
                 "reference": reference,
                 "bleu_score": formatted_bleu_score,
                 "score_category": score_category

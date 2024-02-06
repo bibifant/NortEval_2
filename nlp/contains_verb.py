@@ -71,7 +71,7 @@ def run_contains_verb(output_folder):
 
     for index, data_point in enumerate(data.get('scores', [])):
 
-        response_text = data_point.get('prediction', '')
+        response_text = data_point.get('response', '')
         doc = nlp(response_text)
 
         sentences_with_verb_count = sum(1 for sent in doc.sents if sentence_contains_verb(sent.text))

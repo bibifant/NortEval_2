@@ -84,7 +84,7 @@ def run_language_percentage(output_folder):
 
     for index, data_point in enumerate(data.get('scores', [])):
 
-        response_text = data_point.get('prediction', '')
+        response_text = data_point.get('response', '')
         doc = nlp(response_text)
 
         # Determine the main language of the text

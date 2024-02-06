@@ -71,7 +71,7 @@ def run_upper_lower_case(output_folder):
 
     for index, data_point in enumerate(data.get('scores', [])):
 
-        response_text = data_point.get('prediction', '')
+        response_text = data_point.get('response', '')
         doc = nlp(response_text)
 
         text_low = response_text.lower()
