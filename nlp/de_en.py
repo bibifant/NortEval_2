@@ -40,11 +40,11 @@ def calculate_average_percentage(dataset_points, key):
 
 def rating(percentage):
     if 50 <= percentage <= 80:
-        return "moderate"
+        return "average"
     if percentage > 80:
         return "good"
     if percentage < 50:
-        return "low"
+        return "bad"
 
 
 def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
