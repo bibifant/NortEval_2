@@ -1,6 +1,5 @@
 from create_results import create_results
 from metrics.bleu import calculate_bleu
-from metrics.perplexity_transformersGPT2 import run_perplexity_test
 from metrics.rouge import run_rouge
 from nlp.bias_detection import calculate_bias
 from nlp.contains_verb import run_contains_verb
@@ -11,34 +10,31 @@ from nlp.natural_language_quality_tests.natural_language_quality_assessor import
 
 
 def main():
-    # create the results folder with timestamp
+    # Create The Results Folder With Timestamp
     output_folder = create_results()
 
     # Bias
     calculate_bias(output_folder)
 
-    # sentiment analysis
+    # Sentiment Analysis
     run_sentiment_analysis(output_folder)
 
     # Bleu
     calculate_bleu(output_folder)
 
-    # Perplexity
-    # run_perplexity_test(output_folder)
-
     # Natural Language/ Plausibility
     evaluate_generated_text_quality(output_folder)
 
-    # Deutsch-englisch
+    # Deutsch-Englisch
     run_language_percentage(output_folder)
 
     # Rouge
     run_rouge(output_folder)
 
-    # Percentage of german & english words
+    # Percentage of German & English words
     run_language_percentage(output_folder)
 
-    # Upper lower case
+    # Upper Lower Case
     run_upper_lower_case(output_folder)
 
     # Conjugated Verb
