@@ -76,8 +76,7 @@ def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
         "average_rouge2_rating": rating_rouge2_value,
         "average_rougeL": avg_rougeL,
         "average_rougeL_rating": rating_rougeL_value
-        }
-    })
+    }})
 
     # Update results file
     with open(result_file_path, 'w', encoding='utf-8') as result_file:

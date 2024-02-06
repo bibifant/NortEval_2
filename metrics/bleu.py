@@ -102,13 +102,11 @@ def calculate_bleu(output_folder, max_index=100):
         existing_data = json.load(result_file)
 
     # add average bleu score to data
-    bleu_avg_data = {
-        "BlEU":  {
+    bleu_avg_data = { "BlEU":  {
         "count": count,
         "average_bleu_score": formatted_bleu_average_score,
         "score_category": score_category
-        }
-    }
+    }}
     existing_data['Results'].append(bleu_avg_data)
 
     # update avg_results.json file

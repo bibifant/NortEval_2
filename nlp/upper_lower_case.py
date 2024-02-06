@@ -51,11 +51,10 @@ def update_results_file(output_folder, avg_upper_lower_case):
         existing_data = json.load(result_file)
 
     # Add average value
-    existing_data["Results"].append({ "Correct upper lower case": {
+    existing_data["Results"].append({"Correct upper lower case": {
         "average_of_correct_letter_case": round(avg_upper_lower_case, 2),
         "average_of_correct_letter_case_rating": rating_value
-        }
-    })
+    }})
 
     # Update results file
     with open(avg_results_file_path, 'w', encoding='utf-8') as result_file:

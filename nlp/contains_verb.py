@@ -50,12 +50,10 @@ def update_results_file(output_folder, avg_true_percentage):
         existing_data = json.load(result_file)
 
     # Add average value
-    existing_data["Results"].append({
-    "Contains verb": {
+    existing_data["Results"].append({"Contains verb": {
         "average_percentage_of_correct_verbs_contained": round(avg_true_percentage, 2),
         "average_percentage_of_correct_verbs_contained_rating": rating_value
-        }
-    })
+    }})
 
     # Update results file
     with open(avg_result_file_path, 'w', encoding='utf-8') as result_file:

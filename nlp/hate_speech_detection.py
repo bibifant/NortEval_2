@@ -23,14 +23,13 @@ def update_results_file(output_folder, precision_percentage, len_of_valid_commen
     # Define file path
     avg_result_file_path = os.path.join(output_folder, "avg_results.json")
     # Prepare bias score data
-    bias_score_data = {
-        "Hate Speech detection": {
+    bias_score_data = {"Hate Speech detection": {
             "valid_comment_count": len_of_valid_comment,
             "correct_answer_from_openai_count": correct_response_count,
             "hate_speech_score": round(precision_percentage, 2),
             "rating": categorize_bias_detection(precision_percentage)
-        }
-    }
+    }}
+    
     # Load existing result file
     with open(avg_result_file_path, 'r', encoding='utf-8') as result_file:
         existing_data = json.load(result_file)
