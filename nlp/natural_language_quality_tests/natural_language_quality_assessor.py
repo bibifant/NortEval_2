@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from math import exp
 import json
 import os
-from script.azure_openai_connection  import get_answer
+from azure_openai_connection import get_answer
 from nlp.natural_language_quality_tests.bert_semantic_similarity import calculate_semantic_similarity
 from nlp.natural_language_quality_tests.contextual_keyword_checker import extract_relevant_keywords, check_prompt_keywords_in_response
 

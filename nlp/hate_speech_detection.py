@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from script.azure_openai_connection import get_answer
+from azure_openai_connection import get_answer
 
 # dataset link: from Laura
 dataset_path = "./datasets/bias_detection_ds.json"

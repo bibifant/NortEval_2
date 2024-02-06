@@ -2,7 +2,7 @@ import json
 import os
 
 import Levenshtein
-from script.azure_openai_connection import get_answer
+from azure_openai_connection import get_answer
 
 prompt_template = "Categorize which sentiment the example word contains: "
 prompt_additional_instructions = "Respond in all lower caps and in a single word."

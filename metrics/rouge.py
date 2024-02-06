@@ -1,7 +1,7 @@
 import json
 import os.path
 from rouge_score import rouge_scorer
-from script.azure_openai_connection import get_answer
+from azure_openai_connection import get_answer
 
 
 def load_data(json_file_path):
@@ -69,8 +69,7 @@ def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
         existing_data = json.load(result_file)
 
     # Add average values
-    existing_data["Results"].append( {
-        "Rouge": {
+    existing_data["Results"].append({"Rouge": {
         "average_rouge1": avg_rouge1,
         "average_rouge1_rating": rating_rouge1_value,
         "average_rouge2": avg_rouge2,

@@ -3,7 +3,7 @@ import os.path
 
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-from script.azure_openai_connection import get_simple_translation
+from azure_openai_connection import get_simple_translation
 
 # link to datasets: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
 # input file paths
