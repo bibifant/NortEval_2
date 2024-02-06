@@ -33,11 +33,11 @@ def save_contains_verb_results(output_file_path, data):
 
 def rating(percentage):
     if 50 <= percentage <= 80:
-        return "moderate"
+        return "average"
     if percentage > 80:
         return "good"
     if percentage < 50:
-        return "low"
+        return "bad"
 
 
 def update_results_file(output_folder, avg_true_percentage):
