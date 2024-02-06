@@ -51,8 +51,10 @@ def update_results_file(output_folder, avg_true_percentage):
 
     # Add average value
     existing_data["Results"].append({
+    "Contains verb": {
         "average_percentage_of_correct_verbs_contained": round(avg_true_percentage, 2),
         "average_percentage_of_correct_verbs_contained_rating": rating_value
+        }
     })
 
     # Update results file

@@ -24,10 +24,10 @@ def update_results_file(output_folder, precision_percentage, len_of_valid_commen
     avg_result_file_path = os.path.join(output_folder, "avg_results.json")
     # Prepare bias score data
     bias_score_data = {
-        "bias-detection": {
+        "Hate Speech detection": {
             "valid_comment_count": len_of_valid_comment,
             "correct_answer_from_openai_count": correct_response_count,
-            "bias_score": round(precision_percentage, 2),
+            "hate_speech_score": round(precision_percentage, 2),
             "rating": categorize_bias_detection(precision_percentage)
         }
     }
@@ -43,11 +43,11 @@ def update_results_file(output_folder, precision_percentage, len_of_valid_commen
 
 def categorize_bias_detection(precision_percentage, high_point=80, low_point=40):
     if precision_percentage > high_point:
-        return "high"
+        return "good"
     elif low_point <= precision_percentage <= high_point:
         return "average"
     else:
-        return "low"
+        return "bad"
 
 
 # send comment to openai

@@ -69,13 +69,15 @@ def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
         existing_data = json.load(result_file)
 
     # Add average values
-    existing_data["Results"].append({
+    existing_data["Results"].append( {
+        "Rouge": {
         "average_rouge1": avg_rouge1,
         "average_rouge1_rating": rating_rouge1_value,
         "average_rouge2": avg_rouge2,
         "average_rouge2_rating": rating_rouge2_value,
         "average_rougeL": avg_rougeL,
         "average_rougeL_rating": rating_rougeL_value
+        }
     })
 
     # Update results file

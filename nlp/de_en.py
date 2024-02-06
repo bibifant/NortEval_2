@@ -57,11 +57,12 @@ def update_results_file(output_folder, avg_english_percentage, avg_german_percen
         existing_data = json.load(result_file)
 
     # Add average values
-    existing_data["Results"].append({
+    existing_data["Results"].append( {
+    "Percentage of German & English words": {
         "average_percentage_of_english_words": round(avg_english_percentage, 2),
         "average_percentage_of_german_words": round(avg_german_percentage, 2),
         "average_percentage_of_german_words_rating": rating_value
-
+        }
     })
 
     # Update results file

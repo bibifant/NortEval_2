@@ -113,12 +113,15 @@ def evaluate_generated_text_quality(output_folder):
         json.dump(current_results, output_file, ensure_ascii=False, indent=2)
 
     # Prepare data for storing the average scores
-    avg_json_data = {"average_naturalness_score": avg_naturalness,
-                     "average_naturalness_rating": avg_naturalness_rating,
-                     "average_semantic_similarity": avg_similarity,
-                     "average_similarity_rating": avg_semantic_similarity_rating,
-                     "average_keywords_in_response_score": avg_keywords_in_response,
-                     "average_keywords_in_response_rating": avg_keywords_in_response_rating
+    avg_json_data = {
+      "Natural language quality assessor": {
+        "average_naturalness_score": avg_naturalness,
+        "average_naturalness_rating": avg_naturalness_rating,
+        "average_semantic_similarity": avg_similarity,
+        "average_similarity_rating": avg_semantic_similarity_rating,
+        "average_keywords_in_response_score": avg_keywords_in_response,
+        "average_keywords_in_response_rating": avg_keywords_in_response_rating
+      }
     }
 
     # Load existing results file
