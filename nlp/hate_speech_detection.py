@@ -16,7 +16,7 @@ def read_data_from_json(file_path):
 
 def save_results(output_file_path, data):
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        json.dump({"bias_results": data}, output_file, ensure_ascii=False, indent=2)
+        json.dump({"hate_speech_results": data}, output_file, ensure_ascii=False, indent=2)
 
 
 def update_results_file(output_folder, precision_percentage, len_of_valid_comment, correct_response_count):
@@ -40,7 +40,7 @@ def update_results_file(output_folder, precision_percentage, len_of_valid_commen
         json.dump(existing_data, result_file, ensure_ascii=False, indent=2)
 
 
-def categorize_bias_detection(precision_percentage, high_point=80, low_point=40):
+def categorize_hate_speech_detection(precision_percentage, high_point=80, low_point=40):
     if precision_percentage > high_point:
         return "good"
     elif low_point <= precision_percentage <= high_point:
@@ -61,7 +61,7 @@ def send_to_openai(comment):
         return None
 
 
-def calculate_bias(output_folder, max_index=300):
+def run_hate_speech(output_folder, max_index=300):
     # Output file path for the Bias results
     output_file_path = os.path.join(output_folder, "bias_results.json")
     # Initialize bias score data list

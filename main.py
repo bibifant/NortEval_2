@@ -1,7 +1,7 @@
 from create_results import create_results
 from metrics.bleu import calculate_bleu
 from metrics.rouge import run_rouge
-from nlp.hate_speech_detection import calculate_bias
+from nlp.hate_speech_detection import run_hate_speech
 from nlp.sentiment_analysis import run_sentiment_analysis
 from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
 from nlp.de_en import run_language_percentage
@@ -20,8 +20,8 @@ def main():
     # Rouge
     run_rouge(output_folder)
 
-    # Bias
-    calculate_bias(output_folder)
+    # Hate Speech
+    run_hate_speech(output_folder)
 
     # Sentiment Analysis
     run_sentiment_analysis(output_folder)
