@@ -63,7 +63,7 @@ def send_to_openai(comment):
 
 def run_hate_speech(output_folder, max_index=300):
     # Output file path for the Bias results
-    output_file_path = os.path.join(output_folder, "bias_results.json")
+    output_file_path = os.path.join(output_folder, "hate_speech_results.json")
     # Initialize bias score data list
     bias_data = {"content": []}
     # Load the dataset
