@@ -215,3 +215,6 @@ $RECYCLE.BIN/
 __pycache__
 __pycache__/
 results_*/
+
+# Ignore .env files
+.env
