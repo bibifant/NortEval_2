@@ -27,7 +27,7 @@ def update_results_file(output_folder, precision_percentage, len_of_valid_commen
             "valid_comment_count": len_of_valid_comment,
             "correct_answer_from_openai_count": correct_response_count,
             "hate_speech_score": round(precision_percentage, 2),
-            "rating": categorize_bias_detection(precision_percentage)
+            "rating": categorize_hate_speech_detection(precision_percentage)
     }}
     
     # Load existing result file
