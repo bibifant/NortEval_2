@@ -4,7 +4,7 @@ import os.path
 from azure_openai_connection import get_answer
 
 # dataset link: from Laura
-dataset_path = "./datasets/bias_detection_ds.json"
+dataset_path = "./datasets/hate_speech_germeval21_ds.json"
 
 
 # is used if there is a local JSON dataset, return json

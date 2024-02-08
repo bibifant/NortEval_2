@@ -3,48 +3,65 @@
 ## Overview
 
 This Python module is designed for evaluating the output quality of Language Models (LLMs), with a primary focus on generating high-quality German text.
-The evaluation relies on two key metrics: BLEU and ROUGE. Additionally, several NLP tests are conducted to comprehensively evaluate the model's performance. 
+The evaluation relies on two key metrics: BLEU and ROUGE. 
+Additionally, several NLP tests are conducted to comprehensively evaluate the model's performance. 
 
 These NLP tests include:
 
 1. **Natural language quality assessor:** This test uses semantic similarity, key word extractions and perplexity analysis to assess the quality of the model's response in context. 
-
+2. **Hate speech detection:** This script evaluates the model's ability to detect hate speech within provided prompts.
+3. **Sentiment analysis:** This module categorizes text into positive, neutral, or negative sentiment to discern its overall tone.
 2. **Additional tests:** The module also performs several other tests, such as case sensitivity analysis (upper/lower case), and verb presence detection (contains_verb).
 
 ## Installation
 
 To install Nortal LLM, please follow these steps:
 
-1. **Clone the Repository**
+### 1. Clone the Repository
 
-   First, clone the repository to your local machine:
+First, clone the repository to your local machine:
 
    ```bash
    git clone https://gitlab.rz.htw-berlin.de/Christina.Gottschalk/nortal-llm.git
    cd nortal-llm
    ```
 
-2. **Install the Package**
+### 2. Install the Package
 
-   Install the package and its dependencies with:
+Install the package and its dependencies with:
 
    ```bash
    python setup.py install
    ```
 
-   This command will install all necessary dependencies listed in the `setup.py` file.
+This command will install all necessary dependencies listed in the `setup.py` file.
+
+```
+pip install -r requirements.txt
+```
+
+### 3. Create .env File
+
+Create a `.env` file in your project directory with the following content:
+
+```
+AZURE_OPENAI_KEY="Your_key"
+AZURE_OPENAI_ENDPOINT="Your_endpoint"
+```
+
+Replace `"Your_key"` with your Azure OpenAI API key and `"Your_endpoint"` with your Azure OpenAI endpoint URL. Make sure to keep this file secure and not expose your credentials publicly.
 
 
+### 4. Download spaCy Models
 
-3. **Download the spaCy Model**
-
-   After installing the package, you need to download the required spaCy model for German:
+   After installing the package, you need to download the required spaCy models for German:
 
    ```bash
    python -m spacy download de_core_news_lg
+   python -m spacy download de_core_news_sm
    ```
 
-   This step is necessary to ensure functionality of the natural_language_quality_assessor.py script.
+   This step is necessary to ensure functionality of some of the NLP scripts.
 
 ## Usage:
 
