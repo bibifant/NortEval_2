@@ -6,7 +6,7 @@ This Python module is designed for evaluating the output quality of Language Mod
 The evaluation relies on two key metrics: BLEU and ROUGE. 
 Additionally, several NLP tests are conducted to comprehensively evaluate the model's performance. 
 
-These NLP tests include:
+NLP Tests include:
 
 1. **Natural language quality assessor:** This test uses semantic similarity, key word extractions and perplexity analysis to assess the quality of the model's response in context. 
 2. **Hate speech detection:** This script evaluates the model's ability to detect hate speech within provided prompts.
@@ -15,7 +15,7 @@ These NLP tests include:
 
 ## Installation
 
-To install Nortal LLM, please follow these steps:
+To install Nortal LLM and its required dependencies, please follow these steps:
 
 ### 1. Clone the Repository
 
@@ -23,45 +23,32 @@ First, clone the repository to your local machine:
 
    ```bash
    git clone https://gitlab.rz.htw-berlin.de/Christina.Gottschalk/nortal-llm.git
+   ```
+### 2. Navigate to the Project Directory
+
+  ```bash
    cd nortal-llm
    ```
 
-### 2. Install the Package
-
-Install the package and its dependencies with:
+### 3. Install Dependencies
 
    ```bash
-   python setup.py install
+   pip install -r requirements.txt
    ```
+This command will install all the necessary packages specified in the `requirements.txt` file.
 
-This command will install all necessary dependencies listed in the `setup.py` file.
 
-```
-pip install -r requirements.txt
-```
-
-### 3. Create .env File
+### 4. Create .env File
 
 Create a `.env` file in your project directory with the following content:
 
-```
+``` 
 AZURE_OPENAI_KEY="Your_key"
 AZURE_OPENAI_ENDPOINT="Your_endpoint"
 ```
 
 Replace `"Your_key"` with your Azure OpenAI API key and `"Your_endpoint"` with your Azure OpenAI endpoint URL. Make sure to keep this file secure and not expose your credentials publicly.
 
-
-### 4. Download spaCy Models
-
-   After installing the package, you need to download the required spaCy models for German:
-
-   ```bash
-   python -m spacy download de_core_news_lg
-   python -m spacy download de_core_news_sm
-   ```
-
-   This step is necessary to ensure functionality of some of the NLP scripts.
 
 ## Usage:
 
