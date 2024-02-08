@@ -11,7 +11,7 @@ These NLP tests include:
 1. **Natural language quality assessor:** This test uses semantic similarity, key word extractions and perplexity analysis to assess the quality of the model's response in context. 
 2. **Hate speech detection:** This script evaluates the model's ability to detect hate speech within provided prompts.
 3. **Sentiment analysis:** This module categorizes text into positive, neutral, or negative sentiment to discern its overall tone.
-2. **Additional tests:** The module also performs several other tests, such as case sensitivity analysis (upper/lower case), and verb presence detection (contains_verb).
+2. **Additional tests:** The module also performs several other tests, such as case sensitivity analysis (upper/lower case), verb presence detection (contains_verb) and language percentage check(de_en).
 
 ## Installation
 
@@ -84,50 +84,18 @@ def run_bleu_test_on_json_dataset(json_file_path):
     This generates a prompt with text to be translated (from dataset) and instruction to translate it into German. The response is then compared to a reference translation with the BLEU metric and a score is calculated.
     The higher the BLUE score, the better.
 
-## Perplexity
 
 
 ## Rouge
+The Rouge metric is used to evaluate generated text summaries of the LLM by measuring the alignment between the generated and reference texts based on n-gram matches (Rouge-1, Rouge-2) and the longest common subsequence (Rouge-L). With our Rouge implementation we can assess the extent to which a model's response aligns with this objective. Rouge tests if the model correctly understands the meaning of long input text and is able to generate a more compact version in our target language, German. So, it needs to differenciate elemental from superfluous information in the input text.Therefore the metric can be a good indicator, if a model responds with relevant information.The score ranges from 0 to 1. A higher value indicates a better summary quality.
+  
+```bash
+def run_rouge(output_folder):
+```
 
-#### The Rouge metric is used to evaluate generated text summaries of the LLM by measuring the alignment between the generated and reference texts based on n-gram matches (Rouge-1, Rouge-2) and the longest common subsequence (Rouge-L).
-
-import json
-import os.path
-from rouge_score import rouge_scorer
-from script.azure_openai_connection import get_answer
-
-   ```bash
-def load_data(json_file_path)
-   ```
-This reads the json data from "test.json" file and returns the loaded data
-
-def round_rouge_scores(scores):
-    This rounds the rouge scores to two decimal places.
-
-def calculate_average_rouge_scores(dataset_points):
-    This function calculates the average Rouge scores for Rouge-1, Rouge-2, and Rouge-L based on the list of data points, 
-    each containing these scores for different text summaries.
-
-def rating_rouge1(score):
-    This function evaluates the Rouge1 score in three categories: "low", "moderate" and "good".
-
-def rating_rouge2(score):
-    This function evaluates the Rouge2 score in three categories: "low", "moderate" and "good".
-
-def rating_rougeL(score):
-    This function evaluates the RougeL score in three categories: "low", "moderate" and "good".
-
-def update_results_file(output_folder, avg_rouge1, avg_rouge2, avg_rougeL):
-    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding the new data and writing the updated data back to the file.
-
-def save_results(output_file_path, data):
-    This writes the data to the "rouge_results.json" file and saves it there.
-
-def run_rouge():
-    This initializes the Rouge scorer, processes a dataset of German text and  generates summaries of "candidate_summary" using the LLM. 
-    It then calculates Rouge scores for the first 2 entries in the dataset by comparing the candidate summaries to the reference summaries.
-    The scores, prompts and responses are then saved into the json file.
+This function initializes the Rouge scorer, processes a dataset of German text and generates summaries of "candidate_summary" using the LLM.
+It then calculates Rouge scores for the first 2 entries in the dataset by comparing the candidate summaries to the reference summaries.
+The scores, prompts and responses are then saved into the json file.
 
 
 # NLP (Natural Language Processing) Methods
@@ -141,109 +109,37 @@ Furthermore, the script extracts key words from the prompt and compares them to 
 
 
 
-## upper lower case : Capitalization Test
+## upper lower case : Correct upper lower case Test
+This script calculates the percentage of correct upper lower case of BLEUs responses.By using the German model by spaCy we want to find out whether the beginnings of sentences, nouns, titles, salutations and names of the response texts are capitalized correctly and everything else is written in lower case.The higher the percentage, the better the result.
 
-#### This module calculates the percentage of correct capitalization of the generated text from the connected API.
-
-import spacy
-import os
-import json
-from script.azure_openai_connection import get_answer
-
-nlp = spacy.load("de_core_news_sm")
-    This loads the german language model from spacy
-
-def load_data(json_file_path):
-    This reads the json data from "npl_dataset.json" file and returns the loaded data
-
-def calculate_percentage(doc, nouns, words_lower_case):
-    This calculates the percentage of capitalized nouns, lowercase words not in the specified list, and title-cased words at the start of sentences. 
-    It averages these three percentages and rounds the result to two decimal places.
-
-def save_results(output_file_path, dataset_points):
-    This writes the data to the "upper_lower_case_results.json" file and saves it there.
-
-def calculate_average_percentage(dataset_points):
-    This function calculates the average percentage of correct usage of upper and lower case letters across the dataset and rounds the result to two decimal places.
-
-def update_results_file(output_folder, avg_upper_lower_case):
-    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding new data and writing the updated data back to the file.
-
+```bash
 def run_upper_lower_case(output_folder):
-    This processes the dataset and responses of the api, calculates the percentage of correct usage of upper and lower case letters in the answers, saves individual results to the "upper_lower_case_results.json" file, 
-    and updates the "avg_results.json" file with the calculated average percentage.
+```
+
+This function takes the responses of BLEU, calculates the percentage of correct usage of upper and lower case letters in the answers, saves individual results to the "upper_lower_case_results.json" file,and updates the "avg_results.json" file with the calculated average percentage.
 
 
+## contains_verb : Verb Test
+This script checks whether a verb is contained in the responses of BLEUs, because the verb is considered the anchor of a sentence. A German sentence must contain at least one verb in order to be well-formed.For this test we also use the German model by spaCy to find out whether a verb is contained in a sentence.The higher the percentage, the better the result.
 
-## contains_verb : Verb  Test
-
-#### This module checks whether a verb is contained in a sentence.
-
-import spacy
-import json
-import os
-from script.azure_openai_connection import get_answer
-
-nlp = spacy.load("de_core_news_sm")
-    This loads the German language model from spacy
-
-def load_data(json_file_path):
-    This reads the json data from "npl_dataset.json" file and returns the loaded data
-
-def sentence_contains_verb(sentence):
-    This checks whether the sentence contains a verb or an auxiliary verb 
-
-def get_verbs(sentence):
-    This analyzes a sentence using spacy and returns a list of verbs and auxiliary verbs in the sentence
-
-def avg_percentage(dataset_points, key):
-    This calculates the average value whether a conjugated verb is included.
-
-def save_contains_verb_results(output_file_path, data):
-    This writes the data to the "contains_verb_results.json" file and saves it there.
-
-def update_results_file(output_folder, avg_true_percentage):
-    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding new data and writing the updated data back to the file.
-
+```bash
 def run_contains_verb(output_folder):
-    This analyzes each response to calculate the percentage of sentences containing at least one verb. It also extracts the verbs from the responses.It then saves the results including the response sentences, percentage with verbs, 
-    and the verbs themselves into the json file.
+```
+
+This function analyzes each response of BLEU to calculate the percentage of sentences containing at least one verb. It also extracts the verbs from the responses.It then saves the results including the response sentences, percentage with verbs,and the verbs themselves into the json file.It then updates the "avg_results.json" file with the calculated average percentage.
 
 
 ## de_en: Language Percentage Check
+This script identifies the main language of BLEUs responses,using spaCy for linguistic analysis and the langdetect library.We need this test because most LLMs are able to answer in many different languages. We want to make sure that the answer is in German, as we only want to evaluate German results qualitatively.
+The higher the percentage for German, the better the result.
 
-#### This module identifies the main language of the generated answers,using Spacy for linguistic analysis and the langdetect library.
-
-import spacy
-import json
-import os
-from langdetect import detect
-from script.azure_openai_connection import get_answer
-
-nlp = spacy.load("de_core_news_sm")
-    This loads the German language model from spacy
-
-def load_data(json_file_path):
-    This reads the json data from "npl_dataset.json" file and returns the loaded data
-
-def calculate_language_percentages(doc): 
-    This calculates the percentage of words in English and German and rounds the result to two decimal places.
-
-def calculate_average_percentage(dataset_points, key):
-    This function calculates the average percentage of English and German words for all datapoints across the dataset.
-
-def update_results_file(output_folder, avg_english_percentage, avg_german_percentage):
-    This updates the "avg_results.json" file in the "results" folder with new results by reading existing data, 
-    adding new data and writing the updated data back to the file.
-
-def save_results(output_file_path, data):
-    This writes the data to the "language_percentage_results.json" file and saves it there.
-
+```bash
 def run_language_percentage(output_folder):
-    This processes the dataset and responses of the api and calculates the percentage of English and German words in the generated answers.
-    It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
+```
+
+This function takes the responses of BLEU and calculates the percentage of English and German words in the answers.
+It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
+
 
 # Sentiment Analysis
 ### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
