@@ -128,35 +128,20 @@ This function takes the responses of BLEU and calculates the percentage of Engli
 It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
 
 
-# Sentiment Analysis
+## Sentiment Analysis
 ### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
 
-def load_data(ds_json_file_path)
-    This function loads the sentiment analysis dataset from the specified JSON file path (ds_json_file_path). It returns a list containing word data extracted from the dataset.
+In our sentiment analysis implementation, we assess the connected model’s proficiency in recognizing word connotations to ensure that its responses are free from bias or unintended meanings. 
+We accomplish this by prompting the model to categorize test words based on a predefined scale of connotations and comparing its responses to reference connotations. 
+We evaluate the responses using two methods: exact matching and category matching. 
+The former checks if the response matches the reference exactly, while the latter evaluates if the response correctly captures the general connotation
+This allows for a more nuanced interpretation. 
+Additionally, we normalize the response data using Levenshtein distance to account for occasional lexical errors. 
+This approach enables us to tailor the evaluation criteria to specific use cases and ensure the model’s responses align with desired standards.
 
-def generate_prompt(prompt_template, word)
-    Given a base template (prompt_template) and a word, this function generates a prompt for sentiment analysis. The prompt is formatted with the specified word and additional instructions.
-    
-def create_json_file(data, output_file_path)
-    Writes the provided data (data) to a JSON file located at the specified path (output_file_path). This function is responsible for saving data in JSON format.
-    
-def check_sentiment_match_exact(response_sentiment, reference_sentiment, allowed_distance=1)
-    Checks if the predicted sentiment (response_sentiment) matches the reference sentiment (reference_sentiment) either exactly or within the specified Levenshtein distance (allowed_distance).
-
-def check_sentiment_match_in_category(response_sentiment, reference_sentiment)
-    Determines if the predicted sentiment (response_sentiment) falls into the same sentiment category as the reference sentiment (reference_sentiment).
-
-def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches, result_category_exact_match, result_category_category_match)
-    Updates the average results file with new sentiment analysis results. It takes in percentages of exact matches, percentages of matches within the same category, and result categories for both exact matches and matches within the same category.
-
-def save_results(output_file_path, data)
-    Writes the sentiment analysis results (data) to a JSON file located at the specified path (output_file_path). This function is responsible for saving the detailed sentiment analysis results.
-
-def run_sentiment_analysis(output_folder)
-    Processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, and saves both detailed and average results. The results are stored in the specified output folder (output_folder).
-
-
-
-
-
-
+```bash
+def run_sentiment_analysis(output_folder) 
+```
+This function processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, 
+and saves both detailed and average results. 
+The results are stored in the specified output folder (output_folder).
