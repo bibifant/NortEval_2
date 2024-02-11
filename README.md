@@ -94,7 +94,39 @@ Additionally, the script uses semantic similarity to assess how relevant and con
 A higher semantic similarity score indicates that the generated text closely aligns in meaning with the prompt.
 Furthermore, the script extracts key words from the prompt and compares them to the response text to evaluate whether the essential elements of the prompt are addressed in the model's response.
 
+## Hate speech detection
+In our hate speech detection implementation, we aim to assess the model’s ability to identify problematic language, 
+particularly hate speech, in social media comments. 
+We utilize data from the GermEval 2021 webcrawl, which includes comments categorized as toxic (1) or non-toxic (0). 
+Our implementation prompts the model to classify each comment accordingly and compares its responses to the reference classifications. 
+We calculate the average score of correct toxicity recognition and categorize it into good, average, or bad, allowing for adjustments in categorization thresholds.
 
+```bash
+def run_hate_speech(output_folder)
+```
+
+This function processes a dataset of social media comments, sending each comment to an AI model for classification as toxic or non-toxic. 
+It compares the model’s classifications with the reference classifications in the dataset and saves the results to a JSON file.
+This test is essential to ensure that our model does not reproduce language that promotes hatred, violence, or discrimination.
+
+
+## Sentiment Analysis
+### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
+
+In our sentiment analysis implementation, we assess the connected model’s proficiency in recognizing word connotations to ensure that its responses are free from bias or unintended meanings. 
+We accomplish this by prompting the model to categorize test words based on a predefined scale of connotations and comparing its responses to reference connotations. 
+We evaluate the responses using two methods: exact matching and category matching. 
+The former checks if the response matches the reference exactly, while the latter evaluates if the response correctly captures the general connotation
+This allows for a more nuanced interpretation. 
+Additionally, we normalize the response data using Levenshtein distance to account for occasional lexical errors. 
+This approach enables us to tailor the evaluation criteria to specific use cases and ensure the model’s responses align with desired standards.
+
+```bash
+def run_sentiment_analysis(output_folder) 
+```
+This function processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, 
+and saves both detailed and average results. 
+The results are stored in the specified output folder (output_folder).
 
 ## upper lower case : Correct upper lower case Test
 This script calculates the percentage of correct upper lower case of BLEUs responses.By using the German model by spaCy we want to find out whether the beginnings of sentences, nouns, titles, salutations and names of the response texts are capitalized correctly and everything else is written in lower case.The higher the percentage, the better the result.
@@ -127,21 +159,3 @@ def run_language_percentage(output_folder):
 This function takes the responses of BLEU and calculates the percentage of English and German words in the answers.
 It then saves individual results to the "language_percentage_results.json" file, and updates the "avg_results.json" file with the calculated average percentage.
 
-
-## Sentiment Analysis
-### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
-
-In our sentiment analysis implementation, we assess the connected model’s proficiency in recognizing word connotations to ensure that its responses are free from bias or unintended meanings. 
-We accomplish this by prompting the model to categorize test words based on a predefined scale of connotations and comparing its responses to reference connotations. 
-We evaluate the responses using two methods: exact matching and category matching. 
-The former checks if the response matches the reference exactly, while the latter evaluates if the response correctly captures the general connotation
-This allows for a more nuanced interpretation. 
-Additionally, we normalize the response data using Levenshtein distance to account for occasional lexical errors. 
-This approach enables us to tailor the evaluation criteria to specific use cases and ensure the model’s responses align with desired standards.
-
-```bash
-def run_sentiment_analysis(output_folder) 
-```
-This function processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, 
-and saves both detailed and average results. 
-The results are stored in the specified output folder (output_folder).
