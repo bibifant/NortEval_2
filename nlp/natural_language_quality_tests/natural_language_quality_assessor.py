@@ -9,7 +9,7 @@ from nlp.natural_language_quality_tests.contextual_keyword_checker import extrac
 
 # Path to JSON-file in 'dataset' folder
 # You can change the prompts in the dataset according to your needs.
-dataset_natural_l_assess = '../../datasets/natural_language_dataset.json'
+dataset_natural_l_assess = 'datasets/natural_language_dataset.json'
 
 
 def categorize_score(score):
@@ -39,6 +39,54 @@ def calculate_naturalness_score(model, tokenizer, text):
     return exp(loss.item())
 
 
+def load_prompts(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        return data['prompts']
+
+
+def calculate_average_scores(prompts, total_naturalness, total_semantic_similarity, total_keywords_in_response):
+    num_prompts = len(prompts)
+
+    # Berechnung der Durchschnittswerte
+    avg_naturalness = round(total_naturalness / num_prompts, 2) if num_prompts > 0 else 0
+    avg_semantic_similarity = round(total_semantic_similarity / num_prompts, 2) if num_prompts > 0 else 0
+    avg_keywords_in_response = round(total_keywords_in_response / num_prompts, 2) if num_prompts > 0 else 0
+
+    # Kategorisierung der Durchschnittswerte
+    avg_naturalness_rating = categorize_naturalness(avg_naturalness)
+    avg_semantic_similarity_rating = categorize_score(avg_semantic_similarity)
+    avg_keywords_in_response_rating = categorize_score(avg_keywords_in_response)
+
+    avg_json_data = {
+        "Natural language quality assessor": {
+            "average_naturalness_score": avg_naturalness,
+            "average_naturalness_rating": avg_naturalness_rating,
+            "average_semantic_similarity": avg_semantic_similarity,
+            "average_similarity_rating": avg_semantic_similarity_rating,
+            "average_keywords_in_response_score": avg_keywords_in_response,
+            "average_keywords_in_response_rating": avg_keywords_in_response_rating
+        }
+    }
+
+    return avg_json_data
+
+
+def save_results_to_file(data, file_path):
+    with open(file_path, 'w', encoding='utf-8') as file:
+        json.dump(data, file, ensure_ascii=False, indent=2)
+
+
+def update_results_file(output_folder, avg_json_data):
+    result_file_path = os.path.join(output_folder, "avg_results.json")
+    with open(result_file_path, 'r', encoding='utf-8') as result_file:
+        existing_data = json.load(result_file)
+
+    existing_data["Results"].append(avg_json_data)
+
+    save_results_to_file(existing_data, result_file_path)
+
+
 # Function to evaluate the quality of generated text responses
 def evaluate_generated_text_quality(output_folder):
     # Load the model and tokenizer
@@ -51,10 +99,7 @@ def evaluate_generated_text_quality(output_folder):
     # Define the path for the output file
     output_file_path = os.path.join(output_folder, "natural_language_results.json")
 
-    # List of prompts for different text generation tasks
-    with open('datasets/natural_language_dataset.json', 'r', encoding='utf-8') as file:
-        data = json.load(file)
-        prompts = data['prompts']
+    prompts = load_prompts('datasets/natural_language_dataset.json')
 
     current_results = []
     total_naturalness = 0
@@ -94,38 +139,12 @@ def evaluate_generated_text_quality(output_folder):
             print(f"Error processing prompt '{prompt}': {e}")
 
     # Calculate the average scores
-    avg_naturalness = round(total_naturalness / len(prompts), 2) if prompts else 0
-    avg_similarity = round(total_semantic_similarity / len(prompts), 2) if prompts else 0
-    avg_keywords_in_response = round(total_keywords_in_response / len(prompts), 2) if prompts else 0
-
-    # Categorize average scores
-    avg_naturalness_rating = categorize_naturalness(avg_naturalness)
-    avg_semantic_similarity_rating = categorize_score(avg_similarity)
-    avg_keywords_in_response_rating = categorize_score(avg_keywords_in_response)
+    avg_scores = calculate_average_scores(prompts, total_naturalness, total_semantic_similarity, total_keywords_in_response)
 
     # Write the results to a JSON file
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        json.dump(current_results, output_file, ensure_ascii=False, indent=2)
-
-    # Prepare data for storing the average scores
-    avg_json_data = {"Natural language quality assessor": {
-        "average_naturalness_score": avg_naturalness,
-        "average_naturalness_rating": avg_naturalness_rating,
-        "average_semantic_similarity": avg_similarity,
-        "average_similarity_rating": avg_semantic_similarity_rating,
-        "average_keywords_in_response_score": avg_keywords_in_response,
-        "average_keywords_in_response_rating": avg_keywords_in_response_rating
-    }}
-
-    # Load existing results file
-    with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
-        existing_data = json.load(result_file)
-
-    # Add the average scores to the results file
-    existing_data["Results"].append(avg_json_data)
+    save_results_to_file(current_results, output_file_path)
 
     # Update the results file
-    with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
-        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+    update_results_file(output_folder, avg_scores)
 
-    return current_results, avg_json_data
+    return current_results, avg_scores
