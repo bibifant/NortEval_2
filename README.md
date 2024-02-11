@@ -1,4 +1,4 @@
-# Nortal LLM: German LLM Evaluation tool
+# NORTevAL: German LLM Evaluation tool
 
 ## Overview
 
@@ -51,6 +51,42 @@ Replace `"Your_key"` with your Azure OpenAI API key and `"Your_endpoint"` with y
 
 
 ## Usage:
+
+To run the full suite of evaluation metrics and NLP tests on your Language Model, 
+use the `main.py` script. 
+This script orchestrates the execution of various components, including BLEU and ROUGE metrics, hate speech detection, sentiment analysis, and natural language quality assessment. 
+It also runs additional tests such as language percentage check, upper/lower case sensitivity analysis, and verb presence detection.
+
+### Running the Evaluation
+Follow these steps to run the evaluation:
+
+1. **Execute main.py:**
+Navigate to the directory containing `main.py` and execute the script:
+
+```bash
+python main.py
+```
+2. **Results:**
+The script will automatically create an output folder with a timestamp, 
+where all the results from the different tests will be saved. 
+This includes individual JSON files for each test, along with an aggregated summary of the results.
+
+3. **Review the Results:**
+After completion, review the results in the output folder. 
+Each test will generate its own set of detailed results, which you can use to assess the performance and capabilities of your Language Model in handling German text.
+
+   
+### Understanding the Results
+
+The results will provide insights into various aspects of your Language Model's performance, including:
+
+- **Translation Quality (BLEU & ROUGE):** Evaluates how well the model translates and summarizes texts in German.
+- **Hate Speech Detection:** Assesses the model's ability to identify toxic language.
+- **Sentiment Analysis:** Examines the model's proficiency in recognizing and categorizing sentiments.
+- **Natural Language Quality:** Analyzes the fluency, coherence, and relevance of the model's responses.
+- **Language Accuracy:** Checks the correctness of language usage, including upper/lower case sensitivity and verb presence.
+- **Language Preference (de_en):** Determines the predominant language (German or English) in the model's responses.
+
 
 # Metrics
 
