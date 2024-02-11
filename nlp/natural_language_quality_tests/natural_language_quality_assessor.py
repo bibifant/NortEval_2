@@ -9,7 +9,7 @@ from nlp.natural_language_quality_tests.contextual_keyword_checker import extrac
 
 # Path to JSON-file in 'dataset' folder
 # You can change the prompts in the dataset according to your needs.
-path_to_dataset = '../../datasets/natural_language_dataset.json'
+dataset_natural_l_assess = '../../datasets/natural_language_dataset.json'
 
 
 def categorize_score(score):
@@ -81,11 +81,6 @@ def evaluate_generated_text_quality(output_folder):
             total_semantic_similarity += semantic_similarity
             total_keywords_in_response += keywords_in_response_score
 
-            # Round scores
-            naturalness_score_rounded = round(naturalness_score, 2)
-            semantic_similarity_rounded = round(semantic_similarity, 2)
-            keywords_in_response_score_rounded = round(keywords_in_response_score, 2)
-
             # Store the results for each prompt
             current_results.append({
                 "Prompt": prompt,
@@ -124,7 +119,7 @@ def evaluate_generated_text_quality(output_folder):
 
     # Load existing results file
     with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
-            existing_data = json.load(result_file)
+        existing_data = json.load(result_file)
 
     # Add the average scores to the results file
     existing_data["Results"].append(avg_json_data)
@@ -134,4 +129,3 @@ def evaluate_generated_text_quality(output_folder):
         json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
 
     return current_results, avg_json_data
-
