@@ -15,6 +15,6 @@ def get_bert_embeddings(text):
 def calculate_semantic_similarity(text1, text2):
     embedding1 = get_bert_embeddings(text1)
     embedding2 = get_bert_embeddings(text2)
-    # calculate cosine similarity of embeddings
+    # Calculate cosine similarity of embeddings
     similarity = torch.nn.functional.cosine_similarity(embedding1, embedding2)
     return similarity.item()
