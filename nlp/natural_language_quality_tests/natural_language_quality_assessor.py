@@ -90,7 +90,7 @@ def update_results_file(output_folder, avg_json_data):
 
 
 # Function to evaluate the quality of generated text responses
-def evaluate_generated_text_quality(output_folder):
+def run_natural_language_quality_assessor(output_folder):
     # Load the model and tokenizer
     model_name = "gpt2"
     model = AutoModelForCausalLM.from_pretrained(model_name)

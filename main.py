@@ -3,7 +3,7 @@ from metrics.bleu import calculate_bleu
 from metrics.rouge import run_rouge
 from nlp.hate_speech_detection import run_hate_speech
 from nlp.sentiment_analysis import run_sentiment_analysis
-from nlp.natural_language_quality_tests.natural_language_quality_assessor import evaluate_generated_text_quality
+from nlp.natural_language_quality_tests.natural_language_quality_assessor import run_natural_language_quality_assessor
 from nlp.de_en import run_language_percentage
 from nlp.upper_lower_case import run_upper_lower_case
 from nlp.contains_verb import run_contains_verb
@@ -27,7 +27,7 @@ def main():
     run_sentiment_analysis(output_folder)
 
     # Natural Language/ Plausibility
-    evaluate_generated_text_quality(output_folder)
+    run_natural_language_quality_assessor(output_folder)
 
     # Percentage of German & English words
     run_language_percentage(output_folder)
