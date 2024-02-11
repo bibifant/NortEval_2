@@ -89,6 +89,7 @@ def save_results(output_file_path, data):
 
 
 def run_rouge(output_folder):
+    print(f"Rouge score is being calculated.")
     # Initialize rouge scorer
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
 

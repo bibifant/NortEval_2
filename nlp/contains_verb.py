@@ -61,6 +61,7 @@ def update_results_file(output_folder, avg_true_percentage):
 
 
 def run_contains_verb(output_folder):
+    print(f"Contains verb is running.")
 
     json_file_path = os.path.join(output_folder, "bleu_results.json")
     output_file_path = os.path.join(output_folder, "contains_verb_results.json")

@@ -34,6 +34,8 @@ def categorize_bleu_score(bleu_score):
 
 
 def calculate_bleu(output_folder, max_index=100):
+    print(f"BLEU score is being calculated.")
+
     # Dateipfad für die Ausgabedatei
     output_file_path = os.path.join(output_folder, "bleu_results.json")
 

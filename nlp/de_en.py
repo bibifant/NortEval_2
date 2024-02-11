@@ -74,6 +74,7 @@ def save_results(output_file_path, data):
 
 
 def run_language_percentage(output_folder):
+    print(f"Percentage of German & English words is being assessed.")
     json_file_path = os.path.join(output_folder, "bleu_results.json")
     output_file_path = os.path.join(output_folder, "language_percentage_results.json")
 

@@ -62,6 +62,7 @@ def update_results_file(output_folder, avg_upper_lower_case):
 
 
 def run_upper_lower_case(output_folder):
+    print(f"Upper Lower Case is running.")
     json_file_path = os.path.join(output_folder, "bleu_results.json")
     output_file_path = os.path.join(output_folder, "upper_lower_case_results.json")
 

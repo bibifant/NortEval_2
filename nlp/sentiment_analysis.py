@@ -98,6 +98,7 @@ def save_results(output_file_path, data):
 
 
 def run_sentiment_analysis(output_folder):
+    print(f"Sentiment analysis is running.")
     # Load data from JSON file
     words_data = load_data(ds_json_file_path)
     #create detailed results file for sentiment analysis

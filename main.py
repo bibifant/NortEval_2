@@ -11,7 +11,7 @@ from nlp.contains_verb import run_contains_verb
 
 def main():
 
-    # Create The Results Folder With Timestamp
+    # Create the results folder with timestamp
     output_folder = create_results()
 
     # Bleu

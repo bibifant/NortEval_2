@@ -62,6 +62,7 @@ def send_to_openai(comment):
 
 
 def run_hate_speech(output_folder, max_index=300):
+    print(f"Hate speech detection is running.")
     # Output file path for the Bias results
     output_file_path = os.path.join(output_folder, "hate_speech_results.json")
     # Initialize bias score data list
