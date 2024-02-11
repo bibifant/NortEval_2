@@ -91,21 +91,25 @@ The results will provide insights into various aspects of your Language Model's 
 # Metrics
 
 ## BLEU
-This script implements the BLEU metric. It measures the similarity between a machine-generated translation and one or more reference translations provided by humans.
-In this implementation we provide an English source text to be translated into German and compare the LLMs output to a reference translation from a dataset (//add dataset).
+BLEU is a metric used to evaluate the quality of machine-translated text by comparing it to one or more reference translations.
+The script assumes access to datasets in German and English. The German dataset is assumed to be located at datasets/zitate-dewiki-20141024.de, and the English dataset at datasets/zitate-dewiki-20141024.en.
+
+The script reads content from both the German and English dataset files.
+Each sentence in the English dataset is translated into German using the OpenAI translation service.
+BLEU scores are calculated for each translated sentence against its corresponding German sentence in the dataset.
+BLEU scores are categorized as "good", "average", or "bad" based on predefined thresholds.
 
    ```bash
-  json_file_path = "dataset/bleu_dataset.json"
-run_bleu_test_on_json_dataset(json_file_path)
+def calculate_bleu(output_folder)
    ```
 
+NLTK: Required for BLEU score calculation. Install using pip install nltk.
 
-import json
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+Output:
+The script saves the BLEU scores, translation responses, references, and score categories in a JSON file named bleu_results.json.
+It also calculates the average BLEU score for the entire dataset and saves it, along with relevant statistics, in avg_results.json.
 
-def run_bleu_test_on_json_dataset(json_file_path):
-    This generates a prompt with text to be translated (from dataset) and instruction to translate it into German. The response is then compared to a reference translation with the BLEU metric and a score is calculated.
-    The higher the BLUE score, the better.
+
 
 
 
