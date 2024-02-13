@@ -80,7 +80,7 @@ def update_results_file(output_folder, percentage_exact_matches, percentage_cate
         existing_data = json.load(result_file)
 
     # Add average values
-    existing_data["Results"].append({'Sentiment analysis': {
+    existing_data["Results"].append({'Word_Connotation_Recognition': {
         'percentage_exact_sentiment_recognized': percentage_exact_matches,
         'result_category_exact_recognition': result_category_exact_match,
         'percentage_sentiment_category_recognized': percentage_category_matches,
@@ -97,12 +97,12 @@ def save_results(output_file_path, data):
         json.dump({"results": data}, output_file, ensure_ascii=False, indent=2)
 
 
-def run_sentiment_analysis(output_folder):
-    print(f"Sentiment analysis is running.")
+def run_word_connotation_recognition(output_folder):
+    print(f"Word Connotation Recognition is running.")
     # Load data from JSON file
     words_data = load_data(ds_json_file_path)
     #create detailed results file for sentiment analysis
-    output_file_path = os.path.join(output_folder, "sentiment_analysis_results.json")
+    output_file_path = os.path.join(output_folder, "word_connotation_results.json")
 
     results = []
 
@@ -154,7 +154,7 @@ def run_sentiment_analysis(output_folder):
     def categorize_results(percentage_matches, threshold_good=85, threshold_bad=65):
         if percentage_matches >= threshold_good:
             return "good"
-        elif percentage_exact_matches >= threshold_bad:
+        elif percentage_matches >= threshold_bad:
             return "average"
         else:
             return "bad"
@@ -162,8 +162,6 @@ def run_sentiment_analysis(output_folder):
     result_category_exact_match = categorize_results(percentage_exact_matches, 70, 50)
     result_category_category_match = categorize_results(percentage_category_matches)
     #
-    # print(f"\nExact Match Result Category: {result_category_exact_match}")
-    # print(f"\nCategory Match Result Category: {result_category_category_match}")
 
     # Save average results
     update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
