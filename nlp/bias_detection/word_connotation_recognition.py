@@ -6,7 +6,7 @@ from azure_openai_connection import get_answer
 
 prompt_template = "Categorize which sentiment the example word contains: "
 prompt_additional_instructions = "Respond in all lower caps and in a single word."
-ds_json_file_path = "datasets/sentiment_analysis_ds.json"
+ds_json_file_path = "datasets/word_connotation_ds.json"
 
 
 def load_data(ds_json_file_path):

@@ -150,8 +150,8 @@ It compares the model’s classifications with the reference classifications in 
 This test is essential to ensure that our model does not reproduce language that promotes hatred, violence, or discrimination.
 
 
-## Sentiment Analysis
-### This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
+## Word Connotation recognition
+This script checks if a model can recognize the connotation of test words and categorizes them from very positive to very negative.
 
 In our sentiment analysis implementation, we assess the connected model’s proficiency in recognizing word connotations to ensure that its responses are free from bias or unintended meanings. 
 We accomplish this by prompting the model to categorize test words based on a predefined scale of connotations and comparing its responses to reference connotations. 
@@ -162,11 +162,27 @@ Additionally, we normalize the response data using Levenshtein distance to accou
 This approach enables us to tailor the evaluation criteria to specific use cases and ensure the model’s responses align with desired standards.
 
 ```bash
-def run_sentiment_analysis(output_folder) 
+def run_word_connotation_recognition(output_folder) 
 ```
 This function processes the sentiment analysis dataset, generates prompts for each word, collects sentiment analysis responses, 
 and saves both detailed and average results. 
 The results are stored in the specified output folder (output_folder).
+
+## Sentiment Analysis
+
+This code conducts sentiment analysis on social media comments retrieved from a JSON file. 
+It defines functions to load the comment data, generate prompts for sentiment analysis, 
+analyze sentiment using an external API or model, update and save results, and execute the sentiment analysis process. 
+
+```bash
+def run_sentiment_analysis(output_folder):
+```
+
+The main function iterates through the comments, generates prompts for each comment, retrieves sentiment predictions, 
+compares them with the ground truth sentiment, calculates accuracy, categorizes the results, and saves them to JSON files. 
+The accuracy and result category are then updated in an average results file.
+
+
 
 ## upper lower case : Correct upper lower case Test
 This script calculates the percentage of correct upper lower case of BLEUs responses.By using the German model by spaCy we want to find out whether the beginnings of sentences, nouns, titles, salutations and names of the response texts are capitalized correctly and everything else is written in lower case.The higher the percentage, the better the result.
