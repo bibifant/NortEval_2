@@ -3,7 +3,7 @@ import os.path
 
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-from azure_openai_connection import get_simple_translation
+from openai_connection import get_simple_translation
 
 # link to datasets: http://linguatools.org/webcrawl-parallel-corpus-german-english-2015/
 # input file paths
@@ -33,7 +33,7 @@ def categorize_bleu_score(bleu_score):
         return "bad"
 
 
-def calculate_bleu(output_folder, max_index=100):
+def calculate_bleu(output_folder, max_index=10):
     print(f"BLEU score is being calculated.")
 
     # Dateipfad für die Ausgabedatei

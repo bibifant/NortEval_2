@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from azure_openai_connection import get_answer
+from openai_connection import get_answer
 
 # dataset link: from Laura
 dataset_path = "./datasets/hate_speech_germeval21_ds.json"

@@ -1,4 +1,4 @@
-from create_results import create_results
+from create_results import create_results, create_results_for_model
 from metrics.bleu import calculate_bleu
 from metrics.rouge import run_rouge
 from nlp.bias_detection.hate_speech_detection import run_hate_speech
@@ -14,6 +14,9 @@ def main():
 
     # Create the results folder with timestamp
     output_folder = create_results()
+
+    # Create the results folder for model
+    # output_folder = create_results_for_model()
 
     # Bleu
     calculate_bleu(output_folder)

@@ -1,0 +1,1 @@
+{"language": ["en", "fr", "ro", "de", "multilingual"], "license": "apache-2.0", "tags": ["summarization", "translation"], "datasets": ["c4"], "inference": false}

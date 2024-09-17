@@ -1,0 +1,25 @@
+{
+  "language": [
+    "fr",
+    "it",
+    "de",
+    "es",
+    "en"
+  ],
+  "license": "apache-2.0",
+  "inference": {
+    "parameters": {
+      "temperature": 0.5
+    }
+  },
+  "widget": [
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is your favorite condiment?"
+        }
+      ]
+    }
+  ]
+}

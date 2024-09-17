@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from math import exp
 import json
 import os
-from azure_openai_connection import get_answer
+from openai_connection import get_answer
 # Use either BERT or models from sentence transformers for embeddings and calculating semantic similarity.
 # from nlp.natural_language_quality_tests.sentence_transformers_semantic_similarity import calculate_semantic_similarity
 from nlp.natural_language_quality_tests.bert_semantic_similarity import calculate_semantic_similarity

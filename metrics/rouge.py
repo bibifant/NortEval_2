@@ -1,7 +1,7 @@
 import json
 import os.path
 from rouge_score import rouge_scorer
-from azure_openai_connection import get_answer
+from openai_connection import get_answer
 
 
 def load_data(json_file_path):

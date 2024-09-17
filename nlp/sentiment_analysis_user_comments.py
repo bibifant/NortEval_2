@@ -1,7 +1,7 @@
 import json
 import os
 import Levenshtein
-from azure_openai_connection import get_answer
+from openai_connection import get_answer
 
 prompt_template = "Consider the following social media comments. Categorize the main sentiment each comment contains: "
 prompt_additional_instructions = "Respond in all lower caps and in a single word."
