@@ -9,6 +9,13 @@ max_models_to_check = 50
 german_models = []
 
 
+def is_language_model(model_card):
+    # Check if the model is tagged as a language model
+    if "tags" in model_card:
+        return any(tag in model_card.tags for tag in ["text-generation", "text2text-generation", "sequence-classification", "summarization", "translation"])
+    return False
+
+
 def generate_list_of_available_german_models():
     total_models_processed = 0
     while total_models_processed < max_models_to_check:

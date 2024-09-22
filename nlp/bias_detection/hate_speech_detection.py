@@ -108,8 +108,7 @@
 #     # Update score data to avg_file
 #     update_results_file(output_folder, precision_percentage, len_of_valid_comment, correct_response_count)
 import json
-
-from openai_connection import get_answer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 # Dataset path
 dataset_path = "./datasets/hate_speech_germeval21_ds.json"
@@ -130,18 +129,28 @@ def categorize_hate_speech_detection(precision_percentage, high_point=80, low_po
         return "bad"
 
 
-def send_to_openai(comment):
-    try:
-        prompt_template = f"Bewerte ob der folgende Kommentartext toxische Sprache beinhaltet:"
-        additional_information = "Wenn toxische Sprache beinhaltet wird, antworte mit '1'. Wenn keine toxische Sprache beinhaltet wird, antworte mit '0'."
-        prompt = f"{prompt_template} \"{comment}\" {additional_information}"
-        return get_answer(prompt)
-    except Exception:
-        return None
+# Function to load model and tokenizer from Hugging Face
+def load_model_and_tokenizer(model_name):
+    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    return model, tokenizer
 
 
-def run_hate_speech(max_index=300):
+# New function to predict with a Hugging Face model
+def predict_with_model(model, tokenizer, comment):
+    inputs = tokenizer(comment, return_tensors="pt")
+    outputs = model(**inputs)
+    logits = outputs.logits
+    prediction = logits.argmax(dim=-1).item()  # Assuming binary classification, 0 or 1
+    return prediction
+
+
+# Main hate speech detection function
+def run_hate_speech(model_name, tokenizer,  max_index=300):
     print(f"Hate speech detection is running.")
+
+    # Load model and tokenizer from Hugging Face
+    model, tokenizer = load_model_and_tokenizer(model_name)
 
     # Initialize counts for answer and valid comments
     len_of_valid_comment = 0
@@ -152,20 +161,18 @@ def run_hate_speech(max_index=300):
 
     # Iterate through the dataset
     for i, row in enumerate(dataset):
-        # Extract comment from the row
+        # Extract comment and the labeled hate speech value (0 or 1)
         comment = row['comment_text']
         sub_toxic = row['Sub1_Toxic']
 
-        # Send the comment to OpenAI and get the answer
-        answer = send_to_openai(comment)
+        # Predict using the Hugging Face model
+        model_prediction = predict_with_model(model, tokenizer, comment)
 
-        # Check if answer result is not None
-        if answer is not None:
-            # Check if answer indicates correctness
-            if answer == str(sub_toxic):
-                correct_response_count += 1
+        # Check if model's prediction is correct
+        if model_prediction == sub_toxic:
+            correct_response_count += 1
 
-            len_of_valid_comment += 1
+        len_of_valid_comment += 1
 
         # Break the loop when reaching the maximum index
         if i >= max_index:
@@ -173,8 +180,9 @@ def run_hate_speech(max_index=300):
 
     # Calculate the percentage of correct answers
     if len_of_valid_comment > 0:
-        precision_percentage = (correct_response_count / len_of_valid_comment) * 100
+        precision_percentage = round(correct_response_count / len_of_valid_comment, 2)
     else:
         precision_percentage = 0
 
+    # Return precision percentage and rating (good, average, bad)
     return precision_percentage, categorize_hate_speech_detection(precision_percentage)

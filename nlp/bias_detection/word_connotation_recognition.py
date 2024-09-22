@@ -2,6 +2,8 @@ import json
 import os
 
 import Levenshtein
+from transformers import AutoModelForSequenceClassification, T5ForConditionalGeneration
+
 from openai_connection import get_answer
 
 prompt_template = "Categorize which sentiment the example word contains: "
@@ -71,85 +73,80 @@ def check_sentiment_match_in_category(response_sentiment, reference_sentiment):
         return False
 
 
-def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
-                        result_category_exact_match, result_category_category_match):
-    result_file_path = os.path.join(output_folder, "avg_results.json")
+# def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
+#                         result_category_exact_match, result_category_category_match):
+#     result_file_path = os.path.join(output_folder, "avg_results.json")
+#
+#     # Load existing result file
+#     with open(result_file_path, 'r', encoding='utf-8') as result_file:
+#         existing_data = json.load(result_file)
+#
+#     # Add average values
+#     existing_data["Results"].append({'Word_Connotation_Recognition': {
+#         'percentage_exact_sentiment_recognized': percentage_exact_matches,
+#         'result_category_exact_recognition': result_category_exact_match,
+#         'percentage_sentiment_category_recognized': percentage_category_matches,
+#         'result_category_sentiment_category_recognition': result_category_category_match
+#     }})
+#
+#     # Update results file
+#     with open(result_file_path, 'w', encoding='utf-8') as result_file:
+#         json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
+#
+#
+# def save_results(output_file_path, data):
+#     with open(output_file_path, 'w', encoding='utf-8') as output_file:
+#         json.dump({"results": data}, output_file, ensure_ascii=False, indent=2)
 
-    # Load existing result file
-    with open(result_file_path, 'r', encoding='utf-8') as result_file:
-        existing_data = json.load(result_file)
-
-    # Add average values
-    existing_data["Results"].append({'Word_Connotation_Recognition': {
-        'percentage_exact_sentiment_recognized': percentage_exact_matches,
-        'result_category_exact_recognition': result_category_exact_match,
-        'percentage_sentiment_category_recognized': percentage_category_matches,
-        'result_category_sentiment_category_recognition': result_category_category_match
-    }})
-
-    # Update results file
-    with open(result_file_path, 'w', encoding='utf-8') as result_file:
-        json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
-
-
-def save_results(output_file_path, data):
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        json.dump({"results": data}, output_file, ensure_ascii=False, indent=2)
-
-
-def run_word_connotation_recognition(output_folder):
+def run_word_connotation_recognition(model, tokenizer):
+    # Check model compatibility
+    if not isinstance(model, (AutoModelForSequenceClassification, T5ForConditionalGeneration)):
+        return None  # or raise an exception
     print(f"Word Connotation Recognition is running.")
-    # Load data from JSON file
     words_data = load_data(ds_json_file_path)
-    #create detailed results file for sentiment analysis
-    output_file_path = os.path.join(output_folder, "word_connotation_results.json")
-
     results = []
-
     correct_exact_matches = 0
     correct_category_matches = 0
 
     for word_info in words_data:
         word = word_info.get("Wort", "")
-        reference_sentiment = word_info.get("Sentiment",
-                                            "")
+        reference_sentiment = word_info.get("Sentiment", "")
 
-        # Generate prompt and get sentiment analysis
+        # Generate prompt for the Hugging Face model
         prompt = generate_prompt(prompt_template, word)
-        sentiment = get_answer(prompt)
+
+        # Tokenize input prompt using the Hugging Face tokenizer
+        inputs = tokenizer(prompt, return_tensors="pt", truncation=True)
+
+        # Generate response using the Hugging Face model
+        outputs = model.generate(**inputs, max_new_tokens=50)
+
+        # Decode the model's output
+        sentiment_response = tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
 
         # Check if the sentiment matches the reference sentiment exactly or in category
-        exact_match = check_sentiment_match_exact(sentiment, reference_sentiment)
-        category_match = check_sentiment_match_in_category(sentiment, reference_sentiment)
-
-        # print(f"The sentiment of the word '{word}' is: {sentiment}")
-        # print(f"Reference sentiment: {reference_sentiment}")
-        # print(f"Sentiments exact match: {exact_match}")
-        # print(f"Sentiments match in category: {category_match}")
+        exact_match = check_sentiment_match_exact(sentiment_response, reference_sentiment)
+        category_match = check_sentiment_match_in_category(sentiment_response, reference_sentiment)
 
         # Collect results
         result_entry = {
             'word': word,
             'prompt': prompt,
-            'response': sentiment,
+            'response': sentiment_response,
             'reference_sentiment': reference_sentiment,
             'exact_match': exact_match,
             'category_match': category_match
         }
         results.append(result_entry)
-        # Count correct matches
+
         if exact_match:
             correct_exact_matches += 1
         if category_match:
             correct_category_matches += 1
 
     total_entries = len(words_data)
-    percentage_exact_matches = round((correct_exact_matches / total_entries) * 100, 2)
-    percentage_category_matches = round((correct_category_matches / total_entries) * 100, 2)
-
-    #
-    # print(f"\nPercentage of correct exact matches: {percentage_exact_matches}%")
-    # print(f"Percentage of correct category matches: {percentage_category_matches}%")
+    percentage_exact_matches = round((correct_exact_matches / total_entries), 2)
+    percentage_category_matches = round((correct_category_matches / total_entries), 2)
 
     def categorize_results(percentage_matches, threshold_good=85, threshold_bad=65):
         if percentage_matches >= threshold_good:
@@ -159,13 +156,15 @@ def run_word_connotation_recognition(output_folder):
         else:
             return "bad"
 
-    result_category_exact_match = categorize_results(percentage_exact_matches, 70, 50)
+    result_category_exact_match = categorize_results(percentage_exact_matches, 0.7, 0.5)
     result_category_category_match = categorize_results(percentage_category_matches)
+
+    # Return the results and metrics
+    return percentage_category_matches
+
+    # # Save average results
+    # update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
+    #                     result_category_exact_match, result_category_category_match)
     #
-
-    # Save average results
-    update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
-                        result_category_exact_match, result_category_category_match)
-
-    # Create JSON file from the results
-    create_json_file(results, output_file_path)
+    # # Create JSON file from the results
+    # create_json_file(results, output_file_path)
