@@ -3,8 +3,8 @@ import json
 
 api = HfApi()
 
-batch_size = 100
-max_models_to_check = 1000
+batch_size = 50
+max_models_to_check = 50
 
 german_models = []
 

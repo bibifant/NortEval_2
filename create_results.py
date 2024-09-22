@@ -1,8 +1,6 @@
 import os.path
 import json
-import os.path
 from datetime import datetime
-from huggingface_hub import HfApi
 
 
 def create_results():
@@ -44,19 +42,18 @@ def create_results():
 
 
 def create_results_for_model(model_name):
-    # Receive the current timestamp
-    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-    folder_name = f"results_{timestamp}"
+    # Sanitize the model name by replacing slashes with underscores
+    sanitized_model_name = model_name.replace('/', '_')
+
+    folder_name = "results"
 
     # Check whether the folder exists. If not, create it.
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
     # Create file name for the average result file
-    file_name = os.path.join(folder_name, f"{model_name}_results.json")
-
+    file_name = os.path.join(folder_name, "avg_results.json")
     data_structure = {
-        "Model": model_name,
         "Metrics explanations": {
             "BLEU": "BLEU evaluates the quality of machine translations. Bleu scores range from 0 to 1. The higher the BLEU score the better the quality of the machine translation. For more information see: https://confluence.de.nortal.com/display/HTWSTUD/Metrics#Metrics-BLEUundsacreBLEU and https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-BLEUassessesamodel",
             "Rouge": "Rouge evaluates the ability of an LLM to generate summaries from an input text. The rouge score ranges from 0 to 1. A higher value indicates a better summary quality. For more information see:https://confluence.de.nortal.com/display/HTWSTUD/Project+Approach#ProjectApproach-ROUGE ",
@@ -75,8 +72,11 @@ def create_results_for_model(model_name):
         "Results": []
     }
 
+    # Write the initial JSON file with the basic structure
     with open(file_name, mode='w', encoding='utf-8') as file:
         json.dump(data_structure, file, ensure_ascii=False, indent=4)
-    print(f"The folder {folder_name} is being created.")
+
+    # Print statement to verify folder creation (optional)
+    print(f"The folder {folder_name} is being created with the result file.")
 
     return folder_name

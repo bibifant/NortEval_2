@@ -1,91 +1,80 @@
-# import os
-#
-# import openai
-# from dotenv import load_dotenv
-#
-# load_dotenv()
-# openai.api_key = os.getenv("BENCHMARK-KEY")
-#
-#
-# def get_answer(prompt: str, max_response_tokens: int = 50, user_text: str = None):
-#     if user_text is not None:
-#         prompt.format(user_text)
-#
-#     system_message = [{"role": "system", "content": prompt}]
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",  # model = "deployment_name".
-#         messages=system_message,
-#         temperature=0.7,
-#         max_tokens=max_response_tokens
-#     )
-#     return response.choices[0].message.content
-#
-#
-# def get_simple_translation(text, target_language='de', max_response_tokens=50):
-#     try:
-#         neutral_prompt = "Translate the following text to {0}: {1}".format(target_language, text)
-#         response = openai.ChatCompletion.create(
-#             model="gpt-3.5-turbo",  # Update to OpenAI's model name
-#             messages=[{"role": "user", "content": neutral_prompt}],
-#             temperature=0.7,
-#             max_tokens=max_response_tokens
-#         )
-#         # Extrahiere die übersetzte Nachricht aus der Antwort
-#         translated_text = response.choices[0].message.content
-#         return translated_text
-#     except Exception as e:
-#         return None
-#
-#
-# """
-# wenn der Text sensitive Information erhalten, wird bad request zurück gegeben
-# z.B: original_text: these mothers pump their first offspring full of this pollutant, and most of them die.
-# openai.BadRequestError: Error code: 400 -
-# {'error': {'message': "The response was filtered due to the prompt triggering Azure OpenAI's content management policy.
-# Please modify your prompt and retry. To learn more about our content filtering policies please read our documentation: https://go.microsoft.com/fwlink/?linkid=2198766",
-# 'type': None, 'param': 'prompt', 'code': 'content_filter', 'status': 400}}
-# """
-#
-# import os
-# import openai
-# from dotenv import load_dotenv
-#
-# # Load environment variables (make sure .env contains your OpenAI API Key)
-# load_dotenv()
-#
-# # Set up the OpenAI API key from environment variable
-# openai.api_key = os.getenv("JAN_KEY")
-#
-#
-# def test_openai_connection():
-#     try:
-#         # Send a simple test prompt to OpenAI
-#         response = openai.ChatCompletion.create(
-#             model="gpt-3.5-turbo",
-#             messages=[
-#                 {"role": "system", "content": "You are a helpful assistant."},
-#                 {"role": "user", "content": "Hello, how are you?"}
-#             ],
-#             max_tokens=50
-#         )
-#         print(response.choices[0].message['content'])
-#     except Exception as e:
-#         print(f"An error occurred: {str(e)}")
+from transformers import AutoModelForSeq2SeqLM, AutoModel, AutoTokenizer, AutoConfig
 
+from transformers import AutoModelForSeq2SeqLM, AutoModel, AutoTokenizer, AutoConfig
 
-import openai
-import os
-from dotenv import load_dotenv
-openai.api_key = "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"
-
-
-response = openai.Completion.create(
-    model="gpt-4",
-    prompt="Hello world",
-    max_tokens=5
+from transformers import AutoModelForSeq2SeqLM, AutoModel, AutoTokenizer, AutoConfig
+from transformers.models.bert import BertModel
+from transformers import (
+    AutoConfig,
+    AutoModel,
+    AutoModelForSeq2SeqLM,
+    AutoTokenizer,
+    BertModel,
+    T5ForConditionalGeneration
 )
-print(response.choices[0].text.strip())
-#
-# # Execute the test function
-# if __name__ == "__main__":
-#     test_openai_connection()
+
+
+def load_model_and_tokenizer(model_name_or_object):
+    """
+    Load the model and tokenizer based on the input, which can be either a model name (string) or a pre-loaded model object.
+
+    :param model_name_or_object: Either a model name string or an initialized model object.
+    :return: A tuple of (model, tokenizer).
+    """
+
+    # Debugging: Print the type of model_name_or_object
+    print(f"Received input of type: {type(model_name_or_object)}")
+
+    if isinstance(model_name_or_object, str):
+        # Load model and tokenizer using the model name
+        config = AutoConfig.from_pretrained(model_name_or_object)
+
+        # Determine the correct model class based on the configuration
+        if config.is_encoder_decoder:
+            model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_object)
+        else:
+            model = AutoModel.from_pretrained(model_name_or_object)
+
+        tokenizer = AutoTokenizer.from_pretrained(model_name_or_object)
+        print(f"Model and tokenizer loaded successfully from model name: {model_name_or_object}")
+
+    elif isinstance(model_name_or_object, (AutoModelForSeq2SeqLM, AutoModel, BertModel, T5ForConditionalGeneration)):
+        # If a model object is passed, load the corresponding tokenizer
+        model = model_name_or_object
+        tokenizer_name = model.config._name_or_path  # Extract the model name/path from the config
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+        print(f"Model and tokenizer loaded successfully from model object: {tokenizer_name}")
+
+    else:
+        raise ValueError(f"Unsupported model type or input. Received: {type(model_name_or_object)}")
+
+    return model, tokenizer
+
+
+def get_answer(model, tokenizer, prompt: str, max_response_tokens: int = 50, user_text: str = None):
+    if user_text is not None:
+        prompt = prompt.format(user_text)
+
+    # Tokenizing des Inputs
+    input_ids = tokenizer(prompt, return_tensors='pt', max_length=512, truncation=True).input_ids
+    # Response generieren
+    output = model.generate(input_ids, max_length=max_response_tokens)
+
+    # Response zurückgeben
+    response = tokenizer.decode(output[0], skip_special_tokens=True)
+    return response
+
+
+def get_simple_translation(model, tokenizer, text: str, target_language: str = 'de', max_response_tokens: int = 50):
+    # Zielsprache setzen
+    task_prefix = f"translate English to {target_language}: "
+
+    prompt = task_prefix + text
+    input_ids = tokenizer(prompt, return_tensors="pt").input_ids
+
+    # response generieren
+    output_ids = model.generate(input_ids, max_length=max_response_tokens)
+
+    # response zurückgeben
+    translated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+    return translated_text
