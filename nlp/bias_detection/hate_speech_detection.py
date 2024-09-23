@@ -138,7 +138,7 @@ def load_model_and_tokenizer(model_name):
 
 # New function to predict with a Hugging Face model
 def predict_with_model(model, tokenizer, comment):
-    inputs = tokenizer(comment, return_tensors="pt")
+    inputs = tokenizer(comment,return_tensors="pt", truncation=True, padding=True, max_length=512)
     outputs = model(**inputs)
     logits = outputs.logits
     prediction = logits.argmax(dim=-1).item()  # Assuming binary classification, 0 or 1
