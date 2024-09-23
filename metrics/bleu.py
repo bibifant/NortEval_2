@@ -1,9 +1,7 @@
-import json
-import os
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
 # Import Hugging Face translation functions from the modified openai_connection
-from openai_connection import load_model_and_tokenizer, get_simple_translation
+from model_connection import load_model_and_tokenizer, get_simple_translation
 
 # File paths for datasets
 de_file_path = "datasets/zitate-dewiki-20141024.de"
@@ -25,8 +23,6 @@ def calculate_bleu(model_name, max_index=10):
     # Load model and tokenizer for Hugging Face model
     model, tokenizer = load_model_and_tokenizer(model_name)
 
-    # Path for output file
-    # output_file_path = os.path.join(output_folder, "bleu_results.json")
 
     # Read content from the ".de" file
     with open(de_file_path, 'r', encoding='utf-8') as de_file:
@@ -86,14 +82,6 @@ def calculate_bleu(model_name, max_index=10):
     formatted_bleu_average_score = "{:.2f}".format(average_bleu_score)
     score_category = categorize_bleu_score(average_bleu_score)
 
-    # # Save the results as JSON
-    # with open(output_file_path, 'w', encoding='utf-8') as output_file:
-    #     json.dump(bleu_score_data, output_file, indent=2, ensure_ascii=False)
-    #
-    # # Add BLEU average score to avg_results
-    # with open(os.path.join(output_folder, "avg_results.json"), 'r', encoding='utf-8') as result_file:
-    #     existing_data = json.load(result_file)
-
     # Add average BLEU score to data
     bleu_avg_data = {
         "BLEU": {
@@ -102,11 +90,6 @@ def calculate_bleu(model_name, max_index=10):
             "score_category": score_category
         }
     }
-    # existing_data['Results'].append(bleu_avg_data)
-    #
-    # # Update avg_results.json file
-    # with open(os.path.join(output_folder, "avg_results.json"), 'w', encoding='utf-8') as result_file:
-    #     json.dump(existing_data, result_file, indent=4, ensure_ascii=False)
 
     print(average_bleu_score)
     # Create a metrics list for visualization

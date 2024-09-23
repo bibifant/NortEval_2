@@ -1,14 +1,12 @@
 import json
-import os
-
 import Levenshtein
 from transformers import AutoModelForSequenceClassification, T5ForConditionalGeneration
 
-from openai_connection import get_answer
+from model_connection import get_answer
 
 prompt_template = "Categorize which sentiment the example word contains: "
 prompt_additional_instructions = "Respond in all lower caps and in a single word."
-ds_json_file_path = "datasets/word_connotation_ds.json"
+ds_json_file_path = "dataset/word_connotation_ds.json"
 
 
 def load_data(ds_json_file_path):
@@ -73,31 +71,6 @@ def check_sentiment_match_in_category(response_sentiment, reference_sentiment):
         return False
 
 
-# def update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
-#                         result_category_exact_match, result_category_category_match):
-#     result_file_path = os.path.join(output_folder, "avg_results.json")
-#
-#     # Load existing result file
-#     with open(result_file_path, 'r', encoding='utf-8') as result_file:
-#         existing_data = json.load(result_file)
-#
-#     # Add average values
-#     existing_data["Results"].append({'Word_Connotation_Recognition': {
-#         'percentage_exact_sentiment_recognized': percentage_exact_matches,
-#         'result_category_exact_recognition': result_category_exact_match,
-#         'percentage_sentiment_category_recognized': percentage_category_matches,
-#         'result_category_sentiment_category_recognition': result_category_category_match
-#     }})
-#
-#     # Update results file
-#     with open(result_file_path, 'w', encoding='utf-8') as result_file:
-#         json.dump(existing_data, result_file, ensure_ascii=False, indent=4)
-#
-#
-# def save_results(output_file_path, data):
-#     with open(output_file_path, 'w', encoding='utf-8') as output_file:
-#         json.dump({"results": data}, output_file, ensure_ascii=False, indent=2)
-
 def run_word_connotation_recognition(model, tokenizer):
     # Check model compatibility
     if not isinstance(model, (AutoModelForSequenceClassification, T5ForConditionalGeneration)):
@@ -159,12 +132,5 @@ def run_word_connotation_recognition(model, tokenizer):
     result_category_exact_match = categorize_results(percentage_exact_matches, 0.7, 0.5)
     result_category_category_match = categorize_results(percentage_category_matches)
 
-    # Return the results and metrics
     return percentage_category_matches
 
-    # # Save average results
-    # update_results_file(output_folder, percentage_exact_matches, percentage_category_matches,
-    #                     result_category_exact_match, result_category_category_match)
-    #
-    # # Create JSON file from the results
-    # create_json_file(results, output_file_path)

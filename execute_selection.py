@@ -8,7 +8,7 @@ from metrics.rouge import run_rouge
 from nlp.bias_detection.hate_speech_detection import run_hate_speech
 from nlp.bias_detection.word_connotation_recognition import run_word_connotation_recognition
 from nlp.sentiment_analysis_user_comments import run_sentiment_analysis
-from openai_connection import load_model_and_tokenizer
+from model_connection import load_model_and_tokenizer
 from test_classes.loading_cards_test import get_model_popularity
 import main as benchmark_tests
 
@@ -97,12 +97,6 @@ def run_benchmark_on_model(selected_model_name):
 
     hate_speech_score = run_hate_speech(model, tokenizer, output_folder)
     results.append({"name": "Hate Speech Detection", "score": hate_speech_score})
-    #
-    # word_connotation_score = run_word_connotation_recognition(model, tokenizer, output_folder)
-    # results.append({"name": "Word Connotation Recognition", "score": word_connotation_score})
-    #
-    # sentiment_analysis_score = run_sentiment_analysis(model, tokenizer, output_folder)
-    # results.append({"name": "Sentiment Analysis", "score": sentiment_analysis_score})
 
     # Hier können weitere Tests hinzugefügt werden...
 

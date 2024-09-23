@@ -1,0 +1,1 @@
+{"language": ["en", "fr", "ro", "de"], "license": "apache-2.0", "tags": ["summarization", "translation"], "datasets": ["c4"], "pipeline_tag": "translation"}
