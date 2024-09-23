@@ -1,5 +1,4 @@
 import json
-import os
 from rouge_score import rouge_scorer
 from model_connection import get_answer, load_model_and_tokenizer
 
