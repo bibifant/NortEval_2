@@ -23,4 +23,6 @@ torch==2.2.0
 torchvision
 transformers
 streamlit
+matplotlib
+
 
